@@ -1,0 +1,55 @@
+// Special visual effects for the custom cursor
+class CursorEffects {
+    constructor(cursorElement) {
+        this.cursorElement = cursorElement;
+        this.init();
+    }
+
+    init() {
+        this.addEventListeners();
+    }
+
+    addEventListeners() {
+        document.addEventListener('mousemove', (e) => this.onMouseMove(e));
+        document.addEventListener('mouseenter', () => this.onMouseEnter());
+        document.addEventListener('mouseleave', () => this.onMouseLeave());
+    }
+
+    onMouseMove(event) {
+        const { clientX, clientY } = event;
+        this.cursorElement.style.transform = `translate(${clientX}px, ${clientY}px)`;
+        this.applyEffects(clientX, clientY);
+    }
+
+    applyEffects(x, y) {
+        const distanceFromCenter = Math.sqrt(Math.pow(x - window.innerWidth / 2, 2) + Math.pow(y - window.innerHeight / 2, 2));
+        const scale = Math.max(1, 1.5 - distanceFromCenter / 500);
+        const color = this.getColorBasedOnDistance(distanceFromCenter);
+
+        this.cursorElement.style.transform += ` scale(${scale})`;
+        this.cursorElement.style.backgroundColor = color;
+    }
+
+    getColorBasedOnDistance(distance) {
+        const maxDistance = 500;
+        const ratio = Math.min(distance / maxDistance, 1);
+        const red = Math.floor(100 + (155 * ratio));
+        const green = Math.floor(100 - (100 * ratio));
+        const blue = 200;
+
+        return `rgb(${red}, ${green}, ${blue})`;
+    }
+
+    onMouseEnter() {
+        this.cursorElement.style.transition = 'transform 0.2s ease, background-color 0.2s ease';
+    }
+
+    onMouseLeave() {
+        this.cursorElement.style.transition = 'transform 0.5s ease, background-color 0.5s ease';
+        this.cursorElement.style.transform = 'scale(1)';
+        this.cursorElement.style.backgroundColor = 'var(--accent)';
+    }
+}
+
+// Export the CursorEffects class for use in other modules
+export default CursorEffects;

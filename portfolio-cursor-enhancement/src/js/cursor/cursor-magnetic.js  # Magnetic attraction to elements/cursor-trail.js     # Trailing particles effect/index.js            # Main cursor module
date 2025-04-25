@@ -1,0 +1,52 @@
+// src/js/cursor/cursor-magnetic.js
+
+class MagneticCursor {
+    constructor(cursorElement) {
+        this.cursorElement = cursorElement;
+        this.magneticElements = document.querySelectorAll('.magnetic');
+        this.init();
+    }
+
+    init() {
+        this.magneticElements.forEach(element => {
+            element.addEventListener('mouseenter', () => this.onMouseEnter(element));
+            element.addEventListener('mouseleave', () => this.onMouseLeave());
+        });
+    }
+
+    onMouseEnter(element) {
+        this.element = element;
+        this.elementRect = element.getBoundingClientRect();
+        this.updateCursorPosition();
+        this.animateCursor();
+    }
+
+    onMouseLeave() {
+        this.element = null;
+        this.cursorElement.style.transform = 'translate(-50%, -50%)';
+    }
+
+    updateCursorPosition() {
+        if (this.element) {
+            const { left, top, width, height } = this.elementRect;
+            const centerX = left + width / 2;
+            const centerY = top + height / 2;
+
+            const cursorX = centerX - this.cursorElement.clientWidth / 2;
+            const cursorY = centerY - this.cursorElement.clientHeight / 2;
+
+            this.cursorElement.style.transform = `translate(${cursorX}px, ${cursorY}px)`;
+        }
+    }
+
+    animateCursor() {
+        requestAnimationFrame(() => {
+            if (this.element) {
+                this.updateCursorPosition();
+                this.animateCursor();
+            }
+        });
+    }
+}
+
+export default MagneticCursor;

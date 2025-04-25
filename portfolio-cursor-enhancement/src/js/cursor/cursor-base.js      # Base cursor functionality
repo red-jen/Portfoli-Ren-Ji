@@ -1,0 +1,38 @@
+// Base cursor functionality
+
+class CustomCursor {
+    constructor() {
+        this.cursorElement = document.createElement('div');
+        this.cursorElement.classList.add('custom-cursor');
+        document.body.appendChild(this.cursorElement);
+
+        this.init();
+    }
+
+    init() {
+        this.updateCursorPosition();
+        this.addEventListeners();
+    }
+
+    updateCursorPosition() {
+        document.addEventListener('mousemove', (event) => {
+            const { clientX, clientY } = event;
+            this.cursorElement.style.transform = `translate3d(${clientX}px, ${clientY}px, 0)`;
+        });
+    }
+
+    addEventListeners() {
+        document.addEventListener('mouseenter', () => {
+            this.cursorElement.classList.add('active');
+        });
+
+        document.addEventListener('mouseleave', () => {
+            this.cursorElement.classList.remove('active');
+        });
+    }
+}
+
+// Initialize the custom cursor
+document.addEventListener('DOMContentLoaded', () => {
+    new CustomCursor();
+});

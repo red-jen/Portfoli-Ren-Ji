@@ -1,0 +1,64 @@
+/* 
+This file contains styles specific to the custom cursor, including size, shape, and transition effects.
+*/
+
+.custom-cursor {
+    position: fixed;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: var(--accent);
+    mix-blend-mode: difference;
+    pointer-events: none;
+    transition: transform 0.1s ease, background-color 0.3s ease;
+    z-index: 9999;
+}
+
+.cursor-follower {
+    position: fixed;
+    width: 40px;
+    height: 40px;
+    border: 1px solid rgba(100, 255, 218, 0.5);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    transition: transform 0.15s ease, width 0.3s ease, height 0.3s ease;
+    z-index: 9998;
+}
+
+.cursor-magnetic {
+    transition: transform 0.2s ease;
+}
+
+.cursor-trail {
+    position: absolute;
+    border-radius: 50%;
+    background-color: rgba(100, 255, 218, 0.5);
+    pointer-events: none;
+    transition: transform 0.2s ease, opacity 0.3s ease;
+}
+
+.cursor-trail.hidden {
+    opacity: 0;
+}
+
+.cursor-effect-scale {
+    transition: transform 0.3s ease;
+}
+
+.cursor-effect-color {
+    transition: background-color 0.3s ease;
+}
+
+.cursor-effect-active {
+    transform: scale(1.5);
+    background-color: rgba(100, 255, 218, 0.8);
+}
+
+.cursor-effect-hover {
+    background-color: rgba(100, 255, 218, 1);
+}
+
+.cursor-effect-click {
+    transform: scale(0.8);
+}
