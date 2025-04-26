@@ -5,6 +5,40 @@ document.addEventListener("DOMContentLoaded", function() {
     // Check if we're on mobile
     const isMobile = window.innerWidth <= 768;
     
+    // Fix horizontal scrolling issues
+    const fixHorizontalScrolling = () => {
+        // Force body to full width of viewport without overflow
+        document.body.style.width = '100%';
+        document.body.style.maxWidth = '100vw';
+        document.body.style.overflowX = 'hidden';
+        
+        // Find and fix any overflowing elements
+        const allElements = document.querySelectorAll('*');
+        allElements.forEach(el => {
+            if (el.offsetWidth > window.innerWidth) {
+                console.log('Fixing overflowing element:', el);
+                el.style.maxWidth = '100%';
+                el.style.boxSizing = 'border-box';
+                
+                // Fix images specifically
+                if (el.tagName === 'IMG') {
+                    el.style.maxWidth = '100%';
+                    el.style.height = 'auto';
+                }
+            }
+        });
+        
+        // Fix any absolute positioned elements that might cause overflow
+        const absoluteElements = document.querySelectorAll('[style*="position: absolute"]');
+        absoluteElements.forEach(el => {
+            const rect = el.getBoundingClientRect();
+            if (rect.right > window.innerWidth) {
+                el.style.right = '0';
+                el.style.left = 'auto';
+            }
+        });
+    };
+    
     if (isMobile) {
         // Simplify animations for better performance on mobile
         const simplifyAnimations = () => {
@@ -73,6 +107,41 @@ document.addEventListener("DOMContentLoaded", function() {
                 this.querySelector('.project-overlay').style.transform = 'translateY(0)';
             });
         });
+        
+        // Apply new fixes for horizontal scrolling
+        fixHorizontalScrolling();
+        
+        // Fix contact section layout specifically
+        const contactSection = document.getElementById('contact');
+        if (contactSection) {
+            const gridContainer = contactSection.querySelector('.grid');
+            if (gridContainer) {
+                gridContainer.style.width = '100%';
+                gridContainer.style.display = 'block';
+                
+                // Fix eye loader container
+                const eyeLoader = contactSection.querySelector('.eloader');
+                if (eyeLoader) {
+                    const parentDiv = eyeLoader.parentElement;
+                    if (parentDiv) {
+                        parentDiv.style.width = '100%';
+                        parentDiv.style.overflow = 'visible';
+                    }
+                }
+            }
+        }
+        
+        // Remove unnecessary padding/margins
+        document.querySelectorAll('section').forEach(section => {
+            section.style.paddingLeft = '0';
+            section.style.paddingRight = '0';
+            
+            const innerContainer = section.querySelector('.max-w-7xl, .container');
+            if (innerContainer) {
+                innerContainer.style.paddingLeft = '1rem';
+                innerContainer.style.paddingRight = '1rem';
+            }
+        });
     }
     
     // Handle orientation changes
@@ -83,4 +152,13 @@ document.addEventListener("DOMContentLoaded", function() {
             window.scrollBy(0, -1);
         }, 300);
     });
+    
+    // Run the horizontal scroll fix on resize and orientation change
+    window.addEventListener('resize', fixHorizontalScrolling);
+    window.addEventListener('orientationchange', function() {
+        setTimeout(fixHorizontalScrolling, 300);
+    });
+    
+    // Initial run
+    fixHorizontalScrolling();
 });
