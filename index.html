@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Improved viewport meta tag with higher priority for proper mobile rendering -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Reda Jenhaji | Full-Stack Developer</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
@@ -129,12 +130,12 @@
                         </div>
                         
                         <div class="luxury-buttons opacity-0 transform translate-y-8" id="luxury-buttons">
-                            <button class="luxury-btn-primary">Explore Portfolio</button> <a href="#contact">
-                            <button class="luxury-btn-secondary" href="#contact">Contact Me</button></a>
+                            <button class="luxury-btn-primary w-full md:w-auto">Explore Portfolio</button> <a href="#contact" class="w-full md:w-auto">
+                            <button class="luxury-btn-secondary w-full md:w-auto" href="#contact">Contact Me</button></a>
                         </div>
                     </div>
                     
-                    <div class="luxury-profile-container opacity-0 transform translate-x-8"  id="luxury-profile">
+                    <div class="luxury-profile-container opacity-0 transform translate-x-8 mt-8 md:mt-0"  id="luxury-profile">
                         <div class="luxury-rotating-border"></div>
                         <div class="luxury-image-container">
                             <img src="me.png" alt="Reda Jenhaji" class="luxury-image">
@@ -175,7 +176,7 @@
         </section>
         
         <!-- About Section -->
-        <section id="about" class="min-h-screen py-24 px-4 md:px-16 lg:px-24 relative overflow-hidden" style="background-color: var(--bg-secondary);">
+        <section id="about" class="min-h-screen py-16 md:py-24 px-4 md:px-16 lg:px-24 relative overflow-hidden" style="background-color: var(--bg-secondary);">
             <!-- Background elements -->
             <div class="absolute top-0 left-0 w-full h-full opacity-5">
                 <div class="absolute top-1/4 left-1/4 w-64 h-64 rounded-full border border-accent" style="border-color: var(--accent);"></div>
@@ -193,7 +194,7 @@
                     <div class="w-12 h-1 bg-accent" style="background-color: var(--accent);"></div>
                 </div>
                 
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-16 items-center">
                     <!-- Profile column -->
                     <div class="lg:col-span-5 flex flex-col items-center">
                         <!-- Profile card -->
@@ -261,7 +262,7 @@
                         </div>
                         
                         <!-- Resume download button -->
-                        <a href="REDA JENHAJI.pdf" download="REDA_JENHAJI_CV.pdf" class="flex items-center gap-2 mt-8 px-6 py-3 bg-gradient-to-r from-accent to-accent bg-opacity-10 border border-accent rounded-full text-accent hover:bg-opacity-20 transition-all duration-300 group" style="background: linear-gradient(90deg, rgba(100,255,218,0.1), rgba(100,255,218,0.05)); border-color: var(--accent); color: var(--accent);">
+                        <a href="REDA JENHAJI.pdf" download="REDA_JENHAJI_CV.pdf" class="flex items-center justify-center gap-2 mt-8 px-6 py-3 w-full md:w-auto bg-gradient-to-r from-accent to-accent bg-opacity-10 border border-accent rounded-full text-accent hover:bg-opacity-20 transition-all duration-300 group" style="background: linear-gradient(90deg, rgba(100,255,218,0.1), rgba(100,255,218,0.05)); border-color: var(--accent); color: var(--accent);">
                             <span>Download CV</span>
                             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16" class="transform group-hover:translate-y-1 transition-transform duration-300">
                                 <path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 13.293V1.5A.5.5 0 0 1 8 1z"/>
@@ -274,10 +275,10 @@
                         <div class="space-y-6">
                             <!-- About me tabs -->
                             <div class="mb-10">
-                                <div class="flex border-b border-gray-800 mb-6">
-                                    <div class="px-6 py-3 border-b-2 tab-link active-tab" data-tab="about" style="border-color: var(--accent); color: var(--accent);">About Me</div>
-                                    <div class="px-6 py-3 text-gray-500 tab-link" data-tab="experience">Experience</div>
-                                    <div class="px-6 py-3 text-gray-500 tab-link" data-tab="education">Education</div>
+                                <div class="flex overflow-x-auto border-b border-gray-800 mb-6">
+                                    <div class="px-3 md:px-6 py-2 md:py-3 border-b-2 whitespace-nowrap tab-link active-tab" data-tab="about" style="border-color: var(--accent); color: var(--accent);">About Me</div>
+                                    <div class="px-3 md:px-6 py-2 md:py-3 text-gray-500 whitespace-nowrap tab-link" data-tab="experience">Experience</div>
+                                    <div class="px-3 md:px-6 py-2 md:py-3 text-gray-500 whitespace-nowrap tab-link" data-tab="education">Education</div>
                                 </div>
                                 
                                 <!-- About me content -->
@@ -448,7 +449,7 @@
                                     <div class="space-y-4">
                                         <h4 class="text-sm uppercase tracking-wider text-gray-400">Backend</h4>
                                         <div class="flex flex-wrap gap-2">
-                                            <span class="px-4 py-2 bg-opacity-10 bg-accent text-accent border border-accent rounded-full text-sm transform hover:-translate-y-1 transition-transform duration-300" style="background-color: rgba(100, 255, 218, 0.1); color: var(--accent); border-color: var(--accent);">PHP</span>
+                                            <span class="px-4 py-2 bg-opacity-10 bg-accent text-accent border border-accent rounded-full text-sm transform hover:-translate-y-1 transition-transform duration-300" style="background-color: rgba(100, 255, 218, 0.1); color: var (--accent); border-color: var(--accent);">PHP</span>
                                             <span class="px-4 py-2 bg-opacity-10 bg-accent text-accent border border-accent rounded-full text-sm transform hover:-translate-y-1 transition-transform duration-300" style="background-color: rgba(100, 255, 218, 0.1); color: var(--accent); border-color: var(--accent);">Laravel</span>
                                             <span class="px-4 py-2 bg-opacity-10 bg-accent text-accent border border-accent rounded-full text-sm transform hover:-translate-y-1 transition-transform duration-300" style="background-color: rgba(100, 255, 218, 0.1); color: var(--accent); border-color: var(--accent);">MySQL</span>
                                             <span class="px-4 py-2 bg-opacity-10 bg-accent text-accent border border-accent rounded-full text-sm transform hover:-translate-y-1 transition-transform duration-300" style="background-color: rgba(100, 255, 218, 0.1); color: var(--accent); border-color: var(--accent);">PostgreSQL</span>
@@ -463,11 +464,11 @@
         </section>
         
         <!-- Projects Section -->
-        <section id="projects" class="min-h-screen px-4 md:px-16 lg:px-24 py-24">
+        <section id="projects" class="min-h-screen px-4 md:px-16 lg:px-24 py-16 md:py-24">
             <div class="max-w-7xl mx-auto w-full">
-                <h2 class="text-4xl md:text-5xl font-bold mb-16">SELECTED WORKS</h2>
+                <h2 class="text-4xl md:text-5xl font-bold mb-12 md:mb-16">SELECTED WORKS</h2>
                 
-                <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-8">
                     <!-- Project 1 -->
                     <div class="md:col-span-8">
                         <a href="https://fut-champions-phi.vercel.app/" target="_blank">
@@ -576,10 +577,10 @@
                     </div>
                 </div>
                 
-                <div class="mt-16 text-center">
+                <div class="mt-12 md:mt-16 text-center">
                     <a href="https://github.com/red-jen?tab=repositories" target="_blank">
                     <div class="magnetic"  rel="noopener noreferrer">
-                        <button class="btn">View All Projects</button>
+                        <button class="btn px-6 py-3 w-full sm:w-auto">View All Projects</button>
                     </div>
                 </a>
                 </div>
@@ -587,21 +588,21 @@
         </section>
         
         <!-- Skills Section -->
-        <section id="skills" class="min-h-screen px-4 md:px-16 lg:px-24 py-24" style="background-color: var(--bg-secondary);">
+        <section id="skills" class="min-h-screen px-4 md:px-16 lg:px-24 py-16 md:py-24" style="background-color: var(--bg-secondary);">
             <div class="max-w-7xl mx-auto w-full">
-                <h2 class="text-4xl md:text-5xl font-bold mb-16">SKILLS & EXPERTISE</h2>
+                <h2 class="text-4xl md:text-5xl font-bold mb-12 md:mb-16">SKILLS & EXPERTISE</h2>
                 
-                <div class="overflow-hidden whitespace-nowrap mb-24">
+                <div class="overflow-hidden whitespace-nowrap mb-16 md:mb-24">
                     <div class="inline-block animate-marquee">
-                        <span class="text-7xl font-black opacity-10 mx-8">HTML5</span>
-                        <span class="text-7xl font-black opacity-10 mx-8">CSS3</span>
-                        <span class="text-7xl font-black opacity-10 mx-8">JAVASCRIPT</span>
-                        <span class="text-7xl font-black opacity-10 mx-8">TAILWIND</span>
-                        <span class="text-7xl font-black opacity-10 mx-8">PHP</span>
-                        <span class="text-7xl font-black opacity-10 mx-8">LARAVEL</span>
-                        <span class="text-7xl font-black opacity-10 mx-8">SQL</span>
-                        <span class="text-7xl font-black opacity-10 mx-8">REACT</span>
-                        <span class="text-7xl font-black opacity-10 mx-8">NEXT.JS</span>
+                        <span class="text-4xl md:text-7xl font-black opacity-10 mx-4 md:mx-8">HTML5</span>
+                        <span class="text-4xl md:text-7xl font-black opacity-10 mx-4 md:mx-8">CSS3</span>
+                        <span class="text-4xl md:text-7xl font-black opacity-10 mx-4 md:mx-8">JAVASCRIPT</span>
+                        <span class="text-4xl md:text-7xl font-black opacity-10 mx-4 md:mx-8">TAILWIND</span>
+                        <span class="text-4xl md:text-7xl font-black opacity-10 mx-4 md:mx-8">PHP</span>
+                        <span class="text-4xl md:text-7xl font-black opacity-10 mx-4 md:mx-8">LARAVEL</span>
+                        <span class="text-4xl md:text-7xl font-black opacity-10 mx-4 md:mx-8">SQL</span>
+                        <span class="text-4xl md:text-7xl font-black opacity-10 mx-4 md:mx-8">REACT</span>
+                        <span class="text-4xl md:text-7xl font-black opacity-10 mx-4 md:mx-8">NEXT.JS</span>
                     </div>
                 </div>
                 
@@ -658,109 +659,136 @@
         </section>
         
         <!-- Contact Section -->
-        <section id="contact" class="min-h-screen px-4 md:px-16 lg:px-24 py-24">
-            <div class="max-w-7xl mx-auto w-full">
-                <h2 class="text-4xl md:text-5xl font-bold mb-16">GET IN TOUCH</h2>
+        <section id="contact" class="min-h-screen px-4 md:px-16 lg:px-24 py-16 md:py-24">
+    <div class="max-w-7xl mx-auto w-full">
+        <h2 class="text-4xl md:text-5xl font-bold mb-12 md:mb-16">GET IN TOUCH</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-16">
+            <div  class="grid grid-cols-2 width-100%">
+                <div  class="col-1">
+                <p class=" text-gray-300 text-lg mb-12">
+                    I'm currently seeking PFA internship opportunities <br> to apply 
+                     my skills in  real-world projects. <br>
+                    Let's discuss how I can contribute <br>to your team.
+                </p>
+                <div class="grid grid-cols-2 gap-4">
+              <div> 
+                <div class="mb-8">
+                    <h3 class="text-xl font-semibold mb-2">Email</h3>
+                    <p style="color: var(--accent);">redajenhaji278@gmail.com</p>
+                </div>
                 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-16">
-                    <div class="grid grid-cols-2">
-                        <div>
-                        <p class="text-gray-300 text-lg mb-12">
-                            I'm currently seeking PFA internship opportunities to apply my skills in real-world projects.
-                            Let's discuss how I can contribute to your team.
-                        </p>
-                        
-                        <div class="mb-8">
-                            <h3 class="text-xl font-semibold mb-2">Email</h3>
-                            <p style="color: var(--accent);">redajenhaji278@gmail.com</p>
-                        </div>
-                        
-                        <div class="mb-8">
-                            <h3 class="text-xl font-semibold mb-2">Location</h3>
-                            <p class="text-gray-300">Sale, Morocco</p>
-                        </div>
-                        
-                        <div class="flex gap-6 mt-12">
-                            <a href="https://github.com/red-jen" class="text-gray-400 hover:text-white transition-colors duration-300">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
-                                    <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
-                                </svg>
-                            </a>
-                            <a href="https://linkedin.com/in/reda-jenhaji" class="text-gray-400 hover:text-white transition-colors duration-300">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
-                                    <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016a5.54 5.54 0 0 1 .016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z"/>
-                                </svg>
-                            </a>
-                            <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
-                                    <path d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z"/>
-                                </svg>
-                            </a>
-                        </div>
-                    </div>
-                        <!-- From Uiverse.io by 0x-maker --> 
-<div class="eloader" >
-    <div class="head"></div>
-  
-    <div class="flames">
-      <div class="particle"></div>
-      <div class="particle"></div>
-      <div class="particle"></div>
-      <div class="particle"></div>
-      <div class="particle"></div>
-      <div class="particle"></div>
-      <div class="particle"></div>
-      <div class="particle"></div>
-    </div>
-  
-    <div class="eye"></div>
-  </div>
-  
-                    </div>
-                    
-                    <div>
-                        <div id="form-status" class="mb-6 hidden">
-                            <div class="success-message hidden p-3 rounded bg-green-800 bg-opacity-20 border border-green-500 text-green-400">
-                                Your message has been sent successfully! I'll get back to you soon.
-                            </div>
-                            <div class="error-message hidden p-3 rounded bg-red-800 bg-opacity-20 border border-red-500 text-red-400">
-                                Oops! Something went wrong. Please try again later.
-                            </div>
-                        </div>
-                        
-                        <form id="contact-form">
-                            <div class="mb-8">
-                                <label for="name" class="block text-sm font-medium text-gray-400 mb-2">Name</label>
-                                <input type="text" id="name" name="user_name" class="w-full bg-transparent border-b border-gray-600 py-2 text-white focus:border-accent focus:outline-none transition-colors duration-300" style="border-color: var(--text-secondary); focus:border-color: var(--accent);" required>
-                            </div>
-                            
-                            <div class="mb-8">
-                                <label for="email" class="block text-sm font-medium text-gray-400 mb-2">Email</label>
-                                <input type="email" id="email" name="user_email" class="w-full bg-transparent border-b border-gray-600 py-2 text-white focus:border-accent focus:outline-none transition-colors duration-300" style="border-color: var(--text-secondary); focus:border-color: var(--accent);" required>
-                            </div>
-                            
-                            <div class="mb-12">
-                                <label for="message" class="block text-sm font-medium text-gray-400 mb-2">Message</label>
-                                <textarea id="message" name="message" rows="5" class="w-full bg-transparent border-b border-gray-600 py-2 text-white focus:border-accent focus:outline-none transition-colors duration-300" style="border-color: var(--text-secondary); focus:border-color: var(--accent);" required></textarea>
-                            </div>
-                            
-                            <div class="magnetic">
-                                <button type="submit" id="submit-btn" class="btn">
-                                    <span id="btn-text">Send Message</span>
-                                    <span id="btn-loading" class="hidden">
-                                        <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white inline" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                                        </svg>
-                                        Sending...
-                                    </span>
-                                </button>
-                            </div>
-                        </form>
-                    </div>
+                <div class="mb-8">
+                    <h3 class="text-xl font-semibold mb-2">Location</h3>
+                    <p class="text-gray-300">Sale, Morocco</p>
+                </div>
+                
+                <div class="flex gap-6 mt-12">
+                    <a href="https://github.com/red-jen" class="text-gray-400 hover:text-white transition-colors duration-300">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                        </svg>
+                    </a>
+                    <a href="https://linkedin.com/in/reda-jenhaji" class="text-gray-400 hover:text-white transition-colors duration-300">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016a5.54 5.54 0 0 1 .016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z"/>
+                        </svg>
+                    </a>
                 </div>
             </div>
-        </section>
+
+            <div class="col-2">
+                <div class="eloader"  >
+               <div class="head"></div>
+               
+               <div class="flames">
+                   <div class="particle"></div>
+                   <div class="particle"></div>
+                   <div class="particle"></div>
+                   <div class="particle"></div>
+                   <div class="particle"></div>
+                   <div class="particle"></div>
+                   <div class="particle"></div>
+                   <div class="particle"></div>
+               </div>
+               
+               <div class="eye"></div>
+           </div>
+       </div>
+
+            </div>
+            </div>
+                <!-- From Uiverse.io by 0x-maker --> 
+                 <!-- <div class="col-2">
+                     <div class="eloader"  >
+                    <div class="head"></div>
+                    
+                    <div class="flames">
+                        <div class="particle"></div>
+                        <div class="particle"></div>
+                        <div class="particle"></div>
+                        <div class="particle"></div>
+                        <div class="particle"></div>
+                        <div class="particle"></div>
+                        <div class="particle"></div>
+                        <div class="particle"></div>
+                    </div>
+                    
+                    <div class="eye"></div>
+                </div>
+            </div> -->
+            
+            </div>
+            
+            <div>
+                <div id="form-status" class="mb-6 hidden">
+                    <div class="success-message hidden p-3 rounded bg-green-800 bg-opacity-20 border border-green-500 text-green-400">
+                        Your message has been sent successfully! I'll get back to you soon.
+                    </div>
+                    <div class="error-message hidden p-3 rounded bg-red-800 bg-opacity-20 border border-red-500 text-red-400">
+                        Oops! Something went wrong. Please try again later.
+                    </div>
+                </div>
+                
+                <form id="contact-form">
+                    <div class="mb-8">
+                        <label for="name" class="block text-sm font-medium text-gray-400 mb-2">Name</label>
+                        <input type="text" id="name" name="user_name" class="w-full bg-transparent border-b border-gray-600 py-2 text-white focus:border-accent focus:outline-none transition-colors duration-300" style="border-color: var(--text-secondary); focus:border-color: var(--accent);" required>
+                    </div>
+                    
+                    <div class="mb-8">
+                        <label for="email" class="block text-sm font-medium text-gray-400 mb-2">Email</label>
+                        <input type="email" id="email" name="user_email" class="w-full bg-transparent border-b border-gray-600 py-2 text-white focus:border-accent focus:outline-none transition-colors duration-300" style="border-color: var(--text-secondary); focus:border-color: var(--accent);" required>
+                    </div>
+                    
+                    <div class="mb-12">
+                        <label for="message" class="block text-sm font-medium text-gray-400 mb-2">Message</label>
+                        <textarea id="message" name="message" rows="5" class="w-full bg-transparent border-b border-gray-600 py-2 text-white focus:border-accent focus:outline-none transition-colors duration-300" style="border-color: var(--text-secondary); focus:border-color: var(--accent);" required></textarea>
+                    </div>
+                    
+                    <div class="magnetic">
+                        <button type="submit" id="submit-btn" class="btn w-full md:w-auto">
+                            <span id="btn-text">Send Message</span>
+                            <span id="btn-loading" class="hidden">
+                                <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white inline" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                </svg>
+                                Sending...
+                            </span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
         
         <!-- Footer -->
         <footer class="py-8 border-t border-gray-800">
@@ -772,6 +800,8 @@
         </footer>
     </div>
     
+    <!-- Include the responsive fix JavaScript -->
+    <script src="./responsive-fix.js"></script>
     <script src="./gsapanim.js">
        
     </script>
