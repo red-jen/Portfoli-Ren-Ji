@@ -1150,6 +1150,55 @@
                 display: none;
             }
         }
+        
+        /* Explore button hover effect */
+        .luxury-btn-primary {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .luxury-btn-primary::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 10px;
+            height: 10px;
+            background: var(--accent);
+            opacity: 0;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.3s, height 0.3s, opacity 0.3s;
+        }
+        
+        .luxury-btn-primary:hover::after {
+            width: 200%;
+            height: 200%;
+            opacity: 0.1;
+        }
+        
+        /* For the explore button animation */
+        @keyframes ripple {
+            0% {
+                transform: scale(0.1);
+                opacity: 0.2;
+            }
+            100% {
+                transform: scale(2);
+                opacity: 0;
+            }
+        }
+        
+        @keyframes float-away {
+            0% {
+                transform: translate(0, 0) scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(var(--tx), var(--ty)) scale(0);
+                opacity: 0;
+            }
+        }
     </style>
     <link rel="stylesheet" href="./comp.css">
     <link rel="stylesheet" href="./eye.css">
@@ -2405,6 +2454,117 @@
                             btnLoading.classList.add('hidden');
                             submitBtn.disabled = false;
                         });
+                });
+            }
+            
+            // Add animation to Explore Portfolio button
+            const exploreButton = document.querySelector('.luxury-btn-primary');
+            if (exploreButton) {
+                exploreButton.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Create ripple effect
+                    const ripple = document.createElement('div');
+                    ripple.className = 'ripple-effect';
+                    ripple.style.position = 'fixed';
+                    ripple.style.top = '0';
+                    ripple.style.left = '0';
+                    ripple.style.width = '100vw';
+                    ripple.style.height = '100vh';
+                    ripple.style.backgroundColor = 'var(--accent)';
+                    ripple.style.opacity = '0';
+                    ripple.style.zIndex = '9996';
+                    ripple.style.pointerEvents = 'none';
+                    document.body.appendChild(ripple);
+                    
+                    // Create particles for burst effect
+                    const particlesContainer = document.createElement('div');
+                    particlesContainer.className = 'explore-particles';
+                    particlesContainer.style.position = 'fixed';
+                    particlesContainer.style.zIndex = '9997';
+                    particlesContainer.style.pointerEvents = 'none';
+                    document.body.appendChild(particlesContainer);
+                    
+                    // Create particles
+                    for (let i = 0; i < 20; i++) {
+                        const particle = document.createElement('div');
+                        particle.className = 'explore-particle';
+                        particle.style.position = 'absolute';
+                        particle.style.width = `${Math.random() * 10 + 5}px`;
+                        particle.style.height = particle.style.width;
+                        particle.style.backgroundColor = 'var(--accent)';
+                        particle.style.borderRadius = '50%';
+                        particle.style.opacity = Math.random() * 0.5 + 0.5;
+                        
+                        const rect = exploreButton.getBoundingClientRect();
+                        particle.style.left = `${rect.left + rect.width / 2}px`;
+                        particle.style.top = `${rect.top + rect.height / 2}px`;
+                        
+                        particlesContainer.appendChild(particle);
+                    }
+                    
+                    // Animation sequence
+                    const tl = gsap.timeline();
+                    
+                    // Button pulse effect
+                    tl.to(exploreButton, {
+                        scale: 1.1,
+                        duration: 0.2,
+                        ease: "power1.out"
+                    });
+                    
+                    // Particle burst effect
+                    tl.to('.explore-particle', {
+                        x: () => Math.random() * 200 - 100,
+                        y: () => Math.random() * 200 - 100,
+                        opacity: 0,
+                        duration: 0.8,
+                        ease: "power3.out",
+                        stagger: 0.02
+                    }, "-=0.1");
+                    
+                    // Ripple effect
+                    tl.to(ripple, {
+                        opacity: 0.2,
+                        duration: 0.5,
+                        ease: "power1.in"
+                    }, "-=0.7");
+                    
+                    // Fade hero content
+                    tl.to('#luxury-title, #luxury-tagline, #luxury-description, #luxury-stats, #luxury-buttons, #luxury-profile', {
+                        opacity: 0.3,
+                        duration: 0.3,
+                        ease: "power1.in"
+                    }, "-=0.3");
+                    
+                    // Fade out ripple
+                    tl.to(ripple, {
+                        opacity: 0,
+                        duration: 0.5,
+                        ease: "power1.out",
+                        onComplete: () => {
+                            // Clean up elements
+                            document.body.removeChild(ripple);
+                            document.body.removeChild(particlesContainer);
+                        }
+                    });
+                    
+                    // Restore hero content
+                    tl.to('#luxury-title, #luxury-tagline, #luxury-description, #luxury-stats, #luxury-buttons, #luxury-profile', {
+                        opacity: 1,
+                        duration: 0.5,
+                        ease: "power1.out"
+                    }, "-=0.3");
+                    
+                    // Scroll to projects
+                    tl.to(window, {
+                        duration: 1,
+                        scrollTo: {
+                            y: "#projects",
+                            offsetY: 0
+                        },
+                        ease: "power3.inOut"
+                    }, "-=0.5");
                 });
             }
         });
