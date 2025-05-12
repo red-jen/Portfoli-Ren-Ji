@@ -5,15 +5,91 @@
     <!-- Fix viewport meta tag to prevent horizontal scrolling -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Reda Jenhaji | Full-Stack Developer</title>
+    
+    <!-- Add resource hints for faster loading -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    
+    <!-- Preload critical fonts -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400&display=swap" as="style">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
+    
+    <!-- Critical CSS inline -->
+    <style>
+        /* Critical rendering CSS */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--bg-primary);
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        
+        /* Hide content until ready */
+        .section-wrapper {
+            opacity: 0;
+            visibility: hidden;
+        }
+        
+        /* Add will-change for smoother animations on key elements */
+        .luxury-hero, .project-card, .interactive-skills-container {
+            will-change: transform, opacity;
+        }
+    </style>
+    
+    <!-- Load TailwindCSS first for initial styling -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-<link rel="stylesheet" href="./style.css">
+    
+    <!-- Load CSS in order of importance -->
+    <link rel="stylesheet" href="./style.css">
     <link rel="stylesheet" href="./comp.css">
     <link rel="stylesheet" href="./eye.css">
     <link rel="stylesheet" href="./loader.css">
+    
+    <!-- Defer non-critical scripts -->
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    
+    <!-- Add performance optimizer script -->
+    <script defer src="./performance-optimizer.js"></script>
+    
+    <!-- Defer all other custom scripts -->
+    <script defer src="./three-background.js"></script>
+    <script defer src="./interactive-skills.js"></script>
+    <script defer src="./project-enhancements.js"></script>
+    
+    <!-- Load Three.js only when needed with a small loader script -->
+    <script>
+        // Load Three.js dynamically when needed
+        document.addEventListener('DOMContentLoaded', function() {
+            const heroSection = document.getElementById('hero');
+            // Only load Three.js if hero section is visible or about to be visible
+            if (heroSection) {
+                const threeScript = document.createElement('script');
+                threeScript.src = 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js';
+                threeScript.async = true;
+                document.head.appendChild(threeScript);
+            }
+        });
+    </script>
+    
+    <!-- Meta tags for better SEO -->
+    <meta name="description" content="Reda Jenhaji - Full-Stack Developer specializing in creating exceptional digital experiences with clean code and innovative solutions.">
+    <meta name="keywords" content="web developer, full-stack developer, React, PHP, Laravel, JavaScript, portfolio">
+    <meta property="og:title" content="Reda Jenhaji | Full-Stack Developer">
+    <meta property="og:description" content="Creating exceptional digital experiences with clean code and innovative solutions.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://redajenhaji.com">
+    <meta property="og:image" content="./meta-image.jpg">
 </head>
 <body class="overflow-x-hidden">
     <!-- Loading Screen -->
@@ -76,6 +152,12 @@
     <div class="section-wrapper">
         <!-- Hero Section -->
         <section id="hero" class="luxury-hero" >
+            <!-- Add WebGL canvas for advanced background -->
+            <canvas id="hero-canvas" class="webgl-hero-background"></canvas>
+            
+            <!-- Add particles container for interactive background -->
+            <div id="particles-js" class="particles-container"></div>
+            
             <!-- Background Elements -->
             <img src="ChatGPT Image Apr 13, 2025, 10_17_54 PM.png" alt="" class="luxury-hero-bg" id="hero-bg">
             <div class="luxury-overlay"></div>
@@ -173,6 +255,19 @@
                 <span class="luxury-scroll-text">Scroll</span>
                 <div class="luxury-scroll-line"></div>
             </div>
+            
+            <!-- Add interactive achievement badges -->
+            <div class="achievement-badges opacity-0" id="achievement-badges">
+                <div class="achievement" data-tooltip="15+ Projects Completed">
+                    <div class="achievement-icon">🏆</div>
+                </div>
+                <div class="achievement" data-tooltip="Clean Code Advocate">
+                    <div class="achievement-icon">✨</div>
+                </div>
+                <div class="achievement" data-tooltip="Responsive Design Expert">
+                    <div class="achievement-icon">📱</div>
+                </div>
+            </div>
         </section>
         
         <!-- About Section -->
@@ -229,7 +324,7 @@
                                         <div class="text-xs text-gray-400">Projects</div>
                                     </div>
                                     <div class="text-center p-2 rounded-lg bg-opacity-10 bg-white hover:bg-opacity-20 transition-all duration-300">
-                                        <div class="text-xl font-bold">12+</div>
+                                        <div class="text-xl font-bold">12+</</div>
                                         <div class="text-xs text-gray-400">Tech Stack</div>
                                     </div>
                                 </div>
@@ -306,7 +401,7 @@
                                     <div class="mb-8">
                                         <div class="flex justify-between items-center mb-2">
                                             <h4 class="text-white font-medium">???????? ??????? ???</h4>
-                                            <span class="text-accent" style="color: var(--accent);">2024 - in progress</span>
+                                            <span class="text-accent" style="color: var (--accent);">2024 - in progress</span>
                                         </div>
                                         <p class="text-gray-400 text-sm mb-2">Web Development Team</p>
                                         <p class="text-gray-300 leading-relaxed">
@@ -449,7 +544,7 @@
                                     <div class="space-y-4">
                                         <h4 class="text-sm uppercase tracking-wider text-gray-400">Backend</h4>
                                         <div class="flex flex-wrap gap-2">
-                                            <span class="px-4 py-2 bg-opacity-10 bg-accent text-accent border border-accent rounded-full text-sm transform hover:-translate-y-1 transition-transform duration-300" style="background-color: rgba(100, 255, 218, 0.1); color: var (--accent); border-color: var(--accent);">PHP</span>
+                                            <span class="px-4 py-2 bg-opacity-10 bg-accent text-accent border border-accent rounded-full text-sm transform hover:-translate-y-1 transition-transform duration-300" style="background-color: rgba(100, 255, 218, 0.1); color: var(--accent); border-color: var(--accent);">PHP</span>
                                             <span class="px-4 py-2 bg-opacity-10 bg-accent text-accent border border-accent rounded-full text-sm transform hover:-translate-y-1 transition-transform duration-300" style="background-color: rgba(100, 255, 218, 0.1); color: var(--accent); border-color: var(--accent);">Laravel</span>
                                             <span class="px-4 py-2 bg-opacity-10 bg-accent text-accent border border-accent rounded-full text-sm transform hover:-translate-y-1 transition-transform duration-300" style="background-color: rgba(100, 255, 218, 0.1); color: var(--accent); border-color: var(--accent);">MySQL</span>
                                             <span class="px-4 py-2 bg-opacity-10 bg-accent text-accent border border-accent rounded-full text-sm transform hover:-translate-y-1 transition-transform duration-300" style="background-color: rgba(100, 255, 218, 0.1); color: var(--accent); border-color: var(--accent);">PostgreSQL</span>
@@ -592,21 +687,13 @@
             <div class="max-w-7xl mx-auto w-full">
                 <h2 class="text-4xl md:text-5xl font-bold mb-12 md:mb-16">SKILLS & EXPERTISE</h2>
                 
-                <div class="overflow-hidden whitespace-nowrap mb-16 md:mb-24">
-                    <div class="inline-block animate-marquee">
-                        <span class="text-4xl md:text-7xl font-black opacity-10 mx-4 md:mx-8">HTML5</span>
-                        <span class="text-4xl md:text-7xl font-black opacity-10 mx-4 md:mx-8">CSS3</span>
-                        <span class="text-4xl md:text-7xl font-black opacity-10 mx-4 md:mx-8">JAVASCRIPT</span>
-                        <span class="text-4xl md:text-7xl font-black opacity-10 mx-4 md:mx-8">TAILWIND</span>
-                        <span class="text-4xl md:text-7xl font-black opacity-10 mx-4 md:mx-8">PHP</span>
-                        <span class="text-4xl md:text-7xl font-black opacity-10 mx-4 md:mx-8">LARAVEL</span>
-                        <span class="text-4xl md:text-7xl font-black opacity-10 mx-4 md:mx-8">SQL</span>
-                        <span class="text-4xl md:text-7xl font-black opacity-10 mx-4 md:mx-8">REACT</span>
-                        <span class="text-4xl md:text-7xl font-black opacity-10 mx-4 md:mx-8">NEXT.JS</span>
-                    </div>
+                <!-- Interactive skill visualization -->
+                <div class="interactive-skills-container">
+                    <div id="skills-graph" class="skills-graph-container"></div>
                 </div>
                 
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+                <!-- Skills grid -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mt-12">
                     <div>
                         <h3 class="text-2xl font-bold mb-6">Front-End Development</h3>
                         <div class="w-full h-px bg-gray-700 mb-6"></div>
@@ -658,136 +745,119 @@
             </div>
         </section>
         
+        <!-- Add testimonials section -->
+        <section id="testimonials" class="min-h-screen px-4 md:px-16 lg:px-24 py-16 md:py-24">
+            <div class="max-w-7xl mx-auto w-full">
+                <h2 class="text-4xl md:text-5xl font-bold mb-12 md:mb-16">TRUSTED BY MENTORS</h2>
+                
+                <div class="testimonials-container">
+                    <div class="testimonial-slider" id="testimonial-slider">
+                        <!-- Testimonials will be generated by JS -->
+                    </div>
+                </div>        
+            </div>
+        </section>
+        
         <!-- Contact Section -->
         <section id="contact" class="min-h-screen px-4 md:px-16 lg:px-24 py-16 md:py-24">
-    <div class="max-w-7xl mx-auto w-full">
-        <h2 class="text-4xl md:text-5xl font-bold mb-12 md:mb-16">GET IN TOUCH</h2>
-        
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-16">
-            <div  class="grid grid-cols-2 width-100%">
-                <div  class="col-1">
-                <p class=" text-gray-300 text-lg mb-12">
-                    I'm currently seeking PFA internship opportunities <br> to apply 
-                     my skills in  real-world projects. <br>
-                    Let's discuss how I can contribute <br>to your team.
-                </p>
-                <div class="grid grid-cols-2 gap-4">
-              <div> 
-                <div class="mb-8">
-                    <h3 class="text-xl font-semibold mb-2">Email</h3>
-                    <p style="color: var(--accent);">redajenhaji278@gmail.com</p>
-                </div>
-                
-                <div class="mb-8">
-                    <h3 class="text-xl font-semibold mb-2">Location</h3>
-                    <p class="text-gray-300">Sale, Morocco</p>
-                </div>
-                
-                <div class="flex gap-6 mt-12">
-                    <a href="https://github.com/red-jen" class="text-gray-400 hover:text-white transition-colors duration-300">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
-                            <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
-                        </svg>
-                    </a>
-                    <a href="https://linkedin.com/in/reda-jenhaji" class="text-gray-400 hover:text-white transition-colors duration-300">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
-                            <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016a5.54 5.54 0 0 1 .016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z"/>
-                        </svg>
-                    </a>
-                    <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
-                            <path d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z"/>
-                        </svg>
-                    </a>
-                </div>
-            </div>
-
-            <div class="col-2">
-                <div class="eloader"  >
-               <div class="head"></div>
-               
-               <div class="flames">
-                   <div class="particle"></div>
-                   <div class="particle"></div>
-                   <div class="particle"></div>
-                   <div class="particle"></div>
-                   <div class="particle"></div>
-                   <div class="particle"></div>
-                   <div class="particle"></div>
-                   <div class="particle"></div>
-               </div>
-               
-               <div class="eye"></div>
-           </div>
-       </div>
-
-            </div>
-            </div>
-                <!-- From Uiverse.io by 0x-maker --> 
-                 <!-- <div class="col-2">
-                     <div class="eloader"  >
-                    <div class="head"></div>
-                    
-                    <div class="flames">
-                        <div class="particle"></div>
-                        <div class="particle"></div>
-                        <div class="particle"></div>
-                        <div class="particle"></div>
-                        <div class="particle"></div>
-                        <div class="particle"></div>
-                        <div class="particle"></div>
-                        <div class="particle"></div>
-                    </div>
-                    
-                    <div class="eye"></div>
-                </div>
-            </div> -->
+            <!-- Add interactive background -->
+            <div class="contact-background-animation"></div>
             
-            </div>
-            
-            <div>
-                <div id="form-status" class="mb-6 hidden">
-                    <div class="success-message hidden p-3 rounded bg-green-800 bg-opacity-20 border border-green-500 text-green-400">
-                        Your message has been sent successfully! I'll get back to you soon.
+            <div class="max-w-7xl mx-auto w-full">
+                <h2 class="text-4xl md:text-5xl font-bold mb-12 md:mb-16">GET IN TOUCH</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-16">
+                    <div>
+                        <p class=" text-gray-300 text-lg mb-12">
+                            I'm currently seeking PFA internship opportunities <br> to apply 
+                             my skills in  real-world projects. <br>
+                            Let's discuss how I can contribute <br>to your team.
+                        </p>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="mb-8">
+                                <h3 class="text-xl font-semibold mb-2">Email</h3>
+                                <p style="color: var(--accent);">redajenhaji278@gmail.com</p>
+                            </div>
+                        
+                            <div class="mb-8">
+                                <h3 class="text-xl font-semibold mb-2">Location</h3>
+                                <p class="text-gray-300">Sale, Morocco</p>
+                            </div>
+                        
+                            <div class="flex gap-6 mt-12">
+                                <a href="https://github.com/red-jen" class="text-gray-400 hover:text-white transition-colors duration-300">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+                                        <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                                    </svg>
+                                </a>
+                                <a href="https://linkedin.com/in/reda-jenhaji" class="text-gray-400 hover:text-white transition-colors duration-300">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+                                        <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016a5.54 5.54 0 0 1 .016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z"/>
+                                    </svg>
+                                </a>
+                                <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+                                        <path d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z"/>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
                     </div>
-                    <div class="error-message hidden p-3 rounded bg-red-800 bg-opacity-20 border border-red-500 text-red-400">
-                        Oops! Something went wrong. Please try again later.
+                    
+                    <div>
+                        <div id="form-status" class="mb-6 hidden">
+                            <div class="success-message hidden p-3 rounded bg-green-800 bg-opacity-20 border border-green-500 text-green-400">
+                                Your message has been sent successfully! I'll get back to you soon.
+                            </div>
+                            <div class="error-message hidden p-3 rounded bg-red-800 bg-opacity-20 border border-red-500 text-red-400">
+                                Oops! Something went wrong. Please try again later.
+                            </div>
+                        </div>
+                        
+                        <form id="contact-form">
+                            <div class="mb-8">
+                                <label for="name" class="block text-sm font-medium text-gray-400 mb-2">Name</label>
+                                <input type="text" id="name" name="user_name" class="w-full bg-transparent border-b border-gray-600 py-2 text-white focus:border-accent focus:outline-none transition-colors duration-300" style="border-color: var(--text-secondary); focus:border-color: var(--accent);" required>
+                            </div>
+                            
+                            <div class="mb-8">
+                                <label for="email" class="block text-sm font-medium text-gray-400 mb-2">Email</label>
+                                <input type="email" id="email" name="user_email" class="w-full bg-transparent border-b border-gray-600 py-2 text-white focus:border-accent focus:outline-none transition-colors duration-300" style="border-color: var(--text-secondary); focus:border-color: var(--accent);" required>
+                            </div>
+                            
+                            <div class="mb-12">
+                                <label for="message" class="block text-sm font-medium text-gray-400 mb-2">Message</label>
+                                <textarea id="message" name="message" rows="5" class="w-full bg-transparent border-b border-gray-600 py-2 text-white focus:border-accent focus:outline-none transition-colors duration-300" style="border-color: var(--text-secondary); focus:border-color: var(--accent);" required></textarea>
+                            </div>
+                            
+                            <div class="magnetic">
+                                <button type="submit" id="submit-btn" class="btn w-full md:w-auto">
+                                    <span id="btn-text">Send Message</span>
+                                    <span id="btn-loading" class="hidden">
+                                        <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white inline" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                        </svg>
+                                        Sending...
+                                    </span>
+                                </button>
+                            </div>
+                        </form>
                     </div>
                 </div>
                 
-                <form id="contact-form">
-                    <div class="mb-8">
-                        <label for="name" class="block text-sm font-medium text-gray-400 mb-2">Name</label>
-                        <input type="text" id="name" name="user_name" class="w-full bg-transparent border-b border-gray-600 py-2 text-white focus:border-accent focus:outline-none transition-colors duration-300" style="border-color: var(--text-secondary); focus:border-color: var(--accent);" required>
+                <!-- Add live chat widget -->
+                <div class="live-chat-widget" id="live-chat-widget">
+                    <button class="chat-toggle">
+                        <span class="chat-icon">💬</span>
+                        <span class="chat-text">Chat with me</span>
+                    </button>
+                    <div class="chat-container hidden">
+                        <!-- Chat interface will be handled by JS -->
                     </div>
-                    
-                    <div class="mb-8">
-                        <label for="email" class="block text-sm font-medium text-gray-400 mb-2">Email</label>
-                        <input type="email" id="email" name="user_email" class="w-full bg-transparent border-b border-gray-600 py-2 text-white focus:border-accent focus:outline-none transition-colors duration-300" style="border-color: var(--text-secondary); focus:border-color: var(--accent);" required>
-                    </div>
-                    
-                    <div class="mb-12">
-                        <label for="message" class="block text-sm font-medium text-gray-400 mb-2">Message</label>
-                        <textarea id="message" name="message" rows="5" class="w-full bg-transparent border-b border-gray-600 py-2 text-white focus:border-accent focus:outline-none transition-colors duration-300" style="border-color: var(--text-secondary); focus:border-color: var(--accent);" required></textarea>
-                    </div>
-                    
-                    <div class="magnetic">
-                        <button type="submit" id="submit-btn" class="btn w-full md:w-auto">
-                            <span id="btn-text">Send Message</span>
-                            <span id="btn-loading" class="hidden">
-                                <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white inline" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                                </svg>
-                                Sending...
-                            </span>
-                        </button>
-                    </div>
-                </form>
+                </div>
             </div>
-        </div>
-    </div>
-</section>
+        </section>
 
         
         <!-- Footer -->
@@ -800,15 +870,132 @@
         </footer>
     </div>
     
-    <!-- Include the responsive fix JavaScript -->
-    <script src="./responsive-fix.js"></script>
-    <script src="./gsapanim.js">
-       
+    <!-- Add a simplified version of the loading screen for faster initial render -->
+    <script>
+        // Preload key images
+        const preloadImages = [
+            'me.png',
+            'ChatGPT Image Apr 13, 2025, 10_17_54 PM.png'
+        ];
+        
+        preloadImages.forEach(src => {
+            const img = new Image();
+            img.src = src;
+        });
+        
+        // Show content when page is ready
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                document.querySelector('.section-wrapper').style.opacity = '1';
+                document.querySelector('.section-wrapper').style.visibility = 'visible';
+                
+                const loadingScreen = document.querySelector('.loading-screen');
+                loadingScreen.style.opacity = '0';
+                setTimeout(() => {
+                    loadingScreen.style.display = 'none';
+                }, 500);
+                
+                // Initialize cursor after page loads
+                initCustomCursor();
+            }, 500);
+        });
+        
+        // Restore cursor functionality
+        function initCustomCursor() {
+            const cursor = document.querySelector('.cursor--dot');
+            const cursorCircle = document.querySelector('.cursor--circle');
+            const cursorText = document.querySelector('.cursor--text');
+            
+            if (!cursor || !cursorCircle) return;
+            
+            // Prefer using transform for better performance
+            const updateCursor = (e) => {
+                const posX = e.clientX;
+                const posY = e.clientY;
+                
+                cursor.style.transform = `translate3d(${posX}px, ${posY}px, 0)`;
+                cursorCircle.style.transform = `translate3d(${posX}px, ${posY}px, 0)`;
+                
+                if (cursorText) {
+                    cursorText.style.transform = `translate3d(${posX}px, ${posY}px, 0)`;
+                }
+            };
+            
+            window.addEventListener('mousemove', updateCursor);
+            
+            // Project hover effects
+            const projectCards = document.querySelectorAll('.project-card');
+            projectCards.forEach(card => {
+                card.addEventListener('mouseenter', () => {
+                    cursorCircle.classList.add('cursor--hover');
+                    if (cursorText) {
+                        cursorText.classList.add('visible');
+                    }
+                });
+                
+                card.addEventListener('mouseleave', () => {
+                    cursorCircle.classList.remove('cursor--hover');
+                    if (cursorText) {
+                        cursorText.classList.remove('visible');
+                    }
+                });
+            });
+        }
     </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollToPlugin.min.js"></script>
-    <script src="./tabswitch.js">
-    // Tab switching functionality
 
-</script>
+    <!-- Modify lazy loading to preserve critical hero images -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Exempt hero images from lazy loading to ensure they appear immediately
+            const heroImgs = document.querySelectorAll('#hero img, .luxury-image');
+            heroImgs.forEach(img => {
+                img.classList.add('preload');
+                // If already set as lazy, restore original src
+                if (img.getAttribute('data-src')) {
+                    img.setAttribute('src', img.getAttribute('data-src'));
+                }
+            });
+            
+            // Apply lazy loading only to non-hero images
+            const images = document.querySelectorAll('img:not(.preload)');
+            images.forEach(img => {
+                img.setAttribute('loading', 'lazy');
+                if (!img.getAttribute('data-src')) {
+                    const src = img.getAttribute('src');
+                    img.setAttribute('data-src', src);
+                    img.setAttribute('src', 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1 1"%3E%3C/svg%3E');
+                }
+            });
+            
+            // Set up intersection observer for lazy loading
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        const dataSrc = img.getAttribute('data-src');
+                        if (dataSrc) {
+                            img.setAttribute('src', dataSrc);
+                        }
+                        observer.unobserve(img);
+                    }
+                });
+            }, {
+                rootMargin: '200px'
+            });
+            
+            images.forEach(img => {
+                observer.observe(img);
+            });
+        });
+    </script>
+    
+    <!-- Include the optimized scripts -->
+    <script src="./responsive-fix.js"></script>
+    <script src="./optimized-gsap.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollToPlugin.min.js" defer></script>
+    <script src="./tabswitch.js" defer></script>
+    
+    <!-- Add the performance analytics for monitoring -->
+    <script async src="./analytics.js"></script>
 </body>
 </html>
