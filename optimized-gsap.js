@@ -18,6 +18,24 @@ function initGSAPAnimations() {
     // Ensure hero section is visible immediately
     gsap.set(".section-wrapper", { autoAlpha: 1 });
     
+    // Fix section visibility issues
+    gsap.set("section", { autoAlpha: 1 });
+    gsap.set("#about, #projects, #skills, #testimonials, #contact", { 
+        autoAlpha: 1,
+        visibility: "visible",
+        opacity: 1
+    });
+    
+    // Show all content immediately on mobile
+    if (window.innerWidth < 768) {
+        gsap.set(".section-wrapper section *", { 
+            autoAlpha: 1,
+            opacity: 1,
+            y: 0,
+            x: 0
+        });
+    }
+    
     // Fix hero animations with improved performance
     const heroElements = {
         subtitle: document.getElementById('luxury-subtitle'),
@@ -33,25 +51,22 @@ function initGSAPAnimations() {
         badges: document.getElementById('achievement-badges')
     };
     
+    // Restore original hero animation order
     // Create a single timeline for hero section to reduce layout thrashing
     const heroTl = gsap.timeline({ 
         defaults: { 
             ease: "power3.out",
             duration: 0.7
-        },
-        onStart: () => {
-            // Force a single reflow before animations start
-            document.body.offsetHeight;
         }
     });
     
-    // Only animate if elements exist - add 0.1s delays between animations for smoother effect
+    // Only animate if elements exist - simplified to match original order
     if (heroElements.subtitle) {
         heroTl.to(heroElements.subtitle, { 
             opacity: 1, 
             y: 0,
             duration: 0.6
-        }, 0.2);
+        });
     }
     
     if (heroElements.title) {
@@ -59,7 +74,7 @@ function initGSAPAnimations() {
             opacity: 1, 
             y: 0, 
             duration: 0.7
-        }, 0.3);
+        }, "-=0.4");
     }
     
     if (heroElements.tagline) {
@@ -67,7 +82,7 @@ function initGSAPAnimations() {
             opacity: 1, 
             y: 0,
             duration: 0.7
-        }, 0.4);
+        }, "-=0.4");
     }
     
     if (heroElements.typing) {
@@ -75,7 +90,7 @@ function initGSAPAnimations() {
             opacity: 1, 
             y: 0,
             duration: 0.6
-        }, 0.5);
+        }, "-=0.4");
     }
     
     if (heroElements.description) {
@@ -83,7 +98,7 @@ function initGSAPAnimations() {
             opacity: 1, 
             y: 0,
             duration: 0.6
-        }, 0.6);
+        }, "-=0.4");
     }
     
     if (heroElements.stats) {
@@ -92,7 +107,7 @@ function initGSAPAnimations() {
             y: 0,
             duration: 0.6,
             onComplete: animateCounters
-        }, 0.7);
+        }, "-=0.4");
     }
     
     if (heroElements.buttons) {
@@ -100,7 +115,7 @@ function initGSAPAnimations() {
             opacity: 1, 
             y: 0,
             duration: 0.6
-        }, 0.8);
+        }, "-=0.4");
     }
     
     if (heroElements.profile) {
@@ -108,28 +123,28 @@ function initGSAPAnimations() {
             opacity: 1, 
             x: 0,
             duration: 0.8
-        }, 0.5);
+        }, "-=0.8");
     }
     
     if (heroElements.social) {
         heroTl.to(heroElements.social, { 
             opacity: 1,
             duration: 0.5
-        }, 0.9);
+        }, "-=0.2");
     }
     
     if (heroElements.scroll) {
         heroTl.to(heroElements.scroll, { 
             opacity: 1,
             duration: 0.5
-        }, 1);
+        }, "-=0.2");
     }
     
     if (heroElements.badges) {
         heroTl.to(heroElements.badges, { 
             opacity: 1,
             duration: 0.5
-        }, 1.1);
+        }, "-=0.2");
     }
     
     // Optimize counter animations
@@ -158,78 +173,81 @@ function initGSAPAnimations() {
     // Initialize particles for hero section if exists
     initializeParticles();
     
-    // More efficient scroll animations with scroll triggers
+    // More efficient scroll animations with scroll triggers - fix visibility issues
     if (typeof ScrollTrigger !== 'undefined') {
         // Create scroll animations only if elements are present
         const scrollSections = document.querySelectorAll('section[id]:not(#hero)');
         
         scrollSections.forEach(section => {
-            // Create a timeline for each section
+            // Make sure section is visible regardless of scroll
+            gsap.set(section, { autoAlpha: 1 });
+            
+            // Create a timeline for each section with better defaults
             const sectionTl = gsap.timeline({
                 scrollTrigger: {
                     trigger: section,
-                    start: "top 80%",
+                    start: "top 95%", // Start earlier
                     end: "bottom 20%",
                     toggleActions: "play none none none"
                 }
             });
             
-            // Animate section elements with batched operations
+            // Ensure elements are visible with much shorter animations
             const headings = section.querySelectorAll('h2, h3');
             const paragraphs = section.querySelectorAll('p');
             const lists = section.querySelectorAll('ul, ol');
             const images = section.querySelectorAll('img');
             const cards = section.querySelectorAll('.project-card, .testimonial-slider, .interactive-skills-container');
             
-            // Group similar elements to reduce reflows
+            // Use shorter, subtle animations
             if (headings.length) {
                 sectionTl.from(headings, {
-                    y: 30,
-                    opacity: 0,
-                    duration: 0.7,
-                    stagger: 0.2,
-                    ease: "power3.out"
+                    y: 15,
+                    opacity: 0.8,
+                    duration: 0.4,
+                    stagger: 0.1,
+                    ease: "power1.out"
                 }, 0);
             }
             
             if (paragraphs.length) {
                 sectionTl.from(paragraphs, {
-                    y: 20,
-                    opacity: 0,
-                    duration: 0.6,
-                    stagger: 0.15,
-                    ease: "power3.out"
-                }, 0.2);
+                    y: 10,
+                    opacity: 0.8,
+                    duration: 0.3,
+                    stagger: 0.05,
+                    ease: "power1.out"
+                }, 0.1);
             }
             
             if (lists.length) {
                 sectionTl.from(lists, {
-                    y: 20,
-                    opacity: 0,
-                    duration: 0.6,
-                    stagger: 0.15,
-                    ease: "power3.out"
-                }, 0.3);
+                    y: 10,
+                    opacity: 0.8,
+                    duration: 0.3,
+                    stagger: 0.05,
+                    ease: "power1.out"
+                }, 0.1);
             }
             
             if (images.length) {
                 sectionTl.from(images, {
-                    y: 20,
-                    opacity: 0,
-                    duration: 0.7,
-                    stagger: 0.2,
-                    ease: "power3.out"
-                }, 0.2);
+                    y: 10,
+                    opacity: 0.8,
+                    duration: 0.3,
+                    stagger: 0.1,
+                    ease: "power1.out"
+                }, 0.1);
             }
             
             if (cards.length) {
                 sectionTl.from(cards, {
-                    y: 30,
-                    opacity: 0,
-                    duration: 0.8,
-                    stagger: 0.2,
-                    ease: "power3.out"
-                }, 0.3);
+                    y: 15,
+                    opacity: 0.8,
+                    duration: 0.4,
+                    stagger: 0.1,
+                    ease: "power1.out"
+                }, 0.2);
             }
         });
         
@@ -294,7 +312,7 @@ function initGSAPAnimations() {
     }
 }
 
-// Add particles initialization for hero section
+// More natural particle animation
 function initializeParticles() {
     const particlesContainer = document.getElementById('luxury-particles');
     if (!particlesContainer) return;
@@ -302,19 +320,17 @@ function initializeParticles() {
     // Clear existing particles first
     particlesContainer.innerHTML = '';
     
-    // Create new particles with better performance
-    const particleCount = window.innerWidth < 768 ? 20 : 50;
+    // Create new particles with better performance but original appearance
+    const particleCount = window.innerWidth < 768 ? 20 : 40;
     
     for (let i = 0; i < particleCount; i++) {
         const particle = document.createElement('div');
         particle.classList.add('luxury-particle');
         
-        // Random positioning
+        // Random positioning with original appearance
         const posX = Math.random() * 100;
         const posY = Math.random() * 100;
         const size = Math.random() * 3 + 1;
-        const animDuration = Math.random() * 20 + 10;
-        const animDelay = Math.random() * 10;
         
         particle.style.width = `${size}px`;
         particle.style.height = `${size}px`;
@@ -322,12 +338,38 @@ function initializeParticles() {
         particle.style.top = `${posY}%`;
         particle.style.opacity = Math.random() * 0.6 + 0.2;
         
-        // Use CSS transform for animation instead of JS for better performance
-        particle.style.animation = `float-slow ${animDuration}s ${animDelay}s infinite alternate ease-in-out`;
-        
         particlesContainer.appendChild(particle);
     }
 }
+
+// Add a function to force all content to be visible
+function forceContentVisibility() {
+    // Force all sections to be visible
+    document.querySelectorAll('section').forEach(section => {
+        section.style.opacity = '1';
+        section.style.visibility = 'visible';
+    });
+    
+    // Force all project cards to be visible
+    document.querySelectorAll('.project-card').forEach(card => {
+        card.style.opacity = '1';
+        card.style.visibility = 'visible';
+    });
+    
+    // Force tab content to be properly displayed
+    const activeTabs = document.querySelectorAll('.tab-content.active');
+    activeTabs.forEach(tab => {
+        tab.style.display = 'block';
+    });
+}
+
+// Call after a short delay to ensure everything is visible
+window.addEventListener('load', function() {
+    setTimeout(forceContentVisibility, 1000);
+});
+
+// Ensure visibility again after a longer time (failsafe)
+setTimeout(forceContentVisibility, 2500);
 
 // Start GSAP optimizations
 document.addEventListener('DOMContentLoaded', initGSAPAnimations);

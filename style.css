@@ -26,9 +26,7 @@ h1, h2, h3, h4, h5, h6 {
     position: fixed;
     z-index: 9999;
     pointer-events: none;
-    will-change: transform;
     mix-blend-mode: difference;
-    transform: translate(-50%, -50%);
 }
 
 .cursor--dot {
@@ -36,8 +34,9 @@ h1, h2, h3, h4, h5, h6 {
     height: 8px;
     background-color: var(--accent);
     border-radius: 50%;
-    margin-left: -4px;
-    margin-top: -4px;
+    left: 0;
+    top: 0;
+    transform: translate(-50%, -50%);
 }
 
 .cursor--circle {
@@ -45,16 +44,15 @@ h1, h2, h3, h4, h5, h6 {
     height: 40px;
     border: 2px solid var(--accent);
     border-radius: 50%;
-    margin-left: -20px;
-    margin-top: -20px;
+    left: 0;
+    top: 0;
+    transform: translate(-50%, -50%);
     transition: width 0.3s, height 0.3s, background 0.3s;
 }
 
 .cursor--hover {
     width: 80px;
     height: 80px;
-    margin-left: -40px;
-    margin-top: -40px;
     background: rgba(100, 255, 218, 0.1);
 }
 
@@ -63,15 +61,9 @@ h1, h2, h3, h4, h5, h6 {
     color: var(--accent);
     opacity: 0;
     transition: opacity 0.3s, transform 0.3s;
-    margin-left: 0;
-    margin-top: 0;
-    text-align: center;
-}
-
-.cursor--text.visible {
-    opacity: 1;
-    font-size: 12px;
-    transform: translate(-50%, -50%) scale(1);
+    left: 0;
+    top: 0;
+    transform: translate(-50%, -50%);
 }
 
 /* Section wrapper */
@@ -1724,4 +1716,373 @@ img[src^="data:"] {
 
 .optimized-animation {
     animation: optimized-pulse 3s infinite;
+}
+
+/* About section styling fixes */
+#about {
+    background-color: var(--bg-secondary);
+}
+
+#about .rounded-2xl {
+    background: linear-gradient(to bottom right, var(--bg-primary), var(--bg-secondary));
+}
+
+/* Restore original profile image styling */
+.relative.w-48.h-48 {
+    display: block;
+}
+
+.rounded-full.bg-gradient-to-tr {
+    background: linear-gradient(to top right, var(--accent), var(--secondary-accent));
+    animation: pulse 3s infinite alternate;
+}
+
+/* Fix animation timing */
+@keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 0.3; }
+    50% { transform: scale(1.05); opacity: 0.5; }
+}
+
+/* Preload critical images */
+img.preload, 
+.luxury-image,
+.luxury-hero-bg {
+    opacity: 1 !important;
+}
+
+/* Force proper cursor appearance */
+@media (min-width: 769px) {
+    body {
+        cursor: none !important;
+    }
+    
+    .project-card,
+    .btn,
+    a {
+        cursor: none !important;
+    }
+}
+
+/* Optimize for mobile without breaking the design */
+@media (max-width: 768px) {
+    body {
+        cursor: auto;
+    }
+    
+    .cursor--dot, 
+    .cursor--circle, 
+    .cursor--text {
+        display: none;
+    }
+    
+    /* But keep hero section elements visible */
+    .luxury-hero * {
+        display: block;
+    }
+    
+    /* Fix hero section on mobile */
+    .luxury-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+    
+    .luxury-profile-container {
+        grid-row: 1;
+        padding-top: 0;
+        margin-bottom: 2rem;
+    }
+}
+
+/* Fix visibility issues - ensure content is always visible */
+#about, 
+#projects,
+#skills,
+#testimonials,
+#contact {
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+/* Ensure all section content is visible */
+.tab-content,
+.project-card,
+.project-overlay,
+.grid,
+.skills-graph-container {
+    opacity: 1 !important;
+}
+
+/* Fix About section content visibility */
+#about .tab-content {
+    display: none; /* Hide all tab content initially */
+}
+
+#about .tab-content.active {
+    display: block; /* Show only active tab */
+}
+
+/* Make sure project cards display properly */
+.project-card {
+    overflow: visible;
+}
+
+.project-overlay {
+    transform: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.project-card:hover .project-overlay {
+    opacity: 1;
+}
+
+/* Ensure images are visible */
+img {
+    opacity: 1 !important;
+}
+
+/* Restore profile image styling in about section */
+.relative.w-48.h-48 .absolute.inset-0.rounded-full {
+    opacity: 0.3;
+}
+
+/* Fix animation issues that might prevent visibility */
+@media (max-width: 768px) {
+    .section-wrapper > section {
+        min-height: auto !important;
+    }
+}
+
+/* About Section Enhancements */
+#about {
+    background-color: var(--bg-secondary);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Add subtle background patterns */
+#about::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+        radial-gradient(circle at 15% 50%, rgba(100, 255, 218, 0.08) 0%, transparent 25%),
+        radial-gradient(circle at 85% 30%, rgba(64, 93, 230, 0.08) 0%, transparent 25%);
+    opacity: 0.5;
+    z-index: 0;
+}
+
+/* Improved tab styling */
+.tab-link {
+    position: relative;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    opacity: 0.7;
+}
+
+.tab-link:hover {
+    opacity: 1;
+}
+
+.tab-link::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--accent);
+    transition: width 0.3s ease;
+}
+
+.tab-link:hover::after {
+    width: 100%;
+}
+
+.tab-link.active-tab {
+    opacity: 1;
+    color: var(--accent);
+    font-weight: 600;
+}
+
+.tab-link.active-tab::after {
+    width: 100%;
+}
+
+/* Profile card with depth effect */
+#about .relative.max-w-sm {
+    transform: translateZ(0);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 10px 30px -15px rgba(0, 0, 0, 0.5);
+}
+
+#about .relative.max-w-sm:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 30px -15px rgba(0, 0, 0, 0.7);
+}
+
+/* Make profile image more prominent */
+#about .relative.w-40.h-40,
+#about .relative.w-48.h-48 {
+    margin: 0 auto;
+    transition: transform 0.5s ease;
+}
+
+#about .relative.w-40.h-40:hover,
+#about .relative.w-48.h-48:hover {
+    transform: scale(1.05);
+}
+
+/* Improve text readability */
+#about p {
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.85);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Sticky profile card on desktop */
+@media (min-width: 1024px) {
+    #about .lg\:sticky {
+        position: sticky;
+        top: 2rem;
+        align-self: flex-start;
+    }
+}
+
+/* Enhanced skill tags */
+#about .px-4.py-2.bg-opacity-10 {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    border: 1px solid var(--accent);
+}
+
+#about .px-4.py-2.bg-opacity-10::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(100, 255, 218, 0.2), transparent);
+    transition: left 0.7s ease;
+}
+
+#about .px-4.py-2.bg-opacity-10:hover::before {
+    left: 100%;
+}
+
+/* Ghost animation container */
+#ghost {
+    margin: 0 auto;
+    transform: scale(0.7);
+}
+
+/* Improved mobile experience */
+@media (max-width: 768px) {
+    #about .tab-link {
+        padding: 0.75rem 1rem;
+        font-size: 0.9rem;
+    }
+    
+    #about .relative.w-40.h-40,
+    #about .relative.w-48.h-48 {
+        width: 120px;
+        height: 120px;
+    }
+    
+    #about .text-center.p-3 {
+        padding: 0.5rem;
+    }
+    
+    #about .mb-20 {
+        margin-bottom: 2rem;
+    }
+}
+
+/* Fix About Section Layout */
+#about {
+    overflow: visible;
+    padding-bottom: 4rem;
+}
+
+/* Fix tab navigation */
+#about .tab-link {
+    position: relative;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    opacity: 0.7;
+    cursor: pointer;
+    padding: 0.75rem 1.5rem;
+}
+
+#about .tab-link:hover {
+    opacity: 1;
+}
+
+#about .tab-link.active-tab {
+    opacity: 1;
+    color: var(--accent);
+    font-weight: 600;
+}
+
+/* Ensure tab content is visible */
+#about .tab-content {
+    opacity: 1;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+#about .tab-content.active {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+#about .tab-content.hidden {
+    display: none;
+    opacity: 0;
+    transform: translateY(10px);
+}
+
+/* Improved profile card layout */
+#about .grid-cols-1.lg\:grid-cols-12 {
+    align-items: flex-start;
+}
+
+/* Make tab content scrollable on small screens */
+@media (max-width: 768px) {
+    #about .tab-contents {
+        max-height: 80vh;
+        overflow-y: auto;
+    }
+    
+    #about .tab-link {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+    }
+}
+
+/* Fix the ghost animation size on mobile */
+@media (max-width: 768px) {
+    #ghost {
+        transform: scale(0.6);
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+    }
+}
+
+/* Fix the floating issue where skill tags might shift */
+#about .flex.flex-wrap.gap-2 {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+/* Make sure images load properly */
+#about img {
+    opacity: 1 !important;
 }
