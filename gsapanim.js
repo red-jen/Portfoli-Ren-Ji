@@ -462,15 +462,15 @@ document.addEventListener("DOMContentLoaded", function() {
             
             // Get form data
             const templateParams = {
-                from_name: this.user_name.value,
-                from_email: this.user_email.value,
+                name: this.user_name.value,
+                email: this.user_email.value,
                 message: this.message.value,
             };
             
             console.log("Attempting to send email with EmailJS...");
             
             // Send the email using EmailJS (verify these IDs in your dashboard)
-            emailjs.send("service_rwr0hnq", "template_xnwbh1s", templateParams)
+            emailjs.send("service_rwr0hnq", "template_tycdb0t", templateParams)
                 .then(function(response) {
                     console.log('SUCCESS!', response.status, response.text);
                     

@@ -1,0 +1,105 @@
+/* EMERGENCY GRID FIX - These rules have very high specificity and !important flags */
+
+/* Force the about section to be visible with proper layout */
+#about {
+  visibility: visible !important;
+  opacity: 1 !important;
+  overflow: visible !important;
+  display: block !important;
+}
+
+/* Force the correct flex layout for the about content wrapper */
+#about .about-content-wrapper {
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  gap: 2rem !important;
+  width: 100% !important;
+}
+
+/* Desktop and tablet horizontal layout */
+@media (min-width: 768px) {
+  #about .about-content-wrapper {
+    flex-direction: row !important;
+  }
+  
+  #about .about-left-column {
+    flex: 0 0 350px !important;
+    width: 350px !important;
+    max-width: 350px !important;
+  }
+  
+  #about .about-right-column {
+    flex: 1 !important;
+    width: auto !important;
+  }
+  
+  /* Legacy grid layout override */
+  #about .grid-cols-1.lg\:grid-cols-12 {
+    display: grid !important;
+    grid-template-columns: 350px 1fr !important;
+  }
+  
+  #about .lg\:col-span-4 {
+    grid-column: 1 !important;
+    width: 100% !important;
+    max-width: 350px !important;
+  }
+  
+  #about .lg\:col-span-8 {
+    grid-column: 2 !important;
+    width: 100% !important;
+  }
+}
+
+/* Mobile vertical layout */
+@media (max-width: 767px) {
+  #about .about-content-wrapper {
+    flex-direction: column !important;
+  }
+  
+  #about .about-left-column,
+  #about .about-right-column {
+    flex: 0 0 100% !important;
+    width: 100% !important;
+  }
+  
+  /* Legacy grid layout override */
+  #about .grid-cols-1.lg\:grid-cols-12 {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+  }
+  
+  #about .lg\:col-span-4,
+  #about .lg\:col-span-8 {
+    grid-column: 1 !important;
+    width: 100% !important;
+  }
+}
+
+/* Fix profile card sizing */
+#about .bg-opacity-50.rounded-2xl {
+  margin: 0 auto !important;
+}
+
+@media (min-width: 768px) {
+  #about .bg-opacity-50.rounded-2xl {
+    max-width: 350px !important;
+  }
+}
+
+@media (max-width: 767px) {
+  #about .bg-opacity-50.rounded-2xl {
+    max-width: 100% !important;
+  }
+}
+
+/* Ensure tabs display properly */
+#about .tab-content {
+  opacity: 1 !important;
+}
+
+#about .tab-content.active {
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
