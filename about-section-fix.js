@@ -1,245 +1,183 @@
-/**
- * About Section Fixes
- * Improves about section tab switching and animations
- */
+// About section enhancement script
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Improved tab switching with animation
-    const tabLinks = document.querySelectorAll('.tab-link');
-    const tabContents = document.querySelectorAll('.tab-content');
+    // Fix tab initialization and switching
+    initializeAboutTabs();
     
-    // Function to ensure at least one tab is active
-    function ensureActiveTab() {
-        // Check if any tab is already active
-        let hasActiveTab = false;
-        tabContents.forEach(tab => {
-            if (tab.classList.contains('active') && tab.style.display !== 'none') {
-                hasActiveTab = true;
-            }
-        });
-        
-        // If no tab is active, activate the first one
-        if (!hasActiveTab && tabContents.length > 0) {
-            tabLinks[0].classList.add('active-tab');
-            tabLinks[0].style.color = 'var(--accent)';
-            tabLinks[0].style.borderColor = 'var(--accent)';
-            
-            tabContents[0].classList.add('active');
-            tabContents[0].style.display = 'block';
-            tabContents[0].style.opacity = '1';
-        }
-    }
+    // Fix profile card hover effects
+    enhanceProfileCard();
     
-    // Set up tab click handlers
-    tabLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            
-            // Get the tab ID
-            const tabId = this.getAttribute('data-tab');
-            
-            // Remove active class from all tab links
-            tabLinks.forEach(tab => {
-                tab.classList.remove('active-tab');
-                tab.style.borderColor = 'transparent';
-                tab.style.color = 'rgb(156, 163, 175)'; // text-gray-400
-            });
-            
-            // Hide all tab contents with fade effect
-            tabContents.forEach(content => {
-                content.style.opacity = '0';
-                content.style.transform = 'translateY(10px)';
-                
-                // After fade out, hide the content
-                setTimeout(() => {
-                    content.classList.remove('active');
-                    content.style.display = 'none';
-                }, 250);
-            });
-            
-            // Add active class to clicked tab
-            this.classList.add('active-tab');
-            this.style.borderBottom = '2px solid var(--accent)';
-            this.style.color = 'var(--accent)';
-            
-            // Show corresponding content with fade effect
-            const targetTab = document.getElementById(tabId + '-tab');
-            if (targetTab) {
-                setTimeout(() => {
-                    targetTab.classList.add('active');
-                    targetTab.style.display = 'block';
-                    
-                    // Trigger reflow before fading in
-                    void targetTab.offsetWidth;
-                    
-                    targetTab.style.opacity = '1';
-                    targetTab.style.transform = 'translateY(0)';
-                }, 300);
-            }
-        });
-    });
+    // Ensure all content is visible
+    fixVisibilityIssues();
     
-    // Run fix on load and periodically to ensure tab visibility
-    ensureActiveTab();
-    setTimeout(ensureActiveTab, 500);
-    setTimeout(ensureActiveTab, 1000);
-    
-    // Add CSS animations for smoother transitions
-    const styleSheet = document.createElement('style');
-    styleSheet.type = 'text/css';
-    styleSheet.innerHTML = `
-        .tab-content {
-            transition: opacity 0.3s ease, transform 0.3s ease;
-        }
-        
-        .tab-link {
-            position: relative;
-            transition: color 0.3s ease, border-color 0.3s ease;
-        }
-        
-        .tab-link.active-tab {
-            position: relative;
-        }
-        
-        .tab-link.active-tab::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background-color: var(--accent);
-        }
-    `;
-    document.head.appendChild(styleSheet);
-    
-    // Enhanced profile image animation
-    const profileContainer = document.querySelector('#about .relative.w-40.h-40') || 
-                            document.querySelector('#about .relative.w-48.h-48');
-    
-    if (profileContainer) {
-        const profileGradient = profileContainer.querySelector('.absolute.rounded-full.bg-gradient-to-tr');
-        
-        if (profileGradient) {
-            // Better pulse animation
-            profileGradient.style.animation = 'customPulse 3s infinite alternate ease-in-out';
-        }
-    }
-    
-    // Add subtle animation to the skill tags
-    const skillTags = document.querySelectorAll('#about .px-4.py-2.bg-opacity-10');
-    
-    skillTags.forEach((tag, index) => {
-        // Staggered entrance animation
-        tag.style.opacity = '0';
-        tag.style.transform = 'translateY(20px)';
-        
-        setTimeout(() => {
-            tag.style.transition = 'all 0.5s ease';
-            tag.style.opacity = '1';
-            tag.style.transform = 'translateY(0)';
-        }, 100 + (index * 50));
-        
-        // Hover animation enhancement
-        tag.addEventListener('mouseenter', function() {
-            this.style.transform = 'translateY(-5px)';
-            this.style.boxShadow = '0 5px 15px rgba(100, 255, 218, 0.2)';
-        });
-        
-        tag.addEventListener('mouseleave', function() {
-            this.style.transform = 'translateY(0)';
-            this.style.boxShadow = 'none';
-        });
-    });
-    
-    // Add animation to the section background
-    const aboutSection = document.getElementById('about');
-    
-    if (aboutSection) {
-        window.addEventListener('scroll', function() {
-            const scrollPosition = window.scrollY;
-            const sectionTop = aboutSection.offsetTop;
-            const sectionHeight = aboutSection.offsetHeight;
-            
-            if (scrollPosition > sectionTop - 300 && scrollPosition < sectionTop + sectionHeight) {
-                const scrollProgress = (scrollPosition - (sectionTop - 300)) / (sectionHeight + 300);
-                
-                // Subtle parallax effect
-                const translateY = scrollProgress * 30;
-                aboutSection.style.backgroundPositionY = `${translateY}px`;
-            }
-        });
-    }
-
-    // Make sure tab content appears on page load
-    function ensureActiveTabVisible() {
-        const activeTab = document.querySelector('.tab-content.active');
-        if (activeTab) {
-            activeTab.style.display = 'block';
-            activeTab.style.opacity = '1';
-        } else {
-            // If no active tab, set the first one as active
-            const firstTab = document.getElementById('about-tab');
-            if (firstTab) {
-                firstTab.classList.add('active');
-                firstTab.style.display = 'block';
-                firstTab.style.opacity = '1';
-                
-                // Also activate the corresponding tab link
-                const firstTabLink = document.querySelector('.tab-link[data-tab="about"]');
-                if (firstTabLink) {
-                    firstTabLink.classList.add('active-tab');
-                    firstTabLink.style.borderBottom = '2px solid var(--accent)';
-                    firstTabLink.style.color = 'var(--accent)';
-                }
-            }
-        }
-    }
-
-    // Run on load and after a short delay to ensure it works
-    ensureActiveTabVisible();
-    setTimeout(ensureActiveTabVisible, 500);
+    // Give it a small delay to ensure the DOM is fully ready
+    setTimeout(fixVisibilityIssues, 100);
 });
 
-// Add custom pulse animation to style sheet
-(function addCustomAnimations() {
-    const styleSheet = document.createElement('style');
-    styleSheet.type = 'text/css';
-    styleSheet.innerHTML = `
-        @keyframes customPulse {
-            0% { opacity: 0.2; transform: scale(0.98); }
-            100% { opacity: 0.4; transform: scale(1.02); }
-        }
-        
-        .tab-content {
-            transition: opacity 0.3s ease, transform 0.3s ease;
-        }
-        
-        #about .rounded-full img {
-            transition: transform 0.5s ease;
-        }
-        
-        #about .rounded-full:hover img {
-            transform: scale(1.05);
-        }
-    `;
-    document.head.appendChild(styleSheet);
-})();
-
-// Add event listener for window resize to handle responsive layout
-window.addEventListener('resize', function() {
-    // Ensure tabs fit in smaller screens
-    if (window.innerWidth < 768) {
-        const tabLinks = document.querySelectorAll('.tab-link');
-        tabLinks.forEach(tab => {
-            tab.style.padding = '0.5rem 1rem';
-            tab.style.fontSize = '0.9rem';
+function initializeAboutTabs() {
+    // Get all tab links
+    const tabLinks = document.querySelectorAll('#about .tab-link');
+    
+    // Add click event listener to each tab link
+    tabLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            // Get the target tab from data-tab attribute
+            const tabTarget = this.getAttribute('data-tab');
+            
+            // Remove active class from all tabs
+            tabLinks.forEach(tab => {
+                tab.classList.remove('active-tab');
+                tab.style.borderColor = '';
+                tab.style.color = '';
+            });
+            
+            // Add active class to the clicked tab
+            this.classList.add('active-tab');
+            this.style.borderColor = 'var(--accent)';
+            this.style.color = 'var(--accent)';
+            
+            // Hide all tab contents
+            document.querySelectorAll('#about .tab-content').forEach(content => {
+                content.classList.add('hidden');
+                content.classList.remove('active');
+                content.style.display = 'none';
+                content.style.opacity = '0';
+            });
+            
+            // Show the target tab content
+            const targetContent = document.getElementById(tabTarget + '-tab');
+            if (targetContent) {
+                targetContent.classList.remove('hidden');
+                targetContent.classList.add('active');
+                targetContent.style.display = 'block';
+                
+                // Use setTimeout to ensure the display property has taken effect before setting opacity
+                setTimeout(() => {
+                    targetContent.style.opacity = '1';
+                }, 10);
+            }
         });
-    } else {
-        const tabLinks = document.querySelectorAll('.tab-link');
-        tabLinks.forEach(tab => {
-            tab.style.padding = '';
-            tab.style.fontSize = '';
+    });
+    
+    // Initialize tabs on page load
+    const activeTab = document.querySelector('#about .tab-link.active-tab');
+    if (activeTab) {
+        // Manually trigger a click on the active tab to ensure correct initialization
+        activeTab.click();
+    } else if (tabLinks.length > 0) {
+        // If no active tab is found, activate the first one
+        tabLinks[0].classList.add('active-tab');
+        tabLinks[0].style.borderColor = 'var(--accent)';
+        tabLinks[0].style.color = 'var(--accent)';
+        
+        const firstTabContent = document.querySelector('#about .tab-content');
+        if (firstTabContent) {
+            firstTabContent.classList.remove('hidden');
+            firstTabContent.classList.add('active');
+            firstTabContent.style.display = 'block';
+            firstTabContent.style.opacity = '1';
+        }
+    }
+}
+
+function enhanceProfileCard() {
+    // Add hover effect to the profile image
+    const profileImage = document.querySelector('#about .relative.w-48.h-48 img, #about .relative.w-40.h-40 img');
+    const profileCard = document.querySelector('#about .bg-opacity-50.rounded-2xl');
+    
+    if (profileImage && profileCard) {
+        // Create a subtle parallax effect on hover
+        profileCard.addEventListener('mousemove', function(e) {
+            // Only apply effects on devices that support hover
+            if (window.matchMedia('(hover: hover)').matches) {
+                const bounds = this.getBoundingClientRect();
+                const mouseX = e.clientX - bounds.left;
+                const mouseY = e.clientY - bounds.top;
+                
+                const centerX = bounds.width / 2;
+                const centerY = bounds.height / 2;
+                
+                const moveX = (mouseX - centerX) / 20;
+                const moveY = (mouseY - centerY) / 20;
+                
+                profileImage.style.transform = `translate(${moveX}px, ${moveY}px)`;
+            }
+        });
+        
+        profileCard.addEventListener('mouseleave', function() {
+            // Reset transform when mouse leaves
+            profileImage.style.transform = 'translate(0, 0)';
         });
     }
+}
+
+function fixVisibilityIssues() {
+    // Make sure the About section and its content are visible
+    const aboutSection = document.getElementById('about');
+    if (aboutSection) {
+        aboutSection.style.visibility = 'visible';
+        aboutSection.style.opacity = '1';
+        
+        // Force tab contents to be properly styled
+        const activeTabContent = aboutSection.querySelector('.tab-content.active');
+        if (activeTabContent) {
+            activeTabContent.style.display = 'block';
+            activeTabContent.style.opacity = '1';
+        }
+        
+        // Ensure all children are visible
+        aboutSection.querySelectorAll('p, h3, h4, img, div').forEach(el => {
+            el.style.opacity = '1';
+        });
+    }
+    
+    // Make sure profile image is visible
+    const profileImage = document.querySelector('#about .relative.w-48.h-48 img, #about .relative.w-40.h-40 img');
+    if (profileImage) {
+        profileImage.style.opacity = '1';
+    }
+    
+    // Fix the grid layout issues
+    const aboutGrid = document.querySelector('#about .grid-cols-1.lg\\:grid-cols-12');
+    const leftColumn = document.querySelector('#about .lg\\:col-span-4');
+    const rightColumn = document.querySelector('#about .lg\\:col-span-8');
+    
+    if (aboutGrid && leftColumn && rightColumn) {
+        // Force the correct layout based on screen size
+        if (window.innerWidth >= 768) {
+            aboutGrid.style.display = 'grid';
+            
+            if (window.innerWidth >= 1024) {
+                aboutGrid.style.gridTemplateColumns = 'minmax(350px, 1fr) 2fr';
+            } else {
+                aboutGrid.style.gridTemplateColumns = 'minmax(300px, 1fr) 2fr';
+            }
+            
+            leftColumn.style.gridColumn = '1 / 2';
+            rightColumn.style.gridColumn = '2 / 3';
+        } else {
+            aboutGrid.style.gridTemplateColumns = '1fr';
+        }
+    }
+    
+    // Ensure the tab content is visible
+    const activeTabContent = document.querySelector('#about .tab-content.active');
+    if (activeTabContent) {
+        activeTabContent.style.display = 'block';
+        activeTabContent.style.opacity = '1';
+    }
+}
+
+// Run the script once when the page has loaded
+window.addEventListener('load', function() {
+    // Wait a bit to ensure everything else has initialized
+    setTimeout(() => {
+        initializeAboutTabs();
+        fixVisibilityIssues();
+    }, 300);
+});
+
+// Add a resize handler to fix layout on window resize
+window.addEventListener('resize', function() {
+    fixVisibilityIssues();
 });
