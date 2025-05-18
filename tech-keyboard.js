@@ -1,758 +1,835 @@
 /**
  * Tech Keyboard Visualization
- * Enhanced with true 3D cube keys
+ * A 3D interactive keyboard displaying different technologies
+ * Enhanced with camera controls and realistic materials
  */
 
-// Add more technologies to the keyboard layout
-const techKeyboard = [
-  // First row - Frontend basics
-  {
-    row: 0,
-    keys: [
-      { 
-        id: "html5", 
-        name: "HTML5",
-        category: "frontend",
-        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg",
-        experience: "Advanced • 2+ years",
-        description: "Semantic markup language for structuring web content with modern features for multimedia, graphics, and client-side storage."
-      },
-      { 
-        id: "css3", 
-        name: "CSS3",
-        category: "frontend",
-        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg",
-        experience: "Advanced • 2+ years",
-        description: "Styling language for defining the visual presentation of HTML documents with advanced features like animations, flexbox, and grid layouts."
-      },
-      { 
-        id: "javascript", 
-        name: "JavaScript",
-        category: "frontend",
-        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg",
-        experience: "Advanced • 2+ years",
-        description: "Versatile programming language that enables dynamic, interactive content and browser-based applications with support for modern ES6+ features."
-      },
-      { 
-        id: "typescript", 
-        name: "TypeScript",
-        category: "frontend",
-        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg",
-        experience: "Intermediate • 8+ months",
-        description: "Strongly typed programming language that builds on JavaScript, adding static type definitions for enhanced code quality and developer experience."
-      },
-      { 
-        id: "sass", 
-        name: "Sass",
-        category: "frontend",
-        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sass/sass-original.svg",
-        experience: "Intermediate • 1+ year",
-        description: "CSS preprocessor scripting language that extends CSS with variables, nested rules, mixins, and more for more maintainable stylesheets."
-      },
-      { 
-        id: "bootstrap", 
-        name: "Bootstrap",
-        category: "frontend",
-        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg",
-        experience: "Advanced • 2+ years",
-        description: "Front-end framework with pre-built components and responsive grid system for faster and easier web development."
-      }
-    ]
-  },
-  
-  // Second row - Frontend frameworks & libraries
-  {
-    row: 1,
-    keys: [
-      { 
-        id: "react", 
-        name: "React",
-        category: "frontend",
-        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
-        experience: "Intermediate • 1+ year",
-        description: "JavaScript library for building component-based user interfaces with a virtual DOM for efficient rendering and state management."
-      },
-      { 
-        id: "vue", 
-        name: "Vue.js",
-        category: "frontend",
-        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg",
-        experience: "Basic • 6+ months",
-        description: "Progressive JavaScript framework for building user interfaces with a focus on declarative rendering and component composition."
-      },
-      { 
-        id: "tailwind", 
-        name: "Tailwind CSS",
-        category: "frontend",
-        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-plain.svg",
-        experience: "Advanced • 1.5+ years",
-        description: "Utility-first CSS framework for rapidly building custom designs without leaving your HTML, enabling highly efficient development workflows."
-      },
-      { 
-        id: "gsap", 
-        name: "GSAP",
-        category: "frontend",
-        icon: "https://cdn.cdnlogo.com/logos/g/21/gsap-greensock.svg",
-        experience: "Intermediate • 1+ year",
-        description: "Professional-grade animation library for creating high-performance, complex animations with precise control."
-      },
-      { 
-        id: "threejs", 
-        name: "Three.js",
-        category: "frontend",
-        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/threejs/threejs-original.svg",
-        experience: "Basic • 4+ months",
-        description: "JavaScript 3D library that makes WebGL simpler, enabling the creation of 3D graphics in the browser."
-      },
-      { 
-        id: "nextjs", 
-        name: "Next.js",
-        category: "frontend",
-        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg",
-        experience: "Basic • 3+ months",
-        description: "React framework enabling server-side rendering, static site generation, and other performance optimizations with built-in routing."
-      }
-    ]
-  },
-  
-  // Third row - Backend technologies
-  {
-    row: 2,
-    keys: [
-      { 
-        id: "php", 
-        name: "PHP",
-        category: "backend",
-        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg",
-        experience: "Advanced • 2+ years",
-        description: "Server-side scripting language designed for web development with a focus on database connectivity and HTML generation."
-      },
-      { 
-        id: "laravel", 
-        name: "Laravel",
-        category: "backend",
-        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/laravel/laravel-plain.svg",
-        experience: "Intermediate • 1+ year",
-        description: "PHP framework with expressive, elegant syntax that provides tools needed for large, robust applications with MVC architecture."
-      },
-      { 
-        id: "mysql", 
-        name: "MySQL",
-        category: "backend",
-        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg",
-        experience: "Intermediate • 1.5+ years",
-        description: "Open-source relational database management system known for its reliability, performance, and ease of use in web applications."
-      },
-      { 
-        id: "postgresql", 
-        name: "PostgreSQL",
-        category: "backend",
-        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg",
-        experience: "Intermediate • 1+ year",
-        description: "Advanced open-source relational database with strong standards compliance and extensive features for complex data workloads."
-      },
-      { 
-        id: "nodejs", 
-        name: "Node.js",
-        category: "backend",
-        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg",
-        experience: "Basic • 8+ months",
-        description: "JavaScript runtime built on Chrome's V8 engine for building scalable network applications on the server-side."
-      },
-      { 
-        id: "express", 
-        name: "Express.js",
-        category: "backend",
-        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg",
-        experience: "Basic • 6+ months",
-        description: "Fast, unopinionated, minimalist web framework for Node.js for building web applications and APIs."
-      }
-    ]
-  },
-  
-  // Fourth row - Developer tools
-  {
-    row: 3,
-    keys: [
-      { 
-        id: "git", 
-        name: "Git",
-        category: "tools",
-        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg",
-        experience: "Advanced • 2+ years",
-        description: "Distributed version control system for tracking changes in source code during software development and collaboration."
-      },
-      { 
-        id: "github", 
-        name: "GitHub",
-        category: "tools",
-        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg",
-        experience: "Advanced • 2+ years",
-        description: "Hosting platform for Git repositories with features for collaboration, code review, issue tracking, and CI/CD workflows."
-      },
-      { 
-        id: "vscode", 
-        name: "VS Code",
-        category: "tools",
-        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg",
-        experience: "Advanced • 2+ years",
-        description: "Lightweight but powerful source code editor with extensive plugin support, debugging capabilities, and Git integration."
-      },
-      { 
-        id: "composer", 
-        name: "Composer",
-        category: "tools",
-        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/composer/composer-original.svg",
-        experience: "Intermediate • 1+ year",
-        description: "Dependency management tool for PHP that allows declaration and management of project dependencies."
-      },
-      { 
-        id: "npm", 
-        name: "NPM",
-        category: "tools",
-        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/npm/npm-original-wordmark.svg",
-        experience: "Intermediate • 1.5+ years",
-        description: "Default package manager for Node.js that facilitates installation and management of code packages and dependencies."
-      },
-      { 
-        id: "docker", 
-        name: "Docker",
-        category: "tools",
-        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg",
-        experience: "Basic • 6+ months",
-        description: "Platform for developing, shipping, and running applications in containers for consistent deployment across environments."
-      }
-    ]
-  },
-  
-  // Fifth row - Professional skills
-  {
-    row: 4,
-    keys: [
-      { 
-        id: "responsive", 
-        name: "Responsive Design",
-        category: "concepts",
-        icon: "https://cdn.iconscout.com/icon/free/png-256/free-responsive-282-1123251.png",
-        experience: "Advanced • 2+ years",
-        description: "Creating web applications that work seamlessly across different screen sizes, devices, and orientations using flexible layouts and media queries.",
-        size: "1-5u"
-      },
-      { 
-        id: "accessibility", 
-        name: "Accessibility",
-        category: "concepts",
-        icon: "https://cdn-icons-png.flaticon.com/512/6364/6364343.png",
-        experience: "Intermediate • 1.5+ years",
-        description: "Designing and developing websites to be usable by people of all abilities and disabilities, following WCAG guidelines.",
-        size: "1-5u"
-      },
-      { 
-        id: "mvc", 
-        name: "MVC Pattern",
-        category: "concepts",
-        icon: "https://cdn-icons-png.flaticon.com/512/6295/6295417.png",
-        experience: "Intermediate • 1+ year",
-        description: "Software architectural pattern that separates an application into Model (data), View (interface), and Controller (business logic) components.",
-        size: "1-5u"
-      },
-      { 
-        id: "oop", 
-        name: "OOP",
-        category: "concepts",
-        icon: "https://cdn-icons-png.flaticon.com/512/2166/2166823.png",
-        experience: "Advanced • 2+ years",
-        description: "Programming paradigm based on the concept of objects that contain data and code to manipulate that data, with principles like encapsulation and inheritance.",
-        size: "1-5u"
-      }
-    ]
+class TechKeyboard {
+  constructor(containerId = 'tech-keyboard-container') {
+    this.containerId = containerId;
+    this.container = null;
+    this.scene = null;
+    this.camera = null;
+    this.renderer = null;
+    this.controls = null;
+    this.keyboard = null;
+    this.keys = [];
+    this.raycaster = new THREE.Raycaster();
+    this.mouse = new THREE.Vector2();
+    this.clock = new THREE.Clock();
+    this.currentIntersected = null;
+    this.textureLoader = new THREE.TextureLoader();
+    this.isAnimating = false;
+    this.initialCameraPosition = new THREE.Vector3(0, 4, 6);
+    
+    // Tech stack with corresponding colors and images
+    this.techStack = [
+      // First row
+      { name: 'JavaScript', color: 0xF0DB4F, label: 'JS', position: [-1.5, 0, 1.5], 
+        description: 'Core language for web development with strong ecosystem and frameworks.' },
+      { name: 'TypeScript', color: 0x007ACC, label: 'TS', position: [-0.5, 0, 1.5],
+        description: 'JavaScript with syntax for types, enhancing code quality and developer experience.' },
+      { name: 'React', color: 0x61DAFB, label: '', icon: 'react.png', position: [0.5, 0, 1.5],
+        description: 'Component-based UI library for building interactive web applications.' },
+      { name: 'Vue', color: 0x41B883, label: '', icon: 'vue.png', position: [1.5, 0, 1.5],
+        description: 'Progressive framework for building user interfaces with an approachable core library.' },
+      
+      // Second row
+      { name: 'HTML', color: 0xE44D26, label: '', icon: 'html.png', position: [-1.5, 0, 0.5],
+        description: 'Standard markup language for documents designed to be displayed in a web browser.' },
+      { name: 'Node.js', color: 0x3C873A, label: '', icon: 'node.png', position: [-0.5, 0, 0.5],
+        description: 'JavaScript runtime for executing JavaScript code server-side.' },
+      { name: 'Python', color: 0x306998, label: '', icon: 'python.png', position: [0.5, 0, 0.5],
+        description: 'Versatile programming language with clean syntax and rich ecosystem.' },
+      { name: 'Docker', color: 0x0db7ed, label: '', icon: 'docker.png', position: [1.5, 0, 0.5],
+        description: 'Platform for developing, shipping, and running applications in containers.' },
+      
+      // Third row
+      { name: 'AWS', color: 0xFF9900, label: 'aws', position: [-1.5, 0, -0.5],
+        description: 'Cloud computing platform with vast array of infrastructure services.' },
+      { name: 'GraphQL', color: 0xE535AB, label: '', icon: 'graphql.png', position: [-0.5, 0, -0.5],
+        description: 'Query language for APIs and runtime for executing those queries.' },
+      { name: 'GitHub', color: 0x24292E, label: '', icon: 'github.png', position: [0.5, 0, -0.5],
+        description: 'Platform for version control and collaboration using Git.' },
+      { name: 'WordPress', color: 0x21759B, label: '', icon: 'wordpress.png', position: [1.5, 0, -0.5],
+        description: 'Content management system focused on creating websites and blogs.' },
+      
+      // Fourth row
+      { name: 'Linux', color: 0x222222, label: '', icon: 'linux.png', position: [-1.5, 0, -1.5],
+        description: 'Open source operating system and foundation for many servers and devices.' },
+      { name: 'Sass', color: 0xCC6699, label: '', icon: 'sass.png', position: [-0.5, 0, -1.5],
+        description: 'CSS preprocessor scripting language with powerful features.' },
+      { name: 'MongoDB', color: 0x4DB33D, label: '', icon: 'mongodb.png', position: [0.5, 0, -1.5],
+        description: 'Document-oriented NoSQL database used in modern web applications.' },
+      { name: 'Netlify', color: 0x00C7B7, label: '', icon: 'netlify.png', position: [1.5, 0, -1.5],
+        description: 'Platform for automating modern web projects with continuous deployment.' },
+    ];
   }
-];
 
-document.addEventListener('DOMContentLoaded', () => {
-  // Initialize keyboard visualization
-  initTechKeyboard();
-  
-  // Add 3D tilt effect
-  addKeyboardTiltEffect();
-  
-  // Set up demo type animation after a short delay
-  setTimeout(() => {
-    initiateTypingAnimation();
-  }, 1800);
-});
-
-// Improved tech keyboard initialization to ensure all keys display properly
-function initTechKeyboard() {
-  const container = document.getElementById('tech-keyboard');
-  if (!container) return;
-  
-  // Clear any existing content
-  container.innerHTML = '';
-  
-  // Add keyboard edge glow
-  const keyboardEdge = document.createElement('div');
-  keyboardEdge.className = 'keyboard-edge';
-  container.appendChild(keyboardEdge);
-  
-  // Add keyboard base texture
-  const keyboardBase = document.createElement('div');
-  keyboardBase.className = 'keyboard-base';
-  container.appendChild(keyboardBase);
-  
-  // Add lighting element for ambient effects
-  const lighting = document.createElement('div');
-  lighting.className = 'keyboard-lighting';
-  container.appendChild(lighting);
-  
-  // Add keyboard brand and status light for realism
-  const keyboardBrand = document.createElement('div');
-  keyboardBrand.className = 'keyboard-brand';
-  keyboardBrand.textContent = 'TECH STACK';
-  container.appendChild(keyboardBrand);
-  
-  const statusLight = document.createElement('div');
-  statusLight.className = 'keyboard-status-light';
-  statusLight.id = 'keyboard-status';
-  container.appendChild(statusLight);
-  
-  // Create keyboard rows with optimized layout
-  techKeyboard.forEach((rowData, rowIndex) => {
-    const keyboardRow = document.createElement('div');
-    keyboardRow.className = 'keyboard-row';
-    
-    // Special handling for different rows
-    if (rowIndex === 4) { // Concepts row
-      keyboardRow.style.justifyContent = 'space-evenly';
-    } else {
-      keyboardRow.style.justifyContent = 'center';
+  init() {
+    this.container = document.getElementById(this.containerId);
+    if (!this.container) {
+      console.error(`Container "${this.containerId}" not found`);
+      return false;
     }
+
+    this.container.innerHTML = '';
     
-    // Create keys in this row
-    rowData.keys.forEach(key => {
-      const keyElement = createKeyElement(key, rowIndex);
-      keyboardRow.appendChild(keyElement);
+    // Create scene with improved environment
+    this.scene = new THREE.Scene();
+    this.scene.background = new THREE.Color(0x121212);
+    
+    // Add fog for depth perception
+    this.scene.fog = new THREE.Fog(0x121212, 10, 20);
+    
+    // Enhanced lighting setup for realism
+    this.setupLighting();
+    
+    // Camera setup
+    const aspect = this.container.clientWidth / this.container.clientHeight;
+    this.camera = new THREE.PerspectiveCamera(45, aspect, 0.1, 1000);
+    this.camera.position.copy(this.initialCameraPosition);
+    this.camera.lookAt(0, 0, 0);
+    
+    // Renderer setup with enhanced shadows
+    this.renderer = new THREE.WebGLRenderer({ 
+      antialias: true,
+      alpha: true,
+      powerPreference: "high-performance" 
+    });
+    this.renderer.setSize(this.container.clientWidth, this.container.clientHeight);
+    this.renderer.setPixelRatio(window.devicePixelRatio);
+    this.renderer.shadowMap.enabled = true;
+    this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+    this.renderer.outputEncoding = THREE.sRGBEncoding;
+    this.container.appendChild(this.renderer.domElement);
+    
+    // Add OrbitControls for camera manipulation
+    this.controls = new THREE.OrbitControls(this.camera, this.renderer.domElement);
+    this.controls.enableDamping = true;
+    this.controls.dampingFactor = 0.05;
+    this.controls.screenSpacePanning = false;
+    this.controls.minDistance = 3;
+    this.controls.maxDistance = 10;
+    this.controls.maxPolarAngle = Math.PI / 2;
+    this.controls.saveState();
+    
+    // Add keyboard base and environment
+    this.addEnvironment();
+    
+    // Create keyboard base
+    this.createKeyboard();
+    
+    // Add Skills text overlay
+    this.addSkillsText();
+    
+    // Add hint text
+    this.addHintText();
+    
+    // Add camera reset button
+    this.addCameraResetButton();
+    
+    // Event listeners
+    window.addEventListener('resize', () => this.onWindowResize(), false);
+    this.renderer.domElement.addEventListener('mousemove', (event) => this.onMouseMove(event), false);
+    this.renderer.domElement.addEventListener('click', (event) => this.onMouseClick(event), false);
+    
+    // Start animation loop
+    this.animate();
+    
+    return true;
+  }
+  
+  setupLighting() {
+    // Ambient light for base illumination
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.3);
+    this.scene.add(ambientLight);
+    
+    // Main directional light with shadows
+    const mainLight = new THREE.DirectionalLight(0xffffff, 0.8);
+    mainLight.position.set(5, 8, 7);
+    mainLight.castShadow = true;
+    mainLight.shadow.mapSize.width = 1024;
+    mainLight.shadow.mapSize.height = 1024;
+    mainLight.shadow.camera.near = 0.5;
+    mainLight.shadow.camera.far = 25;
+    mainLight.shadow.camera.left = -7;
+    mainLight.shadow.camera.right = 7;
+    mainLight.shadow.camera.top = 7;
+    mainLight.shadow.camera.bottom = -7;
+    mainLight.shadow.bias = -0.001;
+    this.scene.add(mainLight);
+    
+    // Secondary fill light
+    const fillLight = new THREE.DirectionalLight(0x8494e4, 0.4);
+    fillLight.position.set(-5, 3, -5);
+    this.scene.add(fillLight);
+    
+    // Key highlight light
+    const keyLight = new THREE.SpotLight(0xffffff, 0.4);
+    keyLight.position.set(0, 5, 0);
+    keyLight.angle = Math.PI / 4;
+    keyLight.penumbra = 0.5;
+    keyLight.decay = 1;
+    keyLight.distance = 15;
+    this.scene.add(keyLight);
+    
+    // Rim light for keyboard edges
+    const rimLight = new THREE.DirectionalLight(0x41b883, 0.3);
+    rimLight.position.set(0, 0, -5);
+    this.scene.add(rimLight);
+  }
+  
+  addEnvironment() {
+    // Add reflective floor
+    const floorGeometry = new THREE.PlaneGeometry(20, 20);
+    const floorMaterial = new THREE.MeshStandardMaterial({
+      color: 0x111111,
+      metalness: 0.3,
+      roughness: 0.8,
+      envMapIntensity: 0.5
+    });
+    const floor = new THREE.Mesh(floorGeometry, floorMaterial);
+    floor.rotation.x = -Math.PI / 2;
+    floor.position.y = -2;
+    floor.receiveShadow = true;
+    this.scene.add(floor);
+    
+    // Add subtle background grid
+    const gridHelper = new THREE.GridHelper(20, 40, 0x303030, 0x202020);
+    gridHelper.position.y = -1.99;
+    gridHelper.material.opacity = 0.15;
+    gridHelper.material.transparent = true;
+    this.scene.add(gridHelper);
+    
+    // Add circular platform for keyboard
+    const platformGeometry = new THREE.CylinderGeometry(3, 3.5, 0.2, 32);
+    const platformMaterial = new THREE.MeshStandardMaterial({
+      color: 0x202020,
+      metalness: 0.6,
+      roughness: 0.4,
+    });
+    const platform = new THREE.Mesh(platformGeometry, platformMaterial);
+    platform.position.y = -0.8;
+    platform.receiveShadow = true;
+    this.scene.add(platform);
+    
+    // Add rotating outer ring
+    const ringGeometry = new THREE.RingGeometry(3.6, 3.8, 64);
+    const ringMaterial = new THREE.MeshStandardMaterial({
+      color: 0x41b883,
+      metalness: 0.9,
+      roughness: 0.2,
+      side: THREE.DoubleSide
+    });
+    const ring = new THREE.Mesh(ringGeometry, ringMaterial);
+    ring.rotation.x = -Math.PI / 2;
+    ring.position.y = -0.7;
+    this.scene.add(ring);
+    
+    // Animate the ring
+    this.outerRing = ring;
+  }
+  
+  createKeyboard() {
+    // Create keyboard base with improved materials
+    const baseGeometry = new THREE.BoxGeometry(5, 0.5, 4);
+    
+    // Create and apply materials with bump mapping for texture
+    const bumpTexture = this.textureLoader.load('https://cdn.jsdelivr.net/gh/mrdoob/three.js@master/examples/textures/brick_bump.jpg');
+    bumpTexture.wrapS = THREE.RepeatWrapping;
+    bumpTexture.wrapT = THREE.RepeatWrapping;
+    bumpTexture.repeat.set(2, 2);
+    
+    const baseMaterial = new THREE.MeshPhysicalMaterial({
+      color: 0x202020,
+      bumpMap: bumpTexture,
+      bumpScale: 0.02,
+      metalness: 0.8,
+      roughness: 0.3,
+      clearcoat: 0.4,
+      clearcoatRoughness: 0.3
     });
     
-    container.appendChild(keyboardRow);
-  });
-  
-  // Initial check for layout issues after a brief delay to allow rendering
-  setTimeout(() => {
-    checkAndAdjustKeyboardLayout();
-  }, 50);
-}
-
-// Create individual keys with optimized dimensions
-function createKeyElement(key, rowIndex) {
-  // Create key container
-  const keyElement = document.createElement('div');
-  keyElement.className = `keyboard-key key-${key.category} ${key.size ? `key-${key.size}` : 'key-1u'}`;
-  keyElement.dataset.tech = key.id;
-  
-  // Adjust size for fifth row (concepts row) to ensure equal distribution
-  if (rowIndex === 4) {
-    keyElement.classList.add('concept-key');
+    // Create the base mesh
+    this.keyboard = new THREE.Mesh(baseGeometry, baseMaterial);
+    this.keyboard.position.y = -0.5;
+    this.keyboard.receiveShadow = true;
+    this.keyboard.castShadow = true;
+    this.scene.add(this.keyboard);
+    
+    // Add trim to keyboard edges
+    this.addKeyboardTrim();
+    
+    // Create keys with enhanced materials
+    this.techStack.forEach(tech => {
+      this.createKey(tech);
+    });
+    
+    // Set initial keyboard rotation
+    this.keyboard.rotation.x = -0.2;
   }
   
-  // Add key shadow
-  const keyShadow = document.createElement('div');
-  keyShadow.className = 'key-shadow';
-  keyElement.appendChild(keyShadow);
-  
-  // Create the actual cube container
-  const keyCube = document.createElement('div');
-  keyCube.className = 'key-cube';
-  
-  // Create all six cube faces
-  
-  // 1. Top face (main visible face with icon)
-  const keyTop = document.createElement('div');
-  keyTop.className = 'key-face key-top';
-  const keyIcon = document.createElement('img');
-  keyIcon.src = key.icon;
-  keyIcon.alt = key.name;
-  keyIcon.className = 'key-img';
-  keyIcon.loading = "lazy";
-  keyTop.appendChild(keyIcon);
-  
-  // 2. Bottom face (opposite of top)
-  const keyBottom = document.createElement('div');
-  keyBottom.className = 'key-face key-bottom';
-  
-  // 3. Front face
-  const keyFront = document.createElement('div');
-  keyFront.className = 'key-face key-front';
-  
-  // 4. Back face
-  const keyBack = document.createElement('div');
-  keyBack.className = 'key-face key-back';
-  
-  // 5. Left face
-  const keyLeft = document.createElement('div');
-  keyLeft.className = 'key-face key-left';
-  
-  // 6. Right face
-  const keyRight = document.createElement('div');
-  keyRight.className = 'key-face key-right';
-  
-  // Add all faces to cube
-  keyCube.appendChild(keyTop);
-  keyCube.appendChild(keyBottom);
-  keyCube.appendChild(keyFront);
-  keyCube.appendChild(keyBack);
-  keyCube.appendChild(keyLeft);
-  keyCube.appendChild(keyRight);
-  
-  // Add cube to key
-  keyElement.appendChild(keyCube);
-  
-  // Create tooltip
-  const tooltip = document.createElement('div');
-  tooltip.className = 'key-tooltip';
-  tooltip.textContent = key.name;
-  keyElement.appendChild(tooltip);
-  
-  // Add event listeners
-  keyElement.addEventListener('mouseenter', () => {
-    showTechDetails(key);
-    playKeyPressSound();
-    document.getElementById('keyboard-status').classList.add('active');
-  });
-  
-  keyElement.addEventListener('mouseleave', () => {
-    document.getElementById('keyboard-status').classList.remove('active');
-  });
-  
-  keyElement.addEventListener('click', () => {
-    pressKey(keyElement);
-    showTechDetails(key);
-    playKeyPressSound(true);
-  });
-  
-  return keyElement;
-}
-
-// More robust layout checking and adjustment
-function checkAndAdjustKeyboardLayout() {
-  const container = document.getElementById('tech-keyboard');
-  if (!container) return;
-  
-  const containerWidth = container.clientWidth;
-  const rows = container.querySelectorAll('.keyboard-row');
-  
-  // First pass - check if any row exceeds container width
-  let needsCompactMode = false;
-  rows.forEach(row => {
-    // Get total width of all keys in row
-    const keysWidth = Array.from(row.querySelectorAll('.keyboard-key'))
-      .reduce((total, key) => total + key.offsetWidth, 0);
+  addKeyboardTrim() {
+    // Top edge
+    const edgeGeometry = new THREE.BoxGeometry(5.2, 0.1, 0.1);
+    const edgeMaterial = new THREE.MeshStandardMaterial({
+      color: 0x41b883,
+      metalness: 0.7,
+      roughness: 0.3,
+      emissive: 0x41b883,
+      emissiveIntensity: 0.1
+    });
     
-    if (keysWidth > containerWidth * 0.98) {
-      needsCompactMode = true;
+    const topEdge = new THREE.Mesh(edgeGeometry, edgeMaterial);
+    topEdge.position.set(0, -0.25, 2.05);
+    this.keyboard.add(topEdge);
+    
+    const bottomEdge = new THREE.Mesh(edgeGeometry, edgeMaterial);
+    bottomEdge.position.set(0, -0.25, -2.05);
+    this.keyboard.add(bottomEdge);
+    
+    const leftEdgeGeometry = new THREE.BoxGeometry(0.1, 0.1, 4.2);
+    const leftEdge = new THREE.Mesh(leftEdgeGeometry, edgeMaterial);
+    leftEdge.position.set(-2.55, -0.25, 0);
+    this.keyboard.add(leftEdge);
+    
+    const rightEdge = new THREE.Mesh(leftEdgeGeometry, edgeMaterial);
+    rightEdge.position.set(2.55, -0.25, 0);
+    this.keyboard.add(rightEdge);
+  }
+  
+  createKey(tech) {
+    // Create more realistic key geometry with rounded corners
+    const keyGeometry = new THREE.BoxGeometry(0.8, 0.3, 0.8, 4, 4, 4);
+    
+    // Create key material with reflections
+    const keyMaterial = new THREE.MeshPhysicalMaterial({
+      color: tech.color,
+      metalness: 0.5,
+      roughness: 0.4,
+      clearcoat: 0.5,
+      clearcoatRoughness: 0.2,
+      reflectivity: 0.5
+    });
+    
+    const key = new THREE.Mesh(keyGeometry, keyMaterial);
+    key.position.set(tech.position[0], tech.position[1] + 0.15, tech.position[2]);
+    key.castShadow = true;
+    key.receiveShadow = true;
+    key.userData.tech = tech;
+    key.userData.originalY = key.position.y;
+    key.userData.originalColor = tech.color;
+    
+    // Add text or icon to key
+    if (tech.icon) {
+      this.addIconToKey(key, tech.icon);
+    } else if (tech.label) {
+      this.addTextToKey(key, tech.label);
     }
-  });
-  
-  // Apply compact mode if needed
-  if (needsCompactMode) {
-    container.classList.add('keyboard-compact');
     
-    // Adjust each row's keys proportionally
-    rows.forEach((row, rowIndex) => {
-      const keys = row.querySelectorAll('.keyboard-key');
-      const totalKeys = keys.length;
-      
-      // Calculate new width for keys
-      let newKeyWidth;
-      if (rowIndex === 4) { // Concepts row
-        newKeyWidth = (containerWidth * 0.95) / totalKeys - 10; // 10px for margins
-      } else {
-        newKeyWidth = (containerWidth * 0.95) / Math.max(totalKeys, 8) - 8; // Ensure consistent width
+    // Add concave key top
+    this.addKeyConcavity(key);
+    
+    this.keyboard.add(key);
+    this.keys.push(key);
+  }
+  
+  addKeyConcavity(key) {
+    // Add subtle concave top to key for realism
+    const concaveGeometry = new THREE.SphereGeometry(0.75, 32, 32, 0, Math.PI * 2, 0, Math.PI / 2);
+    const concaveMaterial = new THREE.MeshPhongMaterial({
+      color: key.material.color,
+      opacity: 0.2,
+      transparent: true,
+      side: THREE.BackSide,
+      shininess: 100
+    });
+    
+    const concave = new THREE.Mesh(concaveGeometry, concaveMaterial);
+    concave.scale.set(1, 0.2, 1);
+    concave.rotation.x = Math.PI;
+    concave.position.y = 0.15;
+    concave.visible = false; // Initially hidden, only show when implementing full finger press animation
+    key.add(concave);
+  }
+  
+  addIconToKey(key, iconName) {
+    // Create high-quality icon display
+    const iconGeometry = new THREE.PlaneGeometry(0.65, 0.65);
+    const iconMaterial = new THREE.MeshBasicMaterial({
+      color: 0xffffff,
+      transparent: true,
+      opacity: 0.95
+    });
+    
+    // Try loading from assets folder first
+    this.textureLoader.load(
+      `assets/icons/${iconName}`,
+      (texture) => {
+        iconMaterial.map = texture;
+        iconMaterial.needsUpdate = true;
+      },
+      undefined,
+      // Fallback to CDN if local file not found
+      () => {
+        const cdnPath = `https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${iconName.split('.')[0]}/`;
+        this.textureLoader.load(
+          `${cdnPath}${iconName.split('.')[0]}-original.svg`,
+          (texture) => {
+            iconMaterial.map = texture;
+            iconMaterial.needsUpdate = true;
+          }
+        );
       }
+    );
+    
+    const icon = new THREE.Mesh(iconGeometry, iconMaterial);
+    icon.rotation.x = -Math.PI / 2;
+    icon.position.y = 0.151;
+    key.add(icon);
+    
+    // Add subtle glow effect
+    this.addKeyGlow(key, key.userData.tech.color);
+  }
+  
+  addKeyGlow(key, color) {
+    const glowGeometry = new THREE.PlaneGeometry(1.2, 1.2);
+    const glowMaterial = new THREE.MeshBasicMaterial({
+      color: color,
+      transparent: true,
+      opacity: 0.2,
+      blending: THREE.AdditiveBlending
+    });
+    
+    const glow = new THREE.Mesh(glowGeometry, glowMaterial);
+    glow.rotation.x = -Math.PI / 2;
+    glow.position.y = 0.16;
+    key.add(glow);
+  }
+  
+  addTextToKey(key, text) {
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = 256;
+    canvas.height = 256;
+    
+    // Draw text with improved styling
+    ctx.fillStyle = 'rgba(0, 0, 0, 0)';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    
+    // Create gradient for text
+    const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+    gradient.addColorStop(0, 'white');
+    gradient.addColorStop(1, 'rgba(200, 200, 200, 0.8)');
+    
+    ctx.fillStyle = gradient;
+    ctx.font = 'bold 120px Arial';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(text, canvas.width / 2, canvas.height / 2);
+    
+    // Add subtle shadow
+    ctx.shadowColor = 'rgba(0, 0, 0, 0.5)';
+    ctx.shadowBlur = 15;
+    ctx.shadowOffsetX = 5;
+    ctx.shadowOffsetY = 5;
+    ctx.fillText(text, canvas.width / 2, canvas.height / 2);
+    
+    // Create texture
+    const texture = new THREE.CanvasTexture(canvas);
+    const material = new THREE.MeshBasicMaterial({
+      map: texture,
+      transparent: true
+    });
+    
+    // Create plane with texture
+    const labelGeometry = new THREE.PlaneGeometry(0.65, 0.65);
+    const label = new THREE.Mesh(labelGeometry, material);
+    label.rotation.x = -Math.PI / 2;
+    label.position.y = 0.151;
+    key.add(label);
+    
+    // Add subtle glow effect
+    this.addKeyGlow(key, key.userData.tech.color);
+  }
+  
+  addSkillsText() {
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = 1024;
+    canvas.height = 256;
+    
+    // Draw text with enhanced styling
+    ctx.fillStyle = 'rgba(0, 0, 0, 0)';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    
+    // Create gradient for text
+    const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+    gradient.addColorStop(0, 'rgba(255, 255, 255, 0.9)');
+    gradient.addColorStop(1, 'rgba(100, 255, 218, 0.7)');
+    
+    ctx.fillStyle = gradient;
+    ctx.font = 'bold 140px "Arial Black", sans-serif';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText('SKILLS', canvas.width / 2, canvas.height / 2);
+    
+    // Add glow
+    ctx.shadowColor = 'rgba(100, 255, 218, 0.7)';
+    ctx.shadowBlur = 30;
+    ctx.fillText('SKILLS', canvas.width / 2, canvas.height / 2);
+    
+    // Create texture
+    const texture = new THREE.CanvasTexture(canvas);
+    const material = new THREE.MeshBasicMaterial({
+      map: texture,
+      transparent: true,
+      depthTest: false,
+      blending: THREE.AdditiveBlending
+    });
+    
+    // Create plane with texture
+    const textGeometry = new THREE.PlaneGeometry(5, 1.25);
+    const text = new THREE.Mesh(textGeometry, material);
+    text.position.set(0, 2, 0);
+    text.rotation.x = -Math.PI / 4;
+    
+    this.scene.add(text);
+    
+    // Add animation
+    this.skillsText = text;
+  }
+  
+  addHintText() {
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = 512;
+    canvas.height = 64;
+    
+    // Draw text
+    ctx.fillStyle = 'rgba(0, 0, 0, 0)';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+    ctx.font = '28px Arial';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText('(drag to rotate - scroll to zoom)', canvas.width / 2, canvas.height / 2);
+    
+    // Create texture
+    const texture = new THREE.CanvasTexture(canvas);
+    const material = new THREE.MeshBasicMaterial({
+      map: texture,
+      transparent: true,
+      depthTest: false
+    });
+    
+    // Create plane with texture
+    const textGeometry = new THREE.PlaneGeometry(2.5, 0.3);
+    const text = new THREE.Mesh(textGeometry, material);
+    text.position.set(0, 0.5, 0);
+    text.rotation.x = -Math.PI / 4;
+    
+    this.scene.add(text);
+  }
+  
+  addCameraResetButton() {
+    // Create reset view button
+    const resetButton = document.createElement('button');
+    resetButton.innerHTML = 'Reset View';
+    resetButton.className = 'reset-camera-button';
+    resetButton.style.position = 'absolute';
+    resetButton.style.bottom = '10px';
+    resetButton.style.right = '10px';
+    resetButton.style.padding = '8px 12px';
+    resetButton.style.background = 'rgba(65, 184, 131, 0.8)';
+    resetButton.style.color = 'white';
+    resetButton.style.border = 'none';
+    resetButton.style.borderRadius = '4px';
+    resetButton.style.cursor = 'pointer';
+    resetButton.style.zIndex = '100';
+    resetButton.style.fontFamily = 'Arial, sans-serif';
+    resetButton.style.fontSize = '14px';
+    
+    resetButton.addEventListener('click', () => {
+      this.resetCamera();
+    });
+    
+    this.container.appendChild(resetButton);
+  }
+  
+  resetCamera() {
+    // Animate camera back to initial position
+    const currentPosition = this.camera.position.clone();
+    const currentTarget = new THREE.Vector3();
+    this.controls.target.clone(currentTarget);
+    
+    const duration = 1.0; // seconds
+    const startTime = this.clock.getElapsedTime();
+    
+    const animate = () => {
+      const elapsedTime = this.clock.getElapsedTime() - startTime;
+      const progress = Math.min(elapsedTime / duration, 1.0);
       
-      // Apply new width to each key
-      keys.forEach(key => {
-        key.style.width = `${newKeyWidth}px`;
+      // Use easing function for smooth transition
+      const easeProgress = this.easeInOutCubic(progress);
+      
+      // Interpolate position
+      this.camera.position.lerpVectors(
+        currentPosition, 
+        this.initialCameraPosition, 
+        easeProgress
+      );
+      
+      // Interpolate controls target
+      this.controls.target.set(
+        (1 - easeProgress) * currentTarget.x,
+        (1 - easeProgress) * currentTarget.y,
+        (1 - easeProgress) * currentTarget.z
+      );
+      
+      this.controls.update();
+      
+      if (progress < 1.0) {
+        requestAnimationFrame(animate);
+      }
+    };
+    
+    animate();
+  }
+  
+  easeInOutCubic(t) {
+    return t < 0.5 
+      ? 4 * t * t * t 
+      : 1 - Math.pow(-2 * t + 2, 3) / 2;
+  }
+  
+  onWindowResize() {
+    const width = this.container.clientWidth;
+    const height = this.container.clientHeight;
+    
+    this.camera.aspect = width / height;
+    this.camera.updateProjectionMatrix();
+    this.renderer.setSize(width, height);
+  }
+  
+  onMouseMove(event) {
+    // Calculate mouse position in normalized device coordinates
+    const rect = this.renderer.domElement.getBoundingClientRect();
+    this.mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+    this.mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
+  }
+  
+  onMouseClick(event) {
+    if (this.currentIntersected) {
+      const tech = this.currentIntersected.userData.tech;
+      console.log(`Selected technology: ${tech.name}`);
+      
+      // Trigger detailed key press animation
+      this.animateDetailedKeyPress(this.currentIntersected);
+      
+      // Show tech details panel
+      this.showTechDetails(tech);
+    }
+  }
+  
+  animateDetailedKeyPress(key) {
+    if (this.isAnimating) return;
+    this.isAnimating = true;
+    
+    const originalY = key.userData.originalY;
+    const originalColor = key.userData.originalColor;
+    
+    // Store initial state
+    const initialPosition = key.position.y;
+    const initialEmissive = key.material.emissive.getHex();
+    
+    // Press down animation
+    new TWEEN.Tween(key.position)
+      .to({ y: originalY - 0.15 }, 100)
+      .easing(TWEEN.Easing.Quadratic.Out)
+      .start()
+      .onStart(() => {
+        // Change emissive color on press
+        key.material.emissive.set(new THREE.Color(originalColor));
+        key.material.emissiveIntensity = 0.3;
+      })
+      .onComplete(() => {
+        // Press up with bounce
+        new TWEEN.Tween(key.position)
+          .to({ y: originalY + 0.05 }, 100)
+          .easing(TWEEN.Easing.Quadratic.Out)
+          .start()
+          .onComplete(() => {
+            // Settle back
+            new TWEEN.Tween(key.position)
+              .to({ y: originalY }, 200)
+              .easing(TWEEN.Easing.Elastic.Out)
+              .start()
+              .onComplete(() => {
+                // Reset emissive
+                new TWEEN.Tween({ intensity: 0.3 })
+                  .to({ intensity: 0 }, 300)
+                  .onUpdate((obj) => {
+                    key.material.emissiveIntensity = obj.intensity;
+                  })
+                  .start()
+                  .onComplete(() => {
+                    key.material.emissive.set(new THREE.Color(0x000000));
+                    this.isAnimating = false;
+                  });
+              });
+          });
       });
-    });
   }
-}
-
-function showTechDetails(tech) {
-  const detailPanel = document.getElementById('tech-detail-panel');
-  if (!detailPanel) return;
   
-  // Set tech details
-  detailPanel.querySelector('.tech-detail-icon').src = tech.icon;
-  detailPanel.querySelector('.tech-detail-icon').alt = tech.name;
-  detailPanel.querySelector('.tech-detail-name').textContent = tech.name;
-  
-  // Set category with appropriate style
-  const categoryElement = detailPanel.querySelector('.tech-detail-category');
-  categoryElement.textContent = getCategoryName(tech.category);
-  categoryElement.style.backgroundColor = getCategoryColor(tech.category, '0.1');
-  categoryElement.style.color = getCategoryColor(tech.category);
-  
-  detailPanel.querySelector('.tech-detail-description').textContent = tech.description;
-  detailPanel.querySelector('.tech-detail-experience').textContent = tech.experience;
-  
-  // Show panel with animation
-  detailPanel.classList.add('active');
-}
-
-function getCategoryName(category) {
-  const categories = {
-    'frontend': 'Frontend Development',
-    'backend': 'Backend Development',
-    'tools': 'Developer Tools',
-    'concepts': 'Professional Skills'
-  };
-  return categories[category] || category;
-}
-
-function getCategoryColor(category, opacity = '') {
-  const colors = {
-    'frontend': `#38BDF8${opacity}`,
-    'backend': `#4ADE80${opacity}`,
-    'tools': `#C084FC${opacity}`,
-    'concepts': `#FB7185${opacity}`
-  };
-  return colors[category] || `#64FFDA${opacity}`;
-}
-
-function pressKey(keyElement) {
-  keyElement.classList.add('key-pressed');
-  
-  // Reset after animation completes
-  setTimeout(() => {
-    keyElement.classList.remove('key-pressed');
-  }, 250);
-}
-
-// Sound effects for keyboard
-let audioContext;
-function playKeyPressSound(louder = false) {
-  try {
-    // Initialize AudioContext on first use (needs user interaction)
-    if (!audioContext) {
-      audioContext = new (window.AudioContext || window.webkitAudioContext)();
-    }
+  showTechDetails(tech) {
+    // This would connect to your HTML panel for showing details
+    const detailPanel = document.getElementById('tech-detail-panel');
+    if (!detailPanel) return;
     
-    // Create more complex sound for mechanical keyboard effect
-    const clickOscillator = audioContext.createOscillator();
-    const clickGain = audioContext.createGain();
-    const thumpOscillator = audioContext.createOscillator();
-    const thumpGain = audioContext.createGain();
+    const nameElement = detailPanel.querySelector('.tech-detail-name');
+    const descriptionElement = detailPanel.querySelector('.tech-detail-description');
     
-    // Connect nodes
-    clickOscillator.connect(clickGain);
-    thumpOscillator.connect(thumpGain);
-    clickGain.connect(audioContext.destination);
-    thumpGain.connect(audioContext.destination);
+    if (nameElement) nameElement.textContent = tech.name;
+    if (descriptionElement) descriptionElement.textContent = tech.description || '';
     
-    // High-frequency click (plastic keycap sound)
-    clickOscillator.type = 'triangle';
-    clickOscillator.frequency.value = louder ? 2000 + Math.random() * 500 : 1500 + Math.random() * 500;
-    clickGain.gain.value = louder ? 0.03 : 0.02;
+    // Show the panel
+    detailPanel.classList.add('active');
     
-    // Low-frequency thump (key bottoming out)
-    thumpOscillator.type = 'sine';
-    thumpOscillator.frequency.value = louder ? 120 + Math.random() * 30 : 100 + Math.random() * 20;
-    thumpGain.gain.value = louder ? 0.08 : 0.05;
-    
-    // Play sounds
-    clickOscillator.start();
-    thumpOscillator.start();
-    
-    // Release sounds quickly
-    clickGain.gain.exponentialRampToValueAtTime(0.0001, audioContext.currentTime + 0.08);
-    thumpGain.gain.exponentialRampToValueAtTime(0.0001, audioContext.currentTime + 0.15);
-    
-    clickOscillator.stop(audioContext.currentTime + 0.1);
-    thumpOscillator.stop(audioContext.currentTime + 0.2);
-  } catch (error) {
-    // Silently fail if audio context isn't supported or fails
-    console.log('Audio not supported');
-  }
-}
-
-// Demonstration typing animation
-function initiateTypingAnimation() {
-  const keys = document.querySelectorAll('.keyboard-key');
-  if (keys.length === 0) return;
-  
-  // Status light flashing
-  const statusLight = document.getElementById('keyboard-status');
-  if (statusLight) statusLight.classList.add('active');
-  
-  // More realistic typing pattern - nearby keys in sequence
-  const keyGroups = [
-    // Group of frontend technologies
-    [0, 1, 2, 3],
-    // Group of backend technologies
-    [5, 6, 7, 8],
-    // Group of tools
-    [10, 11, 12],
-    // Group of concepts
-    [15, 16, 17]
-  ];
-  
-  // Pick a random group to "type"
-  const groupIndex = Math.floor(Math.random() * keyGroups.length);
-  const selectedKeys = keyGroups[groupIndex];
-  
-  // Animate the keys in more realistic sequence with varied timing
-  let delay = 0;
-  selectedKeys.forEach((index, i) => {
-    if (index >= keys.length) return;
-    
+    // Hide after a delay
     setTimeout(() => {
-      const key = keys[index];
-      pressKey(key);
-      playKeyPressSound();
-      
-      // Show tech details for the last key
-      if (i === selectedKeys.length - 1) {
-        const techId = key.dataset.tech;
-        const tech = findTechById(techId);
-        if (tech) {
-          showTechDetails(tech);
+      detailPanel.classList.remove('active');
+    }, 4000);
+  }
+  
+  checkIntersections() {
+    this.raycaster.setFromCamera(this.mouse, this.camera);
+    const intersects = this.raycaster.intersectObjects(this.keys);
+    
+    if (intersects.length > 0) {
+      if (this.currentIntersected !== intersects[0].object) {
+        // Reset previous intersected key
+        if (this.currentIntersected) {
+          const prevKey = this.currentIntersected;
+          new TWEEN.Tween(prevKey.material)
+            .to({ emissiveIntensity: 0 }, 200)
+            .start()
+            .onComplete(() => {
+              prevKey.material.emissive.setHex(0x000000);
+            });
         }
         
-        // Turn off status light after typing sequence
-        setTimeout(() => {
-          if (statusLight) statusLight.classList.remove('active');
-        }, 500);
+        // Highlight new intersected key
+        this.currentIntersected = intersects[0].object;
+        const color = this.currentIntersected.userData.tech.color;
+        this.currentIntersected.material.emissive.set(new THREE.Color(color));
+        
+        new TWEEN.Tween(this.currentIntersected.material)
+          .to({ emissiveIntensity: 0.2 }, 200)
+          .start();
+          
+        // Slightly raise the key
+        const originalY = this.currentIntersected.userData.originalY;
+        new TWEEN.Tween(this.currentIntersected.position)
+          .to({ y: originalY + 0.05 }, 200)
+          .easing(TWEEN.Easing.Quadratic.Out)
+          .start();
+          
+        document.body.style.cursor = 'pointer';
       }
-    }, delay);
-    
-    // More realistic varied typing speed
-    delay += 100 + Math.random() * 200;
-  });
-  
-  // Schedule the next animation with natural pauses
-  setTimeout(initiateTypingAnimation, delay + 4000 + Math.random() * 2000);
-}
-
-function findTechById(id) {
-  for (const row of techKeyboard) {
-    for (const key of row.keys) {
-      if (key.id === id) {
-        return key;
+    } else {
+      // Reset when no intersection
+      if (this.currentIntersected) {
+        const prevKey = this.currentIntersected;
+        new TWEEN.Tween(prevKey.material)
+          .to({ emissiveIntensity: 0 }, 200)
+          .start()
+          .onComplete(() => {
+            prevKey.material.emissive.setHex(0x000000);
+          });
+          
+        // Return to original position
+        const originalY = this.currentIntersected.userData.originalY;
+        new TWEEN.Tween(this.currentIntersected.position)
+          .to({ y: originalY }, 200)
+          .easing(TWEEN.Easing.Quadratic.Out)
+          .start();
       }
+      this.currentIntersected = null;
+      document.body.style.cursor = 'auto';
     }
   }
-  return null;
+  
+  animate() {
+    requestAnimationFrame(() => this.animate());
+    
+    // Update controls
+    this.controls.update();
+    
+    // Update tweens
+    if (typeof TWEEN !== 'undefined') {
+      TWEEN.update();
+    }
+    
+    const time = this.clock.getElapsedTime();
+    
+    // Gentle floating motion for keyboard
+    if (this.keyboard) {
+      this.keyboard.position.y = -0.5 + Math.sin(time * 0.5) * 0.05;
+    }
+    
+    // Animate outer ring
+    if (this.outerRing) {
+      this.outerRing.rotation.z = time * 0.2;
+    }
+    
+    // Animate skills text
+    if (this.skillsText) {
+      this.skillsText.position.y = 2 + Math.sin(time * 0.7) * 0.1;
+      this.skillsText.material.opacity = 0.7 + Math.sin(time * 1.5) * 0.3;
+    }
+    
+    // Check for intersections
+    this.checkIntersections();
+    
+    // Render scene
+    this.renderer.render(this.scene, this.camera);
+  }
 }
 
-// Create ripple effect when pressing keys
-function createRippleEffect(element) {
-  const ripple = document.createElement('div');
-  ripple.className = 'key-ripple';
-  ripple.style.position = 'absolute';
-  ripple.style.top = '50%';
-  ripple.style.left = '50%';
-  ripple.style.width = '0';
-  ripple.style.height = '0';
-  ripple.style.backgroundColor = 'rgba(255, 255, 255, 0.2)';
-  ripple.style.borderRadius = '50%';
-  ripple.style.transform = 'translate(-50%, -50%)';
-  ripple.style.transition = 'all 0.6s ease-out';
-  ripple.style.zIndex = '1';
-  ripple.style.pointerEvents = 'none';
-  
-  element.appendChild(ripple);
-  
-  // Animate ripple
-  setTimeout(() => {
-    const size = Math.max(element.offsetWidth, element.offsetHeight) * 2;
-    ripple.style.width = size + 'px';
-    ripple.style.height = size + 'px';
-    ripple.style.opacity = '0';
-  }, 10);
-  
-  // Clean up
-  setTimeout(() => {
-    ripple.remove();
-  }, 600);
+// Export the TechKeyboard class
+if (typeof module !== 'undefined') {
+  module.exports = TechKeyboard;
+} else {
+  window.TechKeyboard = TechKeyboard;
 }
 
-// Add responsive behavior
-window.addEventListener('resize', () => {
-  // Adjust keyboard layout based on screen size
-  const container = document.getElementById('tech-keyboard');
-  if (!container) return;
-  
-  if (window.innerWidth < 768) {
-    container.classList.add('compact-layout');
+// Auto-initialize when script loads
+document.addEventListener('DOMContentLoaded', () => {
+  // Load Three.js OrbitControls if not available
+  if (typeof THREE.OrbitControls === 'undefined') {
+    const script = document.createElement('script');
+    script.src = 'https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/controls/OrbitControls.js';
+    document.head.appendChild(script);
+    script.onload = initKeyboard;
   } else {
-    container.classList.remove('compact-layout');
+    initKeyboard();
+  }
+  
+  // Check if TWEEN is available, load if not
+  if (typeof TWEEN === 'undefined') {
+    const script = document.createElement('script');
+    script.src = 'https://cdnjs.cloudflare.com/ajax/libs/tween.js/18.6.4/tween.umd.js';
+    document.head.appendChild(script);
   }
 });
 
-// Enhanced tilt effect with lower angle to keep all keys visible
-function addKeyboardTiltEffect() {
-  const keyboard = document.getElementById('tech-keyboard');
-  if (!keyboard) return;
-  
-  keyboard.addEventListener('mousemove', (e) => {
-    const rect = keyboard.getBoundingClientRect();
-    
-    // Calculate relative position within keyboard
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    
-    // Calculate tilt with better constraints
-    const tiltX = -((y / rect.height - 0.5) * 2);
-    const tiltY = (x / rect.width - 0.5) * 3;
-    
-    // Apply tilt with smooth transition - using lower starting angle
-    keyboard.style.transform = `rotateX(${8 + tiltX}deg) rotateY(${tiltY}deg) scale(0.9)`;
-  });
-  
-  // Reset tilt when mouse leaves - to lower base angle
-  keyboard.addEventListener('mouseleave', () => {
-    keyboard.style.transform = 'rotateX(8deg) rotateY(0deg) scale(0.9)';
-  });
-  
-  // Add touch support for mobile tilt
-  keyboard.addEventListener('touchmove', (e) => {
-    if (e.touches.length > 0) {
-      const touch = e.touches[0];
-      const rect = keyboard.getBoundingClientRect();
-      
-      // Calculate relative position
-      const x = touch.clientX - rect.left;
-      const y = touch.clientY - rect.top;
-      
-      // Calculate tilt (less than mouse for better mobile experience)
-      const tiltX = -((y / rect.height - 0.5) * 1.5);
-      const tiltY = (x / rect.width - 0.5) * 2.5;
-      
-      // Apply tilt
-      keyboard.style.transform = `rotateX(${8 + tiltX}deg) rotateY(${tiltY}deg) scale(0.8)`;
-      
-      // Prevent page scrolling while interacting with keyboard
-      e.preventDefault();
-    }
-  }, { passive: false });
+function initKeyboard() {
+  // Initialize after a short delay to ensure resources are loaded
+  setTimeout(() => {
+    const techKeyboard = new TechKeyboard();
+    techKeyboard.init();
+  }, 1000);
 }
-
-// Add additional window resize handler to readjust layout as needed
-window.addEventListener('resize', () => {
-  // Reset any custom widths first
-  const keys = document.querySelectorAll('.keyboard-key');
-  keys.forEach(key => key.style.width = '');
-  
-  // Remove compact class to start fresh
-  const keyboard = document.getElementById('tech-keyboard');
-  if (keyboard) keyboard.classList.remove('keyboard-compact');
-  
-  // Re-check layout
-  setTimeout(checkAndAdjustKeyboardLayout, 50);
-});
-
-// Add window resize handler to adjust layout
-window.addEventListener('resize', () => {
-  checkKeyboardLayout();
-});
