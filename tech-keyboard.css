@@ -1,0 +1,523 @@
+/* Tech Keyboard Visualization - Enhanced 3D Realism */
+
+.tech-keyboard-container {
+  position: relative;
+  max-width: 1100px;
+  margin: 0 auto 3rem;
+  padding: 4rem 2.5rem 3rem;
+  background: linear-gradient(145deg, #232a36, #141925);
+  border-radius: 1.75rem;
+  border: 1px solid rgba(0, 0, 0, 0.75);
+  box-shadow: 
+    0 30px 60px -15px rgba(0, 0, 0, 0.6),
+    0 0 40px rgba(0, 0, 0, 0.5) inset;
+  transition: all 0.3s ease;
+  perspective: 1000px;
+  transform-style: preserve-3d;
+  transform: rotateX(12deg);
+}
+
+/* Keyboard base with enhanced depth effect */
+.tech-keyboard-container::before {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  right: 2px;
+  bottom: -15px;
+  background: #0a0e17;
+  border-radius: 1.75rem;
+  transform: translateZ(-30px);
+  z-index: -1;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+  filter: blur(1px);
+}
+
+/* Keyboard bottom plate */
+.tech-keyboard-container::after {
+  content: "";
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  right: 6px;
+  bottom: -28px;
+  background: #050609;
+  border-radius: 1.75rem;
+  transform: translateZ(-50px);
+  z-index: -2;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7);
+}
+
+/* Enhanced side lighting effects */
+.keyboard-lighting {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 1.75rem;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.keyboard-lighting::after {
+  content: "";
+  position: absolute;
+  top: -10%;
+  left: -10%;
+  right: -10%;
+  bottom: -10%;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(255, 255, 255, 0.03) 0%,
+    rgba(0, 0, 0, 0) 60%
+  );
+  pointer-events: none;
+}
+
+/* Staggered keyboard rows - more realistic keyboard layout */
+.keyboard-row {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+  position: relative;
+  transform-style: preserve-3d;
+}
+
+/* Key styling with enhanced 3D effects */
+.keyboard-key {
+  position: relative;
+  width: 4.5rem;
+  height: 4.5rem;
+  margin: 0 0.4rem;
+  border-radius: 0.65rem;
+  background: linear-gradient(145deg, #2a3141, #1e242f);
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.15s cubic-bezier(0.2, 0.8, 0.2, 1);
+  transform-style: preserve-3d;
+  transform: translateZ(2px);
+  user-select: none;
+  overflow: hidden;
+  box-shadow: 
+    0 2px 0 #000, 
+    0 3px 3px rgba(0, 0, 0, 0.5),
+    0 8px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Key top surface texture */
+.key-surface {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    135deg, 
+    rgba(255, 255, 255, 0.03) 0%, 
+    rgba(255, 255, 255, 0.05) 30%, 
+    rgba(0, 0, 0, 0.05) 70%,
+    rgba(0, 0, 0, 0.1) 100%
+  );
+  border-radius: 0.6rem;
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* Key beveled edges */
+.keyboard-key::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 0.65rem;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.08) 0%,
+    rgba(255, 255, 255, 0) 40%,
+    rgba(0, 0, 0, 0.1) 60%,
+    rgba(0, 0, 0, 0.2) 100%
+  );
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Key side for enhanced 3D effect */
+.keyboard-key::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 1px;
+  right: 1px;
+  height: 6px;
+  background: #000000;
+  border-radius: 0 0 0.65rem 0.65rem;
+  z-index: -1;
+  transform-origin: top;
+  transform: rotateX(-40deg);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5) inset;
+}
+
+/* Enhanced hover effect */
+.keyboard-key:hover {
+  transform: translateY(-3px) translateZ(2px);
+  box-shadow: 
+    0 5px 0 #000, 
+    0 8px 10px rgba(0, 0, 0, 0.4),
+    0 0 20px rgba(100, 255, 218, 0.2);
+}
+
+/* Enhanced key press effect */
+.keyboard-key:active, .keyboard-key.pressed {
+  transform: translateY(1px) translateZ(0);
+  box-shadow: 0 1px 0 #000, 0 1px 3px rgba(0, 0, 0, 0.4);
+  transition: all 0.05s ease;
+}
+
+/* Tech icon styling */
+.key-img {
+  width: 55%;
+  height: 55%;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.5));
+  transition: transform 0.2s ease;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.keyboard-key:hover .key-img {
+  transform: scale(1.15);
+}
+
+/* Different key sizes */
+.key-1u {
+  width: 4.5rem;
+}
+
+.key-1-25u {
+  width: 5.625rem;
+}
+
+.key-1-5u {
+  width: 6.75rem;
+}
+
+.key-1-75u {
+  width: 7.875rem;
+}
+
+.key-2u {
+  width: 9rem;
+}
+
+.key-2-25u {
+  width: 10.125rem;
+}
+
+.key-6-25u {
+  width: 28.125rem;
+}
+
+/* Category colors with enhanced shine effect */
+.key-frontend {
+  border-top: 2px solid #38BDF8;
+}
+
+.key-backend {
+  border-top: 2px solid #4ADE80;
+}
+
+.key-tools {
+  border-top: 2px solid #C084FC;
+}
+
+.key-concepts {
+  border-top: 2px solid #FB7185;
+}
+
+/* Glowing category indicators */
+.key-frontend .key-surface {
+  box-shadow: 0 0 15px rgba(56, 189, 248, 0.15) inset;
+}
+
+.key-backend .key-surface {
+  box-shadow: 0 0 15px rgba(74, 222, 128, 0.15) inset;
+}
+
+.key-tools .key-surface {
+  box-shadow: 0 0 15px rgba(192, 132, 252, 0.15) inset;
+}
+
+.key-concepts .key-surface {
+  box-shadow: 0 0 15px rgba(251, 113, 133, 0.15) inset;
+}
+
+/* Key press animation */
+@keyframes keyPress {
+  0% { transform: translateY(0) translateZ(2px); }
+  40% { transform: translateY(2px) translateZ(0); }
+  100% { transform: translateY(0) translateZ(2px); }
+}
+
+.key-pressed {
+  animation: keyPress 0.2s ease-in-out;
+}
+
+/* Tooltip with improved styling */
+.key-tooltip {
+  position: absolute;
+  top: -45px;
+  left: 50%;
+  transform: translateX(-50%) translateY(10px);
+  background: rgba(15, 23, 42, 0.95);
+  color: white;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s ease;
+  z-index: 30;
+  border: 1px solid rgba(100, 255, 218, 0.3);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+}
+
+.key-tooltip::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px 5px 0;
+  border-style: solid;
+  border-color: rgba(15, 23, 42, 0.95) transparent transparent transparent;
+}
+
+.keyboard-key:hover .key-tooltip {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* Tech detail panel with improved styling */
+.tech-detail-panel {
+  max-width: 800px;
+  margin: 3rem auto 0;
+  background: linear-gradient(145deg, rgba(15, 23, 42, 0.9), rgba(23, 37, 63, 0.8));
+  border-radius: 1rem;
+  border: 1px solid rgba(100, 255, 218, 0.2);
+  padding: 1.75rem;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  backdrop-filter: blur(10px);
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.3),
+    0 0 30px rgba(100, 255, 218, 0.05) inset;
+  min-height: 220px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+}
+
+.tech-detail-panel.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.tech-detail-inner {
+  text-align: center;
+}
+
+.tech-detail-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.tech-detail-icon {
+  width: 3rem;
+  height: 3rem;
+  margin-right: 1rem;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.4));
+}
+
+.tech-detail-name {
+  font-size: 1.75rem;
+  font-weight: bold;
+  color: #fff;
+  margin: 0;
+}
+
+.tech-detail-category {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 2rem;
+  font-size: 0.875rem;
+  margin-bottom: 1rem;
+  background: rgba(100, 255, 218, 0.1);
+  color: var(--accent);
+}
+
+.tech-detail-description {
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 1rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
+}
+
+.tech-detail-experience {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.875rem;
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 2rem;
+}
+
+/* Typing effect animation */
+@keyframes typeKey {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(4px); }
+  100% { transform: translateY(0); }
+}
+
+.typing-animation {
+  animation: typeKey 0.15s ease forwards;
+}
+
+/* Additional keyboard visualization enhancements */
+
+/* Typing indicator light at the top */
+.keyboard-status-light {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.75rem;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(100, 255, 218, 0.2);
+  box-shadow: 0 0 5px rgba(100, 255, 218, 0.2);
+  transition: all 0.3s ease;
+}
+
+.keyboard-status-light.active {
+  background: rgba(100, 255, 218, 0.8);
+  box-shadow: 0 0 10px rgba(100, 255, 218, 0.8);
+}
+
+/* Keyboard brand label */
+.keyboard-brand {
+  position: absolute;
+  top: 1.25rem;
+  left: 1.75rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: rgba(255, 255, 255, 0.15);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* Enhanced row staggering for realistic keyboard look */
+.keyboard-row:nth-child(1) {
+  padding-left: 0;
+}
+
+.keyboard-row:nth-child(2) {
+  padding-left: 1.1rem;
+}
+
+.keyboard-row:nth-child(3) {
+  padding-left: 1.6rem;
+}
+
+.keyboard-row:nth-child(4) {
+  padding-left: 0.8rem;
+}
+
+/* Key illumination effect */
+.key-illumination {
+  position: absolute;
+  top: -2px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.1), transparent);
+  filter: blur(1px);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.keyboard-key:hover .key-illumination {
+  opacity: 1;
+}
+
+/* Custom keyboard layout for smaller screens */
+@media (max-width: 768px) {
+  .keyboard-row {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .keyboard-key {
+    width: 3rem;
+    height: 3rem;
+    margin: 0.25rem;
+  }
+  
+  /* Adjust sizes for special keys */
+  .key-1-25u, .key-1-5u, .key-1-75u, .key-2u, .key-2-25u {
+    width: 3rem;
+  }
+  
+  .key-6-25u {
+    width: 80%;
+  }
+  
+  .tech-keyboard-container {
+    transform: rotateX(4deg);
+    padding: 2.5rem 1.5rem 2rem;
+  }
+  
+  .keyboard-row {
+    padding-left: 0 !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .keyboard-key {
+    width: 2.5rem;
+    height: 2.5rem;
+    margin: 0.2rem;
+  }
+  
+  .tech-keyboard-container {
+    padding: 1rem 0.5rem;
+    transform: rotateX(3deg);
+    padding: 2rem 1rem 1.5rem;
+  }
+  
+  .tech-detail-panel {
+    padding: 1rem;
+  }
+  
+  .tech-detail-name {
+    font-size: 1.5rem;
+  }
+  
+  .tech-detail-icon {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+}

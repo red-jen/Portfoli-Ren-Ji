@@ -1,0 +1,239 @@
+/* Neural Network Tech Visualization Styles */
+
+.neural-network-container {
+  position: relative !important;
+  width: 100% !important;
+  height: 700px !important;
+  max-width: 1200px !important;
+  margin: 0 auto !important;
+  border-radius: 16px !important;
+  overflow: hidden !important;
+  background-color: rgba(10, 15, 25, 0.9) !important;
+  box-shadow: 0 0 60px rgba(100, 255, 218, 0.1) !important;
+  border: 1px solid rgba(100, 255, 218, 0.2) !important;
+  display: block !important;
+  visibility: visible !important;
+}
+
+#neural-canvas {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  z-index: 1 !important;
+  filter: saturate(1.1) contrast(1.05) !important;
+  display: block !important;
+  visibility: visible !important;
+}
+
+/* Brain-inspired background */
+.neural-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(circle at 30% 20%, rgba(56, 189, 248, 0.05) 0%, transparent 35%),
+    radial-gradient(circle at 70% 30%, rgba(74, 222, 128, 0.05) 0%, transparent 35%),
+    radial-gradient(circle at 50% 70%, rgba(192, 132, 252, 0.05) 0%, transparent 40%);
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Neural fold effect */
+.neural-background::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 2px,
+      rgba(255, 255, 255, 0.01) 2px,
+      rgba(255, 255, 255, 0.01) 4px
+    );
+}
+
+/* Neural network info panel */
+.neural-info-panel {
+  position: absolute;
+  bottom: 30px;
+  right: 30px;
+  width: 280px;
+  background: rgba(10, 15, 25, 0.9);
+  backdrop-filter: blur(8px);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(100, 255, 218, 0.2);
+  opacity: 0;
+  transform: translateX(30px);
+  transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+  z-index: 10;
+}
+
+.neural-info-panel.active {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.neural-info-header {
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.neural-info-header h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0;
+  color: #fff;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.neural-info-badge {
+  background: rgba(0, 0, 0, 0.3);
+  font-size: 11px;
+  font-weight: 500;
+  padding: 3px 8px;
+  border-radius: 20px;
+  color: #fff;
+}
+
+.neural-info-content {
+  padding: 15px;
+}
+
+.neural-info-exp {
+  font-size: 13px;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  color: #fff;
+  opacity: 0.8;
+}
+
+.neural-info-content p {
+  font-size: 14px;
+  line-height: 1.5;
+  margin-bottom: 15px;
+  color: #fff;
+  opacity: 0.9;
+}
+
+.neural-info-connections h4 {
+  font-size: 14px;
+  margin: 0 0 10px;
+  color: #fff;
+  opacity: 0.8;
+}
+
+.neural-connection-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.neural-connection-chip {
+  background: rgba(255, 255, 255, 0.1);
+  font-size: 11px;
+  padding: 3px 8px;
+  border-radius: 12px;
+  color: #fff;
+  white-space: nowrap;
+  transition: background-color 0.2s ease;
+}
+
+.neural-connection-chip:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Neural Legend */
+.neural-legend {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: rgba(10, 15, 25, 0.7);
+  backdrop-filter: blur(10px);
+  padding: 12px 15px;
+  border-radius: 10px;
+  z-index: 10;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  box-shadow: 0 0 8px currentColor;
+}
+
+.legend-text {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 500;
+}
+
+/* Brain activity effect */
+@keyframes brainPulse {
+  0% { opacity: 0.3; }
+  50% { opacity: 0.8; }
+  100% { opacity: 0.3; }
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .neural-network-container {
+    height: 550px;
+  }
+  
+  .neural-info-panel {
+    width: 250px;
+    right: 20px;
+    bottom: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .neural-network-container {
+    height: 450px;
+    border-radius: 12px;
+  }
+  
+  .neural-info-panel {
+    width: calc(100% - 40px);
+    left: 20px;
+    right: 20px;
+    bottom: 20px;
+  }
+  
+  .neural-legend {
+    top: 15px;
+    left: 15px;
+    padding: 8px 12px;
+  }
+  
+  .legend-item {
+    gap: 6px;
+  }
+  
+  .legend-text {
+    font-size: 12px;
+  }
+}

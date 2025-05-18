@@ -42,6 +42,25 @@
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
     <link rel="preconnect" href="https://cdn.tailwindcss.com">
     <link rel="preconnect" href="https://cdn.jsdelivr.net">
+
+    <!-- Add this in the head section to ensure neural network visualization works -->
+    <link rel="stylesheet" href="./neural-styles.css">
+    <script>
+        // Ensure the neural network visualization loads properly
+        window.addEventListener('load', function() {
+            console.log('Window loaded, checking neural visualization');
+            const neuralContainer = document.getElementById('neural-tech-network');
+            const neuralCanvas = document.getElementById('neural-canvas');
+            
+            if (neuralContainer && (!neuralCanvas || !neuralCanvas.getContext)) {
+                console.log('Neural network needs initialization');
+                // If container exists but canvas is not properly initialized
+                if (typeof initNeuralNetwork === 'function') {
+                    setTimeout(initNeuralNetwork, 800);
+                }
+            }
+        });
+    </script>
 </head>
 <body class="overflow-x-hidden">
     <!-- Loading Screen -->
@@ -603,7 +622,7 @@
                         </div>
                     </a>
                     </div>
-                </div>
+                </div>eural-network-container">
                 
                 <div class="mt-12 md:mt-16 text-center">
                     <a href="https://github.com/red-jen?tab=repositories" target="_blank">
@@ -615,76 +634,102 @@
             </div>
         </section>
         
-        <!-- Skills Section -->
-        <section id="skills" class="min-h-screen px-4 md:px-16 lg:px-24 py-16 md:py-24" style="background-color: var(--bg-secondary);">
-            <div class="max-w-7xl mx-auto w-full">
-                <h2 class="text-4xl md:text-5xl font-bold mb-12 md:mb-16">SKILLS & EXPERTISE</h2>
-                
-                <div class="overflow-hidden whitespace-nowrap mb-16 md:mb-24">
-                    <div class="inline-block animate-marquee">
-                        <span class="text-4xl md:text-7xl font-black opacity-10 mx-4 md:mx-8">HTML5</span>
-                        <span class="text-4xl md:text-7xl font-black opacity-10 mx-4 md:mx-8">CSS3</span>
-                        <span class="text-4xl md:text-7xl font-black opacity-10 mx-4 md:mx-8">JAVASCRIPT</span>
-                        <span class="text-4xl md:text-7xl font-black opacity-10 mx-4 md:mx-8">TAILWIND</span>
-                        <span class="text-4xl md:text-7xl font-black opacity-10 mx-4 md:mx-8">PHP</span>
-                        <span class="text-4xl md:text-7xl font-black opacity-10 mx-4 md:mx-8">LARAVEL</span>
-                        <span class="text-4xl md:text-7xl font-black opacity-10 mx-4 md:mx-8">SQL</span>
-                        <span class="text-4xl md:text-7xl font-black opacity-10 mx-4 md:mx-8">REACT</span>
-                        <span class="text-4xl md:text-7xl font-black opacity-10 mx-4 md:mx-8">NEXT.JS</span>
-                    </div>
+        <!-- Tech Stack Section - Keyboard visualization -->
+<section class="tech-stack-section relative py-20 min-h-screen flex flex-col justify-center" style="background-color: var(--bg-primary);">
+    <div class="max-w-7xl mx-auto px-4 w-full">
+        <h2 class="text-4xl md:text-5xl font-bold mb-8 md:mb-12 text-center">Technology Stack</h2>
+        <p class="text-center text-gray-400 mb-12 max-w-3xl mx-auto">My toolkit for crafting digital experiences - hover over keys to explore.</p>
+        
+        <!-- Tech Keyboard Visualization -->
+        <div id="tech-keyboard" class="tech-keyboard-container">
+            <!-- Keyboard will be generated here -->
+        </div>
+        
+        <!-- Tech Detail Panel -->
+        <div id="tech-detail-panel" class="tech-detail-panel">
+            <div class="tech-detail-inner">
+                <div class="tech-detail-header">
+                    <img src="" alt="" class="tech-detail-icon">
+                    <h3 class="tech-detail-name"></h3>
                 </div>
-                
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
-                    <div>
-                        <h3 class="text-2xl font-bold mb-6">Front-End Development</h3>
-                        <div class="w-full h-px bg-gray-700 mb-6"></div>
-                        <p class="text-gray-300 mb-6">
-                            Creating responsive, accessible, and visually stunning user interfaces
-                            using modern front-end technologies and best practices.
-                        </p>
-                        <ul class="text-gray-400">
-                            <li class="mb-2">• Responsive Web Design</li>
-                            <li class="mb-2">• Modern CSS Frameworks</li>
-                            <li class="mb-2">• JavaScript & DOM Manipulation</li>
-                            <li class="mb-2">• Animation & Micro-interactions</li>
-                            <li>• Front-End Frameworks</li>
-                        </ul>
-                    </div>
-                    
-                    <div>
-                        <h3 class="text-2xl font-bold mb-6">Back-End Development</h3>
-                        <div class="w-full h-px bg-gray-700 mb-6"></div>
-                        <p class="text-gray-300 mb-6">
-                            Building robust, scalable, and secure server-side applications
-                            with clean architectures and efficient database management.
-                        </p>
-                        <ul class="text-gray-400">
-                            <li class="mb-2">• PHP & Laravel Development</li>
-                            <li class="mb-2">• RESTful API Design</li>
-                            <li class="mb-2">• Database Design & Optimization</li>
-                            <li class="mb-2">• Authentication & Authorization</li>
-                            <li>• Server Management</li>
-                        </ul>
-                    </div>
-                    
-                    <div>
-                        <h3 class="text-2xl font-bold mb-6">Software Engineering</h3>
-                        <div class="w-full h-px bg-gray-700 mb-6"></div>
-                        <p class="text-gray-300 mb-6">
-                            Applying principles and patterns that ensure maintainable,
-                            testable, and extensible code for long-term project success.
-                        </p>
-                        <ul class="text-gray-400">
-                            <li class="mb-2">• MVC Architecture</li>
-                            <li class="mb-2">• Repository Pattern</li>
-                            <li class="mb-2">• SOLID Principles</li>
-                            <li class="mb-2">• Version Control (Git)</li>
-                            <li>• Testing & Debugging</li>
-                        </ul>
-                    </div>
-                </div>
+                <div class="tech-detail-category"></div>
+                <p class="tech-detail-description"></p>
+                <div class="tech-detail-experience"></div>
             </div>
-        </section>
+        </div>
+    </div>
+</section>
+
+<!-- Skills Section -->
+<section id="skills" class="min-h-screen px-4 md:px-16 lg:px-24 py-16 md:py-24" style="background-color: var(--bg-secondary);">
+    <div class="max-w-7xl mx-auto w-full">
+        <h2 class="text-4xl md:text-5xl font-bold mb-12 md:mb-16">SKILLS & EXPERTISE</h2>
+        
+        <div class="overflow-hidden whitespace-nowrap mb-16 md:mb-24">
+            <div class="inline-block animate-marquee">
+                <span class="text-4xl md:text-7xl font-black opacity-10 mx-4 md:mx-8">HTML5</span>
+                <span class="text-4xl md:text-7xl font-black opacity-10 mx-4 md:mx-8">CSS3</span>
+                <span class="text-4xl md:text-7xl font-black opacity-10 mx-4 md:mx-8">JAVASCRIPT</span>
+                <span class="text-4xl md:text-7xl font-black opacity-10 mx-4 md:mx-8">TAILWIND</span>
+                <span class="text-4xl md:text-7xl font-black opacity-10 mx-4 md:mx-8">PHP</span>
+                <span class="text-4xl md:text-7xl font-black opacity-10 mx-4 md:mx-8">LARAVEL</span>
+                <span class="text-4xl md:text-7xl font-black opacity-10 mx-4 md:mx-8">SQL</span>
+                <span class="text-4xl md:text-7xl font-black opacity-10 mx-4 md:mx-8">REACT</span>
+                <span class="text-4xl md:text-7xl font-black opacity-10 mx-4 md:mx-8">NEXT.JS</span>
+            </div>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+            <div>
+                <h3 class="text-2xl font-bold mb-6">Front-End Development</h3>
+                <div class="w-full h-px bg-gray-700 mb-6"></div>
+                <p class="text-gray-300 mb-6">
+                    Creating responsive, accessible, and visually stunning user interfaces
+                    using modern front-end technologies and best practices.
+                </p>
+                <ul class="text-gray-400">
+                    <li class="mb-2">• Responsive Web Design</li>
+                    <li class="mb-2">• Modern CSS Frameworks</li>
+                    <li class="mb-2">• JavaScript & DOM Manipulation</li>
+                    <li class="mb-2">• Animation & Micro-interactions</li>
+                    <li>• Front-End Frameworks</li>
+                </ul>
+            </div>
+            
+            <div>
+                <h3 class="text-2xl font-bold mb-6">Back-End Development</h3>
+                <div class="w-full h-px bg-gray-700 mb-6"></div>
+                <p class="text-gray-300 mb-6">
+                    Building robust, scalable, and secure server-side applications
+                    with clean architectures and efficient database management.
+                </p>
+                <ul class="text-gray-400">
+                    <li class="mb-2">• PHP & Laravel Development</li>
+                    <li class="mb-2">• RESTful API Design</li>
+                    <li class="mb-2">• Database Design & Optimization</li>
+                    <li class="mb-2">• Authentication & Authorization</li>
+                    <li>• Server Management</li>
+                </ul>
+            </div>
+            
+            <div>
+                <h3 class="text-2xl font-bold mb-6">Software Engineering</h3>
+                <div class="w-full h-px bg-gray-700 mb-6"></div>
+                <p class="text-gray-300 mb-6">
+                    Applying principles and patterns that ensure maintainable,
+                    testable, and extensible code for long-term project success.
+                </p>
+                <ul class="text-gray-400">
+                    <li class="mb-2">• MVC Architecture</li>
+                    <li class="mb-2">• Repository Pattern</li>
+                    <li class="mb-2">• SOLID Principles</li>
+                    <li class="mb-2">• Version Control (Git)</li>
+                    <li>• Testing & Debugging</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
         
         <!-- Contact Section -->
         <section id="contact" class="min-h-screen px-4 md:px-16 lg:px-24 py-16 md:py-24">
@@ -817,72 +862,6 @@
     </div>
 </section>
 
-<!-- Tech Stack Section -->
-<section class="tech-stack-section relative py-20 min-h-screen flex items-center">
-    <div class="max-w-7xl mx-auto px-4 w-full">
-        <h2 class="text-4xl md:text-5xl font-bold mb-16 text-center">Tech Stack</h2>
-        
-        <div class="tech-orbit-container">
-            <!-- Center Core -->
-            <div class="tech-core">
-                <div class="core-content">
-                    <span class="text-accent">2+</span>
-                    <span class="text-sm">Years</span>
-                </div>
-            </div>
-            
-            <!-- Frontend Orbit -->
-            <div class="tech-orbit frontend-orbit">
-                <!-- Tech items are positioned via JavaScript -->
-                <div class="tech-item" data-tech="HTML5">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5" loading="lazy" width="30" height="30">
-                </div>
-                <div class="tech-item" data-tech="CSS3">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS3" loading="lazy" width="30" height="30">
-                </div>
-                <div class="tech-item" data-tech="JavaScript">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript" loading="lazy" width="30" height="30">
-                </div>
-                <div class="tech-item" data-tech="React">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React" loading="lazy" width="30" height="30">
-                </div>
-                <div class="tech-item" data-tech="Tailwind">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-plain.svg" alt="Tailwind" loading="lazy" width="30" height="30">
-                </div>
-            </div>
-            
-            <!-- Backend Orbit -->
-            <div class="tech-orbit backend-orbit">
-                <div class="tech-item" data-tech="PHP">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" alt="PHP" loading="lazy" width="30" height="30">
-                </div>
-                <div class="tech-item" data-tech="Laravel">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/laravel/laravel-plain.svg" alt="Laravel" loading="lazy" width="30" height="30">
-                </div>
-                <div class="tech-item" data-tech="MySQL">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="MySQL" loading="lazy" width="30" height="30">
-                </div>
-                <div class="tech-item" data-tech="PostgreSQL">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" alt="PostgreSQL" loading="lazy" width="30" height="30">
-                </div>
-            </div>
-            
-            <!-- Tools Orbit -->
-            <div class="tech-orbit tools-orbit">
-                <div class="tech-item" data-tech="Git">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git" loading="lazy" width="30" height="30">
-                </div>
-                <div class="tech-item" data-tech="GitHub">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub" loading="lazy" width="30" height="30">
-                </div>
-                <div class="tech-item" data-tech="VS Code">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" alt="VS Code" loading="lazy" width="30" height="30">
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
 <!-- Footer -->
 <footer class="py-8 border-t border-gray-800">
     <div class="container mx-auto px-4 text-center">
@@ -893,10 +872,15 @@
 </footer>
 
 <!-- Include JavaScript files -->
+<link rel="stylesheet" href="./tech-keyboard.css">
+<script src="./tech-keyboard.js" defer></script>
 <script src="./responsive-fix.js" defer></script>
 <script src="./gsapanim.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollToPlugin.min.js" defer></script>
 <script src="./tabswitch.js" defer></script>
-<script src="./tech-animation.js" defer></script>
+<script src="./modern-tech-grid.js" defer></script>
+<script src="./performance-optimization.js" defer></script>
+<!-- Remove this script which was causing the reload issue -->
+<!-- <script src="./tech-neural-network-debug.js"></script> -->
 </body>
 </html>

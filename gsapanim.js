@@ -947,4 +947,8 @@ document.addEventListener("DOMContentLoaded", function() {
             onComplete: () => container.removeChild(particle)
         });
     }
+    // setTimeout(checkNeuralNetworkStatus, 1000);
+  
+    // // Add a manual trigger for users
+    // window.fixNeuralNetwork = fixNeuralNetwork;
 });
