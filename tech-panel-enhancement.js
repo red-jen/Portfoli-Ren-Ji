@@ -14,8 +14,8 @@ function enhanceTechDetailPanel() {
   const techData = {
     'JavaScript': {
       experience: '2 years',
-      expertiseLevel: 80, // Percentage
-      description: 'Core language for web development with strong ecosystem and frameworks.',
+      expertiseLevel: 80,
+      description: 'Core language for web development with ES6+ features and strong ecosystem.',
       category: 'Programming Language',
       skills: [
         { name: 'ES6+ Features', level: 85 },
@@ -36,7 +36,7 @@ function enhanceTechDetailPanel() {
       ],
       projects: ['Task Manager', 'Portfolio']
     },
-    'React': {
+    'React.js': {
       experience: '1.5 years',
       expertiseLevel: 75,
       description: 'Component-based UI library for building interactive web applications.',
@@ -48,7 +48,19 @@ function enhanceTechDetailPanel() {
       ],
       projects: ['FUT Champions', 'Portfolio', 'SYBER SOUNDSCAPE']
     },
-    'Vue': {
+    'Next.js': {
+      experience: '1 year',
+      expertiseLevel: 70,
+      description: 'React framework with server-side rendering and static site generation capabilities.',
+      category: 'Frontend Framework',
+      skills: [
+        { name: 'Server-side Rendering', level: 75 },
+        { name: 'API Routes', level: 80 },
+        { name: 'Static Generation', level: 70 }
+      ],
+      projects: ['Portfolio', 'E-commerce App']
+    },
+    'Vue.js': {
       experience: '1 year',
       expertiseLevel: 70,
       description: 'Progressive framework for building user interfaces with an approachable core library.',
@@ -60,7 +72,7 @@ function enhanceTechDetailPanel() {
       ],
       projects: ['YOUDEMY', 'Todo App']
     },
-    'HTML': {
+    'HTML5': {
       experience: '2 years',
       expertiseLevel: 90,
       description: 'Standard markup language for documents designed to be displayed in a web browser.',
@@ -71,6 +83,30 @@ function enhanceTechDetailPanel() {
         { name: 'Forms & Validation', level: 90 }
       ],
       projects: ['All Projects']
+    },
+    'CSS3': {
+      experience: '2 years',
+      expertiseLevel: 85,
+      description: 'Style sheet language used for describing the presentation of a document.',
+      category: 'Stylesheet Language',
+      skills: [
+        { name: 'Flexbox', level: 90 },
+        { name: 'Grid Layout', level: 85 },
+        { name: 'Animations', level: 80 }
+      ],
+      projects: ['All Projects']
+    },
+    'Tailwind CSS': {
+      experience: '1.5 years',
+      expertiseLevel: 85,
+      description: 'Utility-first CSS framework for rapidly building custom user interfaces.',
+      category: 'CSS Framework',
+      skills: [
+        { name: 'Utility Classes', level: 90 },
+        { name: 'Responsive Design', level: 85 },
+        { name: 'Custom Configuration', level: 75 }
+      ],
+      projects: ['Portfolio', 'FUT Champions', 'Task Manager']
     },
     'Node.js': {
       experience: '1.5 years',
@@ -84,101 +120,77 @@ function enhanceTechDetailPanel() {
       ],
       projects: ['YOUDEMY API', 'Task Manager Backend']
     },
-    'Python': {
-      experience: '1 year',
-      expertiseLevel: 60,
-      description: 'Versatile programming language with clean syntax and rich ecosystem.',
+    'Express.js': {
+      experience: '1.5 years',
+      expertiseLevel: 75,
+      description: 'Fast, unopinionated, minimalist web framework for Node.js.',
+      category: 'Backend Framework',
+      skills: [
+        { name: 'Routing', level: 85 },
+        { name: 'Middleware', level: 80 },
+        { name: 'RESTful APIs', level: 75 }
+      ],
+      projects: ['YOUDEMY API', 'Task Manager Backend']
+    },
+    'PHP': {
+      experience: '2 years',
+      expertiseLevel: 80,
+      description: 'Popular server-side scripting language designed for web development.',
       category: 'Programming Language',
       skills: [
-        { name: 'Data Analysis', level: 65 },
-        { name: 'Basic Scripting', level: 75 },
-        { name: 'Web Scraping', level: 60 }
+        { name: 'OOP Concepts', level: 85 },
+        { name: 'Database Interaction', level: 80 },
+        { name: 'Session Handling', level: 75 }
       ],
-      projects: ['Data Analysis Project']
+      projects: ['YOUDEMY', 'E-commerce Backend', 'CMS']
     },
-    'Docker': {
-      experience: '6 months',
-      expertiseLevel: 50,
-      description: 'Platform for developing, shipping, and running applications in containers.',
-      category: 'DevOps Tool',
+    'Laravel': {
+      experience: '1.5 years',
+      expertiseLevel: 75,
+      description: 'PHP framework with expressive, elegant syntax for web application development.',
+      category: 'Backend Framework',
       skills: [
-        { name: 'Dockerfiles', level: 60 },
-        { name: 'Docker Compose', level: 55 },
-        { name: 'Containerization', level: 50 }
+        { name: 'Eloquent ORM', level: 80 },
+        { name: 'Blade Templates', level: 85 },
+        { name: 'Laravel Mix', level: 70 }
       ],
-      projects: ['YOUDEMY Deployment']
+      projects: ['YOUDEMY', 'Blog Platform']
     },
-    'AWS': {
-      experience: '6 months',
-      expertiseLevel: 45,
-      description: 'Cloud computing platform with vast array of infrastructure services.',
-      category: 'Cloud Platform',
-      skills: [
-        { name: 'S3', level: 65 },
-        { name: 'EC2', level: 50 },
-        { name: 'Lambda', level: 40 }
-      ],
-      projects: ['Portfolio Deployment', 'Image Storage Service']
-    },
-    'GraphQL': {
-      experience: '6 months',
-      expertiseLevel: 60,
-      description: 'Query language for APIs and runtime for executing those queries.',
-      category: 'API Technology',
-      skills: [
-        { name: 'Queries & Mutations', level: 70 },
-        { name: 'Schema Design', level: 60 },
-        { name: 'Apollo Client', level: 55 }
-      ],
-      projects: ['Blog API', 'E-commerce API']
-    },
-    'GitHub': {
+    'Git': {
       experience: '2 years',
       expertiseLevel: 85,
-      description: 'Platform for version control and collaboration using Git.',
-      category: 'Development Tool',
+      description: 'Distributed version control system for tracking changes in source code.',
+      category: 'Version Control',
       skills: [
-        { name: 'Version Control', level: 90 },
+        { name: 'Branching & Merging', level: 90 },
         { name: 'Pull Requests', level: 85 },
-        { name: 'GitHub Actions', level: 70 }
+        { name: 'Resolving Conflicts', level: 75 }
       ],
       projects: ['All Projects']
     },
-    'WordPress': {
-      experience: '1 year',
+    'MySQL': {
+      experience: '1.5 years',
       expertiseLevel: 75,
-      description: 'Content management system focused on creating websites and blogs.',
-      category: 'CMS',
+      description: 'Open-source relational database management system.',
+      category: 'Database',
       skills: [
-        { name: 'Theme Development', level: 80 },
-        { name: 'Plugin Customization', level: 70 },
-        { name: 'Site Administration', level: 85 }
+        { name: 'SQL Queries', level: 80 },
+        { name: 'Database Design', level: 75 },
+        { name: 'Indexing & Optimization', level: 70 }
       ],
-      projects: ['Client Blog', 'E-commerce Store']
+      projects: ['YOUDEMY', 'Task Manager', 'E-commerce']
     },
-    'Linux': {
-      experience: '1.5 years',
-      expertiseLevel: 65,
-      description: 'Open source operating system and foundation for many servers and devices.',
-      category: 'Operating System',
+    'PostgreSQL': {
+      experience: '1 year',
+      expertiseLevel: 70,
+      description: 'Powerful, open source object-relational database system.',
+      category: 'Database',
       skills: [
-        { name: 'Bash Scripting', level: 60 },
-        { name: 'Server Management', level: 70 },
-        { name: 'Package Management', level: 75 }
+        { name: 'Advanced Queries', level: 70 },
+        { name: 'JSON Data Types', level: 75 },
+        { name: 'Full-text Search', level: 65 }
       ],
-      projects: ['Server Deployment', 'Dev Environment']
-    },
-    'Sass': {
-      experience: '1.5 years',
-      expertiseLevel: 80,
-      description: 'CSS preprocessor scripting language with powerful features.',
-      category: 'Stylesheet Language',
-      skills: [
-        { name: 'Variables & Mixins', level: 85 },
-        { name: 'Nesting', level: 90 },
-        { name: 'Functions', level: 75 }
-      ],
-      projects: ['Portfolio', 'YOUDEMY', 'E-commerce UI']
+      projects: ['SYBER SOUNDSCAPE', 'Analytics Platform']
     },
     'MongoDB': {
       experience: '1 year',
@@ -192,6 +204,42 @@ function enhanceTechDetailPanel() {
       ],
       projects: ['Task Manager', 'Blog Backend']
     },
+    'RESTful APIs': {
+      experience: '2 years',
+      expertiseLevel: 80,
+      description: 'Architectural style for designing networked applications.',
+      category: 'API Development',
+      skills: [
+        { name: 'Resource Design', level: 85 },
+        { name: 'HTTP Methods', level: 90 },
+        { name: 'Status Codes', level: 80 }
+      ],
+      projects: ['YOUDEMY API', 'FUT Champions Backend']
+    },
+    'Docker': {
+      experience: '6 months',
+      expertiseLevel: 50,
+      description: 'Platform for developing, shipping, and running applications in containers.',
+      category: 'DevOps Tool',
+      skills: [
+        { name: 'Dockerfiles', level: 60 },
+        { name: 'Docker Compose', level: 55 },
+        { name: 'Containerization', level: 50 }
+      ],
+      projects: ['YOUDEMY Deployment']
+    },
+    'MVC Architecture': {
+      experience: '1.5 years',
+      expertiseLevel: 80,
+      description: 'Software design pattern dividing application into Model, View, and Controller.',
+      category: 'Architecture Pattern',
+      skills: [
+        { name: 'Separation of Concerns', level: 85 },
+        { name: 'Data Modeling', level: 80 },
+        { name: 'Controller Logic', level: 75 }
+      ],
+      projects: ['YOUDEMY', 'SYBER SOUNDSCAPE', 'Task Manager']
+    },
     'Netlify': {
       experience: '1.5 years',
       expertiseLevel: 80,
@@ -203,6 +251,18 @@ function enhanceTechDetailPanel() {
         { name: 'Serverless Functions', level: 70 }
       ],
       projects: ['Portfolio', 'FUT Champions', 'Static Sites']
+    },
+    'Vercel': {
+      experience: '1 year',
+      expertiseLevel: 75,
+      description: 'Deployment and collaboration platform for frontend developers.',
+      category: 'Deployment Platform',
+      skills: [
+        { name: 'Frontend Deployments', level: 85 },
+        { name: 'Serverless Functions', level: 70 },
+        { name: 'Environment Variables', level: 75 }
+      ],
+      projects: ['Next.js Projects', 'Portfolio']
     }
   };
 
