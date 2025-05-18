@@ -20,6 +20,7 @@ section {
 .max-w-7xl {
   width: 100%;
   max-width: calc(100vw - 2rem) !important;
+  margin: 0 auto;
 }
 
 /* Fix grid layouts to prevent overflow */
@@ -33,6 +34,51 @@ section {
   width: 100%;
   overflow: hidden;
   position: relative;
+}
+
+/* TECH KEYBOARD FIXES - Make it more comfortable size */
+.tech-stack-section {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  padding-bottom: 2rem !important; /* Add more padding at bottom */
+  min-height: auto !important; /* Allow section to grow with panel */
+}
+
+#tech-keyboard-container {
+  width: 95% !important; /* Increased from 90% */
+  max-width: 1000px !important; /* Increased for better visibility */
+  height: 450px !important; /* Taller for better viewing */
+  margin: 0 auto 3rem !important;
+  overflow: hidden !important;
+  border-radius: 12px !important;
+}
+
+/* Make keyboard container responsive */
+@media (max-width: 768px) {
+  #tech-keyboard-container {
+    width: 95% !important;
+    height: 400px !important; /* Increased from 350px */
+  }
+}
+
+@media (max-width: 480px) {
+  #tech-keyboard-container {
+    width: 100% !important;
+    height: 350px !important; /* Increased from 300px */
+  }
+}
+
+/* Fix tech detail panel positioning and width */
+.tech-detail-panel {
+  max-width: 800px !important; /* Match keyboard container width */
+  width: 95% !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  position: relative !important;
+  transform: none !important;
+  left: auto !important;
+  bottom: auto !important;
 }
 
 /* Fix contact section layout */
@@ -56,14 +102,6 @@ section {
   max-width: 100%;
 }
 
-/* Fix tech keyboard container */
-#tech-keyboard-container {
-  width: 100% !important;
-  max-width: 100% !important;
-  margin: 0 auto;
-  overflow: hidden;
-}
-
 /* Fix footer width */
 footer {
   width: 100%;
@@ -74,4 +112,9 @@ footer {
 img, video, iframe {
   max-width: 100%;
   height: auto;
+}
+
+/* Fix the width of the tech keyboard section content */
+.tech-stack-section .max-w-7xl {
+  max-width: 900px !important;
 }

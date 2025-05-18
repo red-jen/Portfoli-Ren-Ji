@@ -2,7 +2,7 @@
 
 .tech-keyboard-container {
   position: relative;
-  max-width: 1100px;
+  max-width: 1400px;
   margin: 0 auto 5rem;
   padding: 5rem 3rem 4rem; /* Adjusted padding for better key visibility */
   background: linear-gradient(145deg, #15171e, #0a0c12);

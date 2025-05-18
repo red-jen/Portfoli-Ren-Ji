@@ -1,16 +1,16 @@
 /* Tech Keyboard 3D Visualization - Three.js version */
 
-/* Container for the 3D keyboard */
+/* Container for the 3D keyboard - Adjusted size for better comfort */
 #tech-keyboard-container {
   position: relative;
-  width: 100%;
-  height: 500px;
-  max-width: 1000px;
-  margin: 0 auto 5rem;
-  border-radius: 8px;
+  width: 95% !important; /* Increased from 90% */
+  height: 450px !important; /* Increased from 400px */
+  max-width: 1000px !important; /* Increased from 800px for better visibility */
+  margin: 0 auto 3rem;
+  border-radius: 12px;
   overflow: hidden;
-  background: #121212; /* Dark background like in the image */
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); /* No glow effect, clean appearance like in the image */
+  background: #0f0f0f; /* Slightly darker background */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
   /* Make sure container is visible */
   display: block !important;
   visibility: visible !important;
@@ -22,7 +22,7 @@
 }
 
 #tech-keyboard-container:hover {
-  box-shadow: 0 15px 40px rgba(65, 184, 131, 0.2);
+  box-shadow: 0 15px 40px rgba(65, 184, 131, 0.15); /* Reduced glow intensity */
 }
 
 /* Canvas element created by Three.js */
@@ -48,63 +48,142 @@
   display: none;
 }
 
-/* Tech detail panel styling - clean and simple */
+/* Enhanced tech detail panel styling - positioned below the keyboard */
 .tech-detail-panel {
-  position: absolute;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%) translateY(100px);
-  width: 80%;
-  max-width: 400px;
-  background-color: rgba(18, 18, 18, 0.85);
-  backdrop-filter: blur(10px);
-  border-radius: 8px;
-  padding: 15px;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+  position: relative; /* Change from absolute to relative */
+  bottom: auto; /* Remove absolute positioning */
+  left: auto;
+  transform: none; /* Remove transform that was positioning it */
+  width: 90%;
+  max-width: 800px; /* Match keyboard container width */
+  background-color: rgba(10, 10, 12, 0.85);
+  backdrop-filter: blur(12px);
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
   opacity: 0;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  height: 0; /* Start with 0 height */
+  overflow: hidden; /* Hide content when closed */
+  transition: opacity 0.4s cubic-bezier(0.2, 0.9, 0.3, 1), 
+              height 0.4s cubic-bezier(0.2, 0.9, 0.3, 1),
+              margin 0.4s cubic-bezier(0.2, 0.9, 0.3, 1);
   z-index: 100;
   border: 1px solid rgba(65, 184, 131, 0.3);
-  margin: 1.5rem auto 0;
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-  min-height: 180px;
-  display: none;
+  margin: 0 auto; /* Center horizontally */
+  display: flex;
+  flex-direction: column;
+  pointer-events: none;
 }
 
 .tech-detail-panel.active {
-  transform: translateX(-50%) translateY(0);
+  transform: none; /* No transform needed */
   opacity: 1;
-  display: block;
+  pointer-events: all;
+  height: auto; /* Auto height when active */
+  min-height: 250px; /* Minimum height */
+  margin-top: 1.5rem; /* Add margin when panel is active */
+  margin-bottom: 2rem; /* Add bottom margin for spacing */
 }
 
 .tech-detail-inner {
-  text-align: center;
-  color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
+/* Improved header layout */
 .tech-detail-header {
   display: flex;
   align-items: center;
-  justify-content: center;
-  margin-bottom: 10px;
+  margin-bottom: 0.5rem;
 }
 
 .tech-detail-icon {
-  width: 30px;
-  height: 30px;
-  margin-right: 10px;
-  border-radius: 4px;
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.4));
+  width: 40px;
+  height: 40px;
+  margin-right: 14px;
+  border-radius: 6px;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.4));
+  object-fit: contain;
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 6px;
 }
 
 .tech-detail-name {
-  font-size: 18px;
+  font-size: 22px;
   font-weight: bold;
   color: #fff;
   margin: 0;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Progress bars for skills */
+.tech-skill-bars {
+  margin: 1rem 0;
+  width: 100%;
+}
+
+.skill-bar-container {
+  margin-bottom: 1rem;
+}
+
+.skill-bar-label {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.skill-name {
+  font-weight: 500;
+}
+
+.skill-level {
+  font-weight: 300;
+  color: var(--accent, #64ffda);
+}
+
+.skill-bar-bg {
+  height: 6px;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.skill-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent, #64ffda), rgba(100, 255, 218, 0.6));
+  border-radius: 3px;
+  width: 0;
+  transition: width 1s cubic-bezier(0.26, 0.86, 0.44, 0.98);
+  position: relative;
+}
+
+.skill-bar-fill::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    90deg, 
+    transparent, 
+    rgba(255, 255, 255, 0.3), 
+    transparent
+  );
+  animation: skill-shine 2s infinite;
+}
+
+@keyframes skill-shine {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(300%);
+  }
 }
 
 .tech-detail-category {
@@ -112,49 +191,98 @@
   padding: 0.25rem 0.75rem;
   border-radius: 2rem;
   font-size: 12px;
-  color: #41b883;
+  background-color: rgba(65, 184, 131, 0.2);
+  color: var(--accent, #64ffda);
   text-transform: uppercase;
   letter-spacing: 1px;
   margin-bottom: 8px;
+  align-self: flex-start;
 }
 
 /* Make panel content more readable */
 .tech-detail-description {
-  font-size: 14px;
-  line-height: 1.4;
+  font-size: 15px;
+  line-height: 1.5;
   margin-bottom: 12px;
   color: #e0e0e0;
-  max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
-  letter-spacing: 0.01em;
+  max-width: 100%;
 }
 
-.tech-detail-experience {
+/* Projects using this tech */
+.tech-projects {
   display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-top: 0.5rem;
+}
+
+.tech-project-tag {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: 4px;
+  display: inline-flex;
   align-items: center;
   gap: 5px;
-  color: rgba(255, 255, 255, 0.7);
-  font-size: 0.875rem;
+}
+
+.tech-project-tag::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  background-color: var(--accent, #64ffda);
+  border-radius: 50%;
   display: inline-block;
-  padding: 0.25rem 0.75rem;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 2rem;
 }
 
-.reset-camera-button {
-  transition: all 0.2s ease-in-out;
+/* Close button */
+.tech-detail-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: rgba(255, 255, 255, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s;
 }
 
-.reset-camera-button:hover {
-  background-color: rgba(65, 184, 131, 1) !important;
-  transform: scale(1.05);
+.tech-detail-close:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: white;
+}
+
+/* Years of experience */
+.tech-detail-experience {
+  margin-top: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.95rem;
+  padding: 0.5rem 0.75rem;
+  background: rgba(65, 184, 131, 0.15);
+  border-radius: 6px;
+  margin-top: 0.5rem;
+  align-self: flex-start;
+}
+
+.tech-detail-experience::before {
+  content: '⏱️';
+  font-size: 16px;
 }
 
 /* Responsive adjustments - ensure keyboard is properly visible on all devices */
 @media (max-width: 768px) {
   #tech-keyboard-container {
-    height: 400px; /* Taller on medium screens */
+    height: 400px; /* Increased from 350px */
     border-radius: 40px; /* Still very rounded on smaller screens */
     margin-bottom: 3rem;
   }
@@ -164,9 +292,9 @@
   }
   
   .tech-detail-panel {
-    width: 90%;
-    padding: 12px;
-    min-height: 150px;
+    width: 92%;
+    padding: 18px;
+    max-width: 450px;
   }
   
   .tech-detail-name {
@@ -181,7 +309,7 @@
 
 @media (max-width: 480px) {
   #tech-keyboard-container {
-    height: 380px;
+    height: 350px; /* Increased from 300px */
     border-radius: 30px; /* Still quite rounded even on small screens */
     margin-bottom: 2rem;
   }
@@ -191,8 +319,9 @@
   }
   
   .tech-detail-panel {
-    padding: 1rem;
-    border-radius: 1rem;
+    width: 95%;
+    padding: 15px;
+    max-width: 350px;
   }
   
   .tech-detail-name {

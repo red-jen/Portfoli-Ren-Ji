@@ -17,6 +17,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // Fix project cards layout
     fixProjectCardsLayout();
     
+    // Fix tech keyboard layout
+    fixTechKeyboardLayout();
+    
     // Fix any contact section layout issues
     fixContactSectionLayout();
     
@@ -75,6 +78,74 @@ function fixProjectCardsLayout() {
   });
 }
 
+// Fix tech keyboard layout specifically
+function fixTechKeyboardLayout() {
+  const techSection = document.querySelector('.tech-stack-section');
+  if (!techSection) return;
+  
+  // Center the heading and description
+  const heading = techSection.querySelector('h2');
+  const description = techSection.querySelector('p');
+  
+  if (heading) {
+    heading.style.textAlign = 'center';
+    heading.style.maxWidth = '800px'; // Increased from 700px
+    heading.style.margin = '0 auto 1rem';
+  }
+  
+  if (description) {
+    description.style.textAlign = 'center';
+    description.style.maxWidth = '700px'; // Increased from 600px
+    description.style.margin = '0 auto 2rem';
+    description.style.color = 'rgba(255, 255, 255, 0.7)';
+  }
+  
+  // Make the keyboard container more comfortable
+  const keyboardContainer = document.getElementById('tech-keyboard-container');
+  if (keyboardContainer) {
+    keyboardContainer.style.width = '95%'; // Increased from 90%
+    keyboardContainer.style.maxWidth = '1000px'; // Increased from 800px
+    keyboardContainer.style.height = '450px'; // Increased from 400px
+    keyboardContainer.style.margin = '0 auto 3rem';
+    
+    // Add responsive adjustment
+    if (window.innerWidth <= 768) {
+      keyboardContainer.style.height = '400px'; // Increased from 350px
+    }
+    if (window.innerWidth <= 480) {
+      keyboardContainer.style.height = '350px'; // Increased from 300px
+      keyboardContainer.style.width = '100%';
+    }
+  }
+  
+  // Center the section content with more width
+  const sectionContainer = techSection.querySelector('.max-w-7xl');
+  if (sectionContainer) {
+    sectionContainer.style.maxWidth = '1100px'; // Increased from 900px
+    sectionContainer.style.margin = '0 auto';
+    sectionContainer.style.paddingBottom = '2rem';
+  }
+  
+  // Fix tech detail panel
+  const detailPanel = document.getElementById('tech-detail-panel');
+  if (detailPanel) {
+    // Position it below keyboard instead of over it
+    detailPanel.style.position = 'relative';
+    detailPanel.style.maxWidth = '800px'; // Match keyboard width
+    detailPanel.style.width = '95%';
+    detailPanel.style.margin = '0 auto';
+    detailPanel.style.transform = 'none';
+    detailPanel.style.left = 'auto';
+    detailPanel.style.bottom = 'auto';
+  }
+  
+  // Ensure the section can grow to accommodate the panel
+  if (techSection) {
+    techSection.style.minHeight = 'auto';
+    techSection.style.paddingBottom = '3rem';
+  }
+}
+
 // Fix contact section layout
 function fixContactSectionLayout() {
   const contactSection = document.getElementById('contact');
@@ -112,6 +183,7 @@ function setupResizeObserver() {
       fixHorizontalOverflow();
       forceAboutSectionLayout();
       fixProjectCardsLayout();
+      fixTechKeyboardLayout(); // Added keyboard fix to resize handler
       fixContactSectionLayout();
     }, 100);
   });
