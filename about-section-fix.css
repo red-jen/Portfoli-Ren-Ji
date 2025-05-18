@@ -1,0 +1,100 @@
+/* Force horizontal single-row layout for About section */
+
+/* Single row container */
+#about .grid-cols-1.lg\:grid-cols-12 {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: flex-start !important;
+  gap: 1.5rem !important;
+  width: 100% !important;
+  flex-wrap: nowrap !important;
+  overflow-x: auto !important; /* Allow horizontal scrolling on small screens */
+  padding-bottom: 1rem !important; /* Space for scrollbar */
+  -webkit-overflow-scrolling: touch !important; /* Smooth scrolling on iOS */
+  scroll-snap-type: x proximity !important; /* Improve scroll behavior */
+}
+
+/* Fixed width profile column - make it more compact */
+#about .lg\:col-span-5 {
+  flex: 0 0 300px !important;
+  width: 300px !important;
+  max-width: 300px !important;
+  margin-right: 0 !important;
+  margin-bottom: 0 !important;
+  scroll-snap-align: start !important;
+}
+
+/* Make content column more compact */
+#about .lg\:col-span-7 {
+  flex: 0 0 auto !important;
+  width: auto !important; 
+  min-width: 280px !important;
+  max-width: none !important;
+  scroll-snap-align: start !important;
+  padding-right: 1.5rem !important;
+}
+
+/* Responsive adjustments for very small screens */
+@media (max-width: 640px) {
+  #about .grid-cols-1.lg\:grid-cols-12 {
+    padding-bottom: 1.5rem !important;
+  }
+  
+  #about .lg\:col-span-5 {
+    flex: 0 0 270px !important;
+    width: 270px !important;
+    max-width: 270px !important;
+  }
+}
+
+/* Adjust profile card size */
+#about .relative.w-full.max-w-sm {
+  width: 100% !important;
+  max-width: 280px !important;
+  margin: 0 auto !important;
+}
+
+/* Make all content sections direct children of the row */
+#about .tab-content {
+  flex: 0 0 auto !important;
+  width: 280px !important;
+  margin-left: 1rem !important;
+  margin-right: 1rem !important;
+  scroll-snap-align: start !important;
+  min-height: 350px !important; /* Ensure consistent height */
+}
+
+/* Tab navigation in horizontal flow */
+#about .flex.overflow-x-auto {
+  flex: 0 0 auto !important;
+  width: auto !important;
+  margin-right: 1.5rem !important;
+  border-bottom: none !important;
+  border-right: 1px solid rgba(75, 85, 99, 0.5) !important;
+  padding-right: 1rem !important;
+  flex-direction: column !important;
+}
+
+#about .tab-link {
+  padding: 0.5rem 1rem 0.5rem 0 !important;
+  margin-bottom: 1rem !important;
+  margin-right: 0 !important;
+  text-align: right !important;
+  border-bottom: none !important;
+  border-right: 2px solid transparent !important;
+}
+
+#about .active-tab {
+  border-right-color: var(--accent, #64ffda) !important;
+}
+
+/* Skills section also as a separate panel */
+#about .space-y-6 > div:last-child {
+  flex: 0 0 auto !important;
+  width: 300px !important;
+  scroll-snap-align: start !important;
+  padding-right: 1rem !important;
+  border-left: 1px solid rgba(75, 85, 99, 0.5) !important;
+  padding-left: 1.5rem !important;
+  margin-left: 0.5rem !important;
+}
