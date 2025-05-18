@@ -385,14 +385,14 @@ function initTechKeyboard3D() {
     
     // Create camera
     camera = new THREE.PerspectiveCamera(
-      36,  // Narrower FOV for better perspective
+      35, // Slightly wider field of view for better keyboard visibility
       container.clientWidth / container.clientHeight,
       0.1,
       1000
     );
     
-    // Position camera to see entire keyboard from better angle
-    camera.position.set(0, 15, 24);
+    // Position camera to better show the tighter key layout
+    camera.position.set(0, 12, 20);  // Adjusted position for better view
     
     // Add camera controls if OrbitControls is available
     if (typeof THREE.OrbitControls !== 'undefined') {
@@ -403,7 +403,7 @@ function initTechKeyboard3D() {
       controls.minDistance = 10;
       controls.maxDistance = 50;
       controls.maxPolarAngle = Math.PI / 2;
-      controls.target.set(0, 0, -4);  // Look at the center of the keyboard
+      controls.target.set(0, 0, -2);  // Look at the center of the keyboard
     } else {
       console.warn('OrbitControls not available');
     }
@@ -435,28 +435,14 @@ function initTechKeyboard3D() {
   
   function createKeyboardBase() {
     // Create a wider and deeper base to properly fit all keys
-    const baseWidth = 26;  // Wider base to fit all keys
-    const baseDepth = 16;  // Deeper base for better key layout
+    const baseWidth = 24;  // Adjusted width to fit keys tightly
+    const baseDepth = 14;  // Adjusted depth for better proportion
     const baseThickness = 0.8;  // Thicker for better appearance
     
-    // Create base with more curved edges for keyboard look
+    // Create base with significantly more rounded corners for keyboard look
     try {
-      // Main keyboard plate with much more rounded corners
-      let baseGeometry;
-      
-      // Try to create a more rounded shape if available
-      if (typeof THREE.RoundedBoxGeometry !== 'undefined') {
-        // Use RoundedBoxGeometry if available
-        baseGeometry = new THREE.RoundedBoxGeometry(
-          baseWidth, baseThickness, baseDepth, 
-          8, // segments
-          2.0 // radius - much larger radius for keyboard-like appearance
-        );
-      } else if (typeof THREE.BoxGeometry !== 'undefined') {
-        // Fallback to regular BoxGeometry
-        baseGeometry = new THREE.BoxGeometry(baseWidth, baseThickness, baseDepth);
-      }
-      
+      // Main keyboard plate with very rounded corners (much rounder than before)
+      const baseGeometry = new THREE.BoxGeometry(baseWidth, baseThickness, baseDepth);
       const baseMaterial = new THREE.MeshPhongMaterial({
         color: 0x111111,
         specular: 0x333333,
@@ -465,41 +451,37 @@ function initTechKeyboard3D() {
       
       const base = new THREE.Mesh(baseGeometry, baseMaterial);
       base.position.y = -0.8;  // Lower position so keys sit on top properly
-      keyboard.add(base);
       
-      // Add edge highlights with matching rounded shape
-      let edgeGeometry;
-      if (typeof THREE.RoundedBoxGeometry !== 'undefined') {
-        edgeGeometry = new THREE.RoundedBoxGeometry(
-          baseWidth + 0.4, 0.25, baseDepth + 0.4,
-          8, // segments
-          2.0 // radius
-        );
-      } else {
-        edgeGeometry = new THREE.BoxGeometry(baseWidth + 0.4, 0.25, baseDepth + 0.4);
-      }
+      // Add chamfered edges to simulate rounded corners
+      const chamferAmount = 1.5; // Much larger chamfer for very rounded look
       
-      const edgeMaterial = new THREE.MeshPhongMaterial({
-        color: 0x222222,
-        specular: 0x666666
+      // Create rounded corners with cylinder geometry for top edges
+      const edgeRadius = 1.0; // Larger radius for more obvious rounding
+      const cylinderMaterial = new THREE.MeshPhongMaterial({
+        color: 0x111111,
+        specular: 0x333333,
+        shininess: 30
       });
       
-      const edge = new THREE.Mesh(edgeGeometry, edgeMaterial);
-      edge.position.y = -0.3;
-      keyboard.add(edge);
+      // Add cylinders to create rounded edges at the four corners (top face)
+      const topCorners = [
+        {x: baseWidth/2 - edgeRadius, z: baseDepth/2 - edgeRadius}, // top right
+        {x: -baseWidth/2 + edgeRadius, z: baseDepth/2 - edgeRadius}, // top left
+        {x: baseWidth/2 - edgeRadius, z: -baseDepth/2 + edgeRadius}, // bottom right
+        {x: -baseWidth/2 + edgeRadius, z: -baseDepth/2 + edgeRadius} // bottom left
+      ];
       
-      // Add glow effect with matching rounded shape
-      let glowGeometry;
-      if (typeof THREE.RoundedBoxGeometry !== 'undefined') {
-        glowGeometry = new THREE.RoundedBoxGeometry(
-          baseWidth + 0.6, 0.1, baseDepth + 0.6,
-          8, // segments
-          2.0 // radius
-        );
-      } else {
-        glowGeometry = new THREE.BoxGeometry(baseWidth + 0.6, 0.1, baseDepth + 0.6);
-      }
+      topCorners.forEach(corner => {
+        const sphereGeom = new THREE.SphereGeometry(edgeRadius, 16, 16, 0, Math.PI*2, 0, Math.PI/2);
+        const cornerSphere = new THREE.Mesh(sphereGeom, cylinderMaterial);
+        cornerSphere.position.set(corner.x, -0.5, corner.z);
+        keyboard.add(cornerSphere);
+      });
       
+      keyboard.add(base);
+      
+      // Add glow effect with rounded shape
+      const glowGeometry = new THREE.BoxGeometry(baseWidth + 0.6, 0.1, baseDepth + 0.6);
       const glowMaterial = new THREE.MeshBasicMaterial({
         color: 0x64ffda,
         transparent: true,
@@ -511,17 +493,7 @@ function initTechKeyboard3D() {
       keyboard.add(glow);
       
       // Bottom part with rounded corners for better appearance
-      let bottomGeometry;
-      if (typeof THREE.RoundedBoxGeometry !== 'undefined') {
-        bottomGeometry = new THREE.RoundedBoxGeometry(
-          baseWidth - 1, 1.2, baseDepth - 1,
-          8, // segments
-          1.8 // radius
-        );
-      } else {
-        bottomGeometry = new THREE.BoxGeometry(baseWidth - 1, 1.2, baseDepth - 1);
-      }
-      
+      const bottomGeometry = new THREE.BoxGeometry(baseWidth - 1, 1.2, baseDepth - 1);
       const bottomMaterial = new THREE.MeshPhongMaterial({
         color: 0x0a0a0a
       });
@@ -561,17 +533,17 @@ function initTechKeyboard3D() {
   }
   
   function createKeyboardKeys() {
-    // Key dimensions - standard mechanical keycap size
+    // Key dimensions - smaller for more realistic layout
     const keyCap = {
-      width: 1.8,   // Standard keycap width
-      height: 0.6,  // Slightly taller for better visibility
-      depth: 1.8    // Standard keycap depth
+      width: 1.6,   // Narrower keys to fit closer together
+      height: 0.6,  // Standard height
+      depth: 1.6    // Consistent square proportion
     };
     
-    // Spacing between keys - more realistic
+    // Much tighter spacing between keys - like a real keyboard
     const spacing = {
-      x: 2.0,       // Horizontal spacing
-      z: 2.0        // Vertical spacing
+      x: 1.7,       // Much tighter horizontal spacing
+      z: 1.7        // Much tighter vertical spacing
     };
     
     // Calculate total width needed for proper centering
@@ -579,10 +551,10 @@ function initTechKeyboard3D() {
     const maxKeysInRow = Math.max(...rowSizes);
     const totalWidth = maxKeysInRow * spacing.x;
     
-    // Starting position (more centered)
+    // Calculate starting position for better centering
     const startPos = {
-      x: -totalWidth / 2 + spacing.x / 2,  // Center the keyboard
-      z: -8                                // Start higher up
+      x: -((maxKeysInRow - 1) * spacing.x) / 2,  // Center the keyboard more precisely
+      z: -3.5                                    // Position keys more centrally on keyboard
     };
     
     // Create rows with proper keyboard staggering
@@ -591,10 +563,10 @@ function initTechKeyboard3D() {
       let rowOffset = 0;
       switch(rowIndex) {
         case 0: rowOffset = 0;    break; // Top row
-        case 1: rowOffset = 0.4;  break; // Second row
-        case 2: rowOffset = 0.8;  break; // Third row
-        case 3: rowOffset = 1.2;  break; // Fourth row
-        case 4: rowOffset = 1.8;  break; // Bottom row (Concepts)
+        case 1: rowOffset = 0.25; break; // Second row (slightly shifted)
+        case 2: rowOffset = 0.5;  break; // Third row (more shifted)
+        case 3: rowOffset = 0.75; break; // Fourth row (even more shifted)
+        case 4: rowOffset = 1.0;  break; // Bottom row (most shifted)
       }
       
       // Calculate how much to center this specific row
@@ -604,17 +576,18 @@ function initTechKeyboard3D() {
       
       // Special treatment for the concept keys row
       if (rowIndex === 4) {
-        // Make concept keys bigger and space them evenly
-        const conceptKeyWidth = 3.0;  // Wider keys for concepts
-        const conceptSpacing = 3.2;   // More space between concept keys
+        // Make concept keys bigger with more even spacing
+        const conceptKeyWidth = 2.2;  // Wider keys for concepts but not too wide
+        const conceptKeyGap = 0.3;    // Small gap between concept keys
+        const conceptSpacing = conceptKeyWidth + conceptKeyGap;
         
         // Position concept keys centrally
-        const conceptRowWidth = row.keys.length * conceptSpacing;
-        const conceptStartX = -conceptRowWidth / 2 + conceptSpacing / 2;
+        const totalConceptWidth = (row.keys.length * conceptKeyWidth) + ((row.keys.length - 1) * conceptKeyGap);
+        const conceptStartX = -totalConceptWidth / 2;
         
         // Create each concept key
         row.keys.forEach((tech, keyIndex) => {
-          const xPos = conceptStartX + (keyIndex * conceptSpacing);
+          const xPos = conceptStartX + (keyIndex * conceptSpacing) + (conceptKeyWidth / 2);
           const zPos = startPos.z + (rowIndex * spacing.z * 1.1); // Extra vertical space
           
           // Create larger, more prominent keys for concepts
@@ -631,7 +604,9 @@ function initTechKeyboard3D() {
       else {
         // Standard rows with proper staggering and centering
         row.keys.forEach((tech, keyIndex) => {
-          const xPos = startPos.x + rowCentering + (keyIndex * spacing.x) + rowOffset;
+          // Calculate key position with more precise centering
+          const rowCenter = (maxKeysInRow - keysInRow) * spacing.x / 2;
+          const xPos = startPos.x + rowCenter + (keyIndex * spacing.x) + rowOffset;
           const zPos = startPos.z + (rowIndex * spacing.z);
           
           // Create standard keys
@@ -661,18 +636,20 @@ function initTechKeyboard3D() {
     const lightColor = new THREE.Color(keyColor);
     lightColor.convertSRGBToLinear();  // Enhance color vibrancy
     
-    // Create key cap with improved shape - more rounded edges
+    // Create key cap with improved shape - much rounder edges
     let keyGeometry;
     
     try {
-      // Try to create box with rounded edges
+      // Try to create box with significantly more rounded edges
       keyGeometry = new THREE.BoxGeometry(width, height, depth);
       
-      // Attempt to round corners if BufferGeometry methods are available
-      if (typeof THREE.BoxGeometry.prototype.fromBufferGeometry === 'function') {
-        const radius = 0.2;  // Corner radius
-        // Add rounding to corners
-        keyGeometry = roundedBox(width, height, depth, radius, 2);
+      // Add rounded corners with a special technique for THREE.js
+      const radiusSegments = 5;  // More segments for smoother rounding
+      const cornerRadius = width * 0.15; // More pronounced rounding (15% of width)
+      
+      // Create chamfered edges if available
+      if (typeof THREE.ChamferBox !== 'undefined') {
+        keyGeometry = new THREE.ChamferBox(width, height, depth, cornerRadius, radiusSegments);
       }
     } catch (e) {
       console.log('Using standard box geometry');

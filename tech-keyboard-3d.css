@@ -1,24 +1,25 @@
 /* Tech Keyboard 3D Visualization - Three.js version */
 
-/* Container for the 3D keyboard - improved keyboard-like appearance */
+/* Container for the 3D keyboard - enhanced keyboard-like appearance */
 #tech-keyboard-container {
   position: relative;
   width: 100%;
   height: 480px;
   max-width: 1100px;
   margin: 0 auto 5rem;
-  border-radius: 50px; /* Much more rounded corners for keyboard-like appearance */
+  border-radius: 50px; /* Very rounded corners */
   overflow: hidden;
   background: linear-gradient(145deg, #15171e, #0a0c12);
   box-shadow: 
     0 35px 80px -20px rgba(0, 0, 0, 0.8),
-    0 10px 30px rgba(100, 255, 218, 0.08);
+    0 10px 30px rgba(100, 255, 218, 0.08),
+    0 3px 8px rgba(100, 255, 218, 0.05); /* Enhanced glow */
   /* Make sure container is visible */
   display: block !important;
   visibility: visible !important;
   z-index: 10;
   
-  /* Add subtle inner shadow to simulate keyboard recess */
+  /* Add subtle inner shadow and border to enhance the keyboard shape */
   border: 1px solid rgba(20, 25, 35, 0.8);
 }
 
@@ -51,30 +52,30 @@
   background: 
     radial-gradient(
       circle at 50% 40%,
-      rgba(100, 255, 218, 0.04),
+      rgba(100, 255, 218, 0.06), /* Increased glow intensity */
       transparent 70%
     );
   box-shadow: 
-    inset 0 0 30px rgba(100, 255, 218, 0.05),
-    inset 0 0 10px rgba(100, 255, 218, 0.03);
+    inset 0 0 30px rgba(100, 255, 218, 0.1), /* Enhanced inner glow */
+    inset 0 0 10px rgba(100, 255, 218, 0.05);
   z-index: 0;
   pointer-events: none;
 }
 
-/* Add enhanced glow effect below keyboard */
+/* Add enhanced glow effect below keyboard - more pronounced */
 #tech-keyboard-container:after {
   content: "";
   position: absolute;
   left: 15%;
   right: 15%;
-  bottom: -30px;
-  height: 60px;
+  bottom: -35px; /* Position slightly lower */
+  height: 70px; /* Taller glow effect */
   background: radial-gradient(
     ellipse at center,
-    rgba(100, 255, 218, 0.2),
-    transparent 70%
+    rgba(100, 255, 218, 0.25), /* Stronger glow */
+    transparent 75%
   );
-  filter: blur(15px);
+  filter: blur(18px); /* More blur for softer effect */
   z-index: -1;
 }
 
@@ -169,7 +170,7 @@
 @media (max-width: 768px) {
   #tech-keyboard-container {
     height: 420px; /* Taller on medium screens */
-    border-radius: 40px; /* Slightly reduced border radius on smaller screens */
+    border-radius: 40px; /* Still very rounded on smaller screens */
     margin-bottom: 3rem;
   }
   
@@ -194,8 +195,8 @@
 
 @media (max-width: 480px) {
   #tech-keyboard-container {
-    height: 380px; /* Still maintain good height on small screens */
-    border-radius: 30px; /* Further reduced border radius on mobile */
+    height: 380px;
+    border-radius: 30px; /* Still quite rounded even on small screens */
     margin-bottom: 2rem;
   }
   
