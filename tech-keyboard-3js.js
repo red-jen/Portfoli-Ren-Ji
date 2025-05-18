@@ -379,6 +379,7 @@ function initTechKeyboard3D() {
     
     // Force the canvas to be visible
     renderer.domElement.style.display = 'block';
+    renderer.domElement.style.borderRadius = '50px';
     container.appendChild(renderer.domElement);
     console.log('Canvas added to container');
     
@@ -438,65 +439,122 @@ function initTechKeyboard3D() {
     const baseDepth = 16;  // Deeper base for better key layout
     const baseThickness = 0.8;  // Thicker for better appearance
     
-    // Main keyboard plate with adjusted dimensions
-    const baseGeometry = new THREE.BoxGeometry(baseWidth, baseThickness, baseDepth);
-    const baseMaterial = new THREE.MeshPhongMaterial({
-      color: 0x111111,
-      specular: 0x333333,
-      shininess: 30
-    });
-    const base = new THREE.Mesh(baseGeometry, baseMaterial);
-    base.position.y = -0.8;  // Lower position so keys sit on top properly
-    keyboard.add(base);
-    
-    // Add details to the base with matching dimensions
-    const edgeGeometry = new THREE.BoxGeometry(baseWidth + 0.4, 0.25, baseDepth + 0.4);
-    const edgeMaterial = new THREE.MeshPhongMaterial({
-      color: 0x222222,
-      specular: 0x666666
-    });
-    const edge = new THREE.Mesh(edgeGeometry, edgeMaterial);
-    edge.position.y = -0.3;
-    keyboard.add(edge);
-    
-    // Add glow effect with matching dimensions
-    const glowGeometry = new THREE.BoxGeometry(baseWidth + 0.6, 0.1, baseDepth + 0.6);
-    const glowMaterial = new THREE.MeshBasicMaterial({
-      color: 0x64ffda,
-      transparent: true,
-      opacity: 0.12
-    });
-    const glow = new THREE.Mesh(glowGeometry, glowMaterial);
-    glow.position.y = -0.1;
-    keyboard.add(glow);
-    
-    // Bottom part for depth with matching dimensions - more curved shape
-    const bottomGeometry = new THREE.BoxGeometry(baseWidth - 1, 1.2, baseDepth - 1);
-    
-    // Try to create rounded corners for bottom if possible
+    // Create base with more curved edges for keyboard look
     try {
-      if (THREE.BoxGeometry.prototype.fromBufferGeometry) {
-        const radius = 0.6;
-        bottomGeometry.vertices.forEach(function(vertex) {
-          if (vertex.y < 0) {
-            // Round bottom corners
-            const xSign = Math.sign(vertex.x);
-            const zSign = Math.sign(vertex.z);
-            vertex.x -= xSign * radius * 0.5;
-            vertex.z -= zSign * radius * 0.5;
-          }
-        });
+      // Main keyboard plate with much more rounded corners
+      let baseGeometry;
+      
+      // Try to create a more rounded shape if available
+      if (typeof THREE.RoundedBoxGeometry !== 'undefined') {
+        // Use RoundedBoxGeometry if available
+        baseGeometry = new THREE.RoundedBoxGeometry(
+          baseWidth, baseThickness, baseDepth, 
+          8, // segments
+          2.0 // radius - much larger radius for keyboard-like appearance
+        );
+      } else if (typeof THREE.BoxGeometry !== 'undefined') {
+        // Fallback to regular BoxGeometry
+        baseGeometry = new THREE.BoxGeometry(baseWidth, baseThickness, baseDepth);
       }
+      
+      const baseMaterial = new THREE.MeshPhongMaterial({
+        color: 0x111111,
+        specular: 0x333333,
+        shininess: 30
+      });
+      
+      const base = new THREE.Mesh(baseGeometry, baseMaterial);
+      base.position.y = -0.8;  // Lower position so keys sit on top properly
+      keyboard.add(base);
+      
+      // Add edge highlights with matching rounded shape
+      let edgeGeometry;
+      if (typeof THREE.RoundedBoxGeometry !== 'undefined') {
+        edgeGeometry = new THREE.RoundedBoxGeometry(
+          baseWidth + 0.4, 0.25, baseDepth + 0.4,
+          8, // segments
+          2.0 // radius
+        );
+      } else {
+        edgeGeometry = new THREE.BoxGeometry(baseWidth + 0.4, 0.25, baseDepth + 0.4);
+      }
+      
+      const edgeMaterial = new THREE.MeshPhongMaterial({
+        color: 0x222222,
+        specular: 0x666666
+      });
+      
+      const edge = new THREE.Mesh(edgeGeometry, edgeMaterial);
+      edge.position.y = -0.3;
+      keyboard.add(edge);
+      
+      // Add glow effect with matching rounded shape
+      let glowGeometry;
+      if (typeof THREE.RoundedBoxGeometry !== 'undefined') {
+        glowGeometry = new THREE.RoundedBoxGeometry(
+          baseWidth + 0.6, 0.1, baseDepth + 0.6,
+          8, // segments
+          2.0 // radius
+        );
+      } else {
+        glowGeometry = new THREE.BoxGeometry(baseWidth + 0.6, 0.1, baseDepth + 0.6);
+      }
+      
+      const glowMaterial = new THREE.MeshBasicMaterial({
+        color: 0x64ffda,
+        transparent: true,
+        opacity: 0.12
+      });
+      
+      const glow = new THREE.Mesh(glowGeometry, glowMaterial);
+      glow.position.y = -0.1;
+      keyboard.add(glow);
+      
+      // Bottom part with rounded corners for better appearance
+      let bottomGeometry;
+      if (typeof THREE.RoundedBoxGeometry !== 'undefined') {
+        bottomGeometry = new THREE.RoundedBoxGeometry(
+          baseWidth - 1, 1.2, baseDepth - 1,
+          8, // segments
+          1.8 // radius
+        );
+      } else {
+        bottomGeometry = new THREE.BoxGeometry(baseWidth - 1, 1.2, baseDepth - 1);
+      }
+      
+      const bottomMaterial = new THREE.MeshPhongMaterial({
+        color: 0x0a0a0a
+      });
+      
+      const bottom = new THREE.Mesh(bottomGeometry, bottomMaterial);
+      bottom.position.y = -1.4;
+      keyboard.add(bottom);
+      
     } catch (e) {
-      // Ignore if advanced geometry modifications aren't supported
+      console.error("Error creating keyboard base:", e);
+      
+      // Fallback to simple geometry if error occurs
+      const baseGeometry = new THREE.BoxGeometry(baseWidth, baseThickness, baseDepth);
+      const baseMaterial = new THREE.MeshPhongMaterial({
+        color: 0x111111,
+        specular: 0x333333,
+        shininess: 30
+      });
+      
+      const base = new THREE.Mesh(baseGeometry, baseMaterial);
+      base.position.y = -0.8;
+      keyboard.add(base);
+      
+      // Add simple bottom
+      const bottomGeometry = new THREE.BoxGeometry(baseWidth - 1, 1.2, baseDepth - 1);
+      const bottomMaterial = new THREE.MeshPhongMaterial({
+        color: 0x0a0a0a
+      });
+      
+      const bottom = new THREE.Mesh(bottomGeometry, bottomMaterial);
+      bottom.position.y = -1.4;
+      keyboard.add(bottom);
     }
-    
-    const bottomMaterial = new THREE.MeshPhongMaterial({
-      color: 0x0a0a0a
-    });
-    const bottom = new THREE.Mesh(bottomGeometry, bottomMaterial);
-    bottom.position.y = -1.4;
-    keyboard.add(bottom);
     
     // Add keyboard to scene
     scene.add(keyboard);

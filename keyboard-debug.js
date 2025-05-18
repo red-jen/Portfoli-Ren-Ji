@@ -91,7 +91,7 @@ function initFallbackKeyboard() {
     return;
   }
   
-  // Add a simple message
+  // Add a simple message with more keyboard-like appearance
   const fallbackMessage = document.createElement('div');
   fallbackMessage.style.position = 'absolute';
   fallbackMessage.style.top = '50%';
@@ -99,18 +99,30 @@ function initFallbackKeyboard() {
   fallbackMessage.style.transform = 'translate(-50%, -50%)';
   fallbackMessage.style.color = 'white';
   fallbackMessage.style.textAlign = 'center';
+  fallbackMessage.style.width = '100%';
+  fallbackMessage.style.maxWidth = '600px';
+  fallbackMessage.style.padding = '20px';
   fallbackMessage.innerHTML = `
     <h3>3D Tech Keyboard</h3>
     <div style="
-      width: 80%;
-      height: 120px;
+      width: 90%;
+      height: 140px;
       margin: 15px auto;
       background: linear-gradient(145deg, #181c24, #0f1218);
-      border-radius: 6px;
+      border-radius: 30px;
       border: 1px solid rgba(100, 255, 218, 0.15);
       box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
       position: relative;
+      overflow: hidden;
     ">
+      <div style="
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 70%;
+        background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.2));
+      "></div>
       <div style="
         display: flex;
         justify-content: space-around;
@@ -119,30 +131,31 @@ function initFallbackKeyboard() {
         left: 50%;
         transform: translateX(-50%);
         width: 80%;
+        gap: 10px;
       ">
         <div style="
-          width: 60px; 
-          height: 15px; 
-          background: rgba(100, 255, 218, 0.2);
-          border-radius: 3px;
-        "></div>
-        <div style="
-          width: 60px; 
+          flex: 1;
           height: 15px; 
           background: rgba(56, 189, 248, 0.2);
-          border-radius: 3px;
+          border-radius: 5px;
         "></div>
         <div style="
-          width: 60px; 
+          flex: 1;
           height: 15px; 
           background: rgba(74, 222, 128, 0.2);
-          border-radius: 3px;
+          border-radius: 5px;
         "></div>
         <div style="
-          width: 60px; 
+          flex: 1;
           height: 15px; 
           background: rgba(192, 132, 252, 0.2);
-          border-radius: 3px;
+          border-radius: 5px;
+        "></div>
+        <div style="
+          flex: 1;
+          height: 15px; 
+          background: rgba(251, 113, 133, 0.2);
+          border-radius: 5px;
         "></div>
       </div>
     </div>
@@ -151,10 +164,11 @@ function initFallbackKeyboard() {
       background: rgba(100, 255, 218, 0.2);
       color: white;
       border: 1px solid rgba(100, 255, 218, 0.5);
-      padding: 8px 16px;
-      border-radius: 4px;
+      padding: 10px 16px;
+      border-radius: 8px;
       cursor: pointer;
-      margin-top: 10px;
+      margin-top: 15px;
+      font-weight: 500;
     ">Retry 3D Version</button>
   `;
   
