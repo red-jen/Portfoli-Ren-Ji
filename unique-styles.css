@@ -1,0 +1,166 @@
+/* HR-Focused Styles */
+
+/* Performance Metrics Animation */
+.metrics-container {
+  position: relative;
+  padding: 2rem;
+  background: rgba(255,255,255,0.02);
+  border-radius: 1rem;
+}
+
+.metric-card {
+  text-align: center;
+  padding: 1.5rem;
+  transition: transform 0.3s;
+}
+
+.metric-card:hover {
+  transform: translateY(-5px);
+}
+
+.circular-chart {
+  width: 150px;
+  height: 150px;
+}
+
+.circle-bg {
+  fill: none;
+  stroke: rgba(255,255,255,0.1);
+  stroke-width: 3;
+}
+
+.circle {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 3;
+  stroke-linecap: round;
+  animation: progress 1.5s ease-out forwards;
+}
+
+@keyframes progress {
+  0% {
+    stroke-dasharray: 0 100;
+  }
+}
+
+.percentage {
+  fill: white;
+  font-size: 0.5em;
+  text-anchor: middle;
+  font-weight: bold;
+}
+
+.metric-label {
+  margin-top: 1rem;
+  color: var(--text-secondary);
+}
+
+/* Interactive Timeline */
+.education-timeline {
+  position: relative;
+  padding-left: 2rem;
+}
+
+.timeline-item {
+  position: relative;
+  padding-bottom: 2rem;
+}
+
+.timeline-dot {
+  position: absolute;
+  left: -2rem;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  background: var(--accent);
+  transform: scale(0);
+  animation: popIn 0.3s ease forwards;
+}
+
+.timeline-content {
+  opacity: 0;
+  transform: translateX(20px);
+  animation: slideIn 0.5s ease forwards;
+}
+
+@keyframes popIn {
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes slideIn {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Skill Progress */
+.skill-progress {
+  margin-bottom: 1rem;
+}
+
+.skill-progress .progress-bar {
+  height: 4px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.skill-progress .progress-fill {
+  height: 100%;
+  background: var(--accent);
+  transform-origin: left;
+  animation: fillProgress 1.5s ease forwards;
+}
+
+@keyframes fillProgress {
+  from {
+    transform: scaleX(0);
+  }
+}
+
+/* Project Cards Enhancement */
+.project-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 0.5rem;
+}
+
+.project-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255,255,255,0.2),
+    transparent
+  );
+  transition: 0.5s;
+}
+
+.project-card:hover::before {
+  left: 100%;
+}
+
+/* Achievement Badges */
+.achievement-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  border-radius: 9999px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--accent);
+  margin: 0.25rem;
+  transition: all 0.3s;
+}
+
+.achievement-badge:hover {
+  background: rgba(255,255,255,0.1);
+  transform: translateY(-2px);
+}
