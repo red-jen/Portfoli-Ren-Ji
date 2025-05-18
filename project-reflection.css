@@ -1,0 +1,189 @@
+/* Enhanced Project Card Reflection Effects
+   Creates a premium 3D effect with reflections on hover */
+
+/* Base styling for project cards with enhanced 3D perspective */
+.project-card {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  box-shadow: 0 10px 30px -15px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+  z-index: 1;
+}
+
+/* Glow effect on hover with color customization */
+.project-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: 12px;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  background: radial-gradient(
+    circle at var(--x, 50%) var(--y, 50%), 
+    rgba(var(--accent-rgb, 100, 255, 218), 0.3) 0%, 
+    transparent 60%
+  );
+  pointer-events: none;
+}
+
+/* Apply special reflection overlay */
+.project-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    130deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.1) 40%,
+    rgba(255, 255, 255, 0.2) 50%,
+    transparent 60%
+  );
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  z-index: 2;
+  pointer-events: none;
+  border-radius: 12px;
+  transform: translateZ(1px); /* Slight 3D positioning */
+}
+
+/* Enhanced hover effects */
+.project-card:hover {
+  transform: translateY(-5px) scale(1.02) perspective(1000px) rotateX(var(--rotateX, 0deg)) rotateY(var(--rotateY, 0deg));
+  box-shadow: 0 20px 40px -20px rgba(0, 0, 0, 0.5), 
+              0 0 20px rgba(var(--accent-rgb, 100, 255, 218), 0.15);
+}
+
+.project-card:hover::before {
+  opacity: 1;
+}
+
+.project-card:hover::after {
+  opacity: 1;
+  animation: reflectionSweep 2s ease infinite alternate;
+}
+
+/* Add subtle animations for the reflection */
+@keyframes reflectionSweep {
+  0% {
+    background-position: -100% -100%;
+  }
+  100% {
+    background-position: 200% 200%;
+  }
+}
+
+/* Enhanced overlay for text content with better gradients */
+.project-card .project-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 1.5rem;
+  background: linear-gradient(
+    to top,
+    rgba(10, 10, 15, 0.95) 0%,
+    rgba(10, 10, 15, 0.8) 60%,
+    rgba(10, 10, 15, 0.2) 100%
+  );
+  transform: translateY(30%);
+  transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+  opacity: 0;
+  border-radius: 0 0 12px 12px;
+  backdrop-filter: blur(4px);
+}
+
+.project-card:hover .project-overlay {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* Enhanced styling for project title with reflection */
+.project-card .project-overlay h3 {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 0.75rem;
+  color: white;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.project-card .project-overlay h3::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+  width: 40px;
+  height: 3px;
+  background: var(--accent, #64ffda);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1) 0.1s;
+}
+
+.project-card:hover .project-overlay h3::after {
+  transform: scaleX(1);
+}
+
+/* Tech tag enhancements */
+.project-card .project-overlay .flex {
+  margin-top: 1rem;
+  transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1) 0.2s, opacity 0.4s cubic-bezier(0.23, 1, 0.32, 1) 0.2s;
+  transform: translateY(10px);
+  opacity: 0;
+}
+
+.project-card:hover .project-overlay .flex {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* Enhanced tech tags with hover effect */
+.project-card .project-overlay .px-2 {
+  position: relative;
+  padding: 4px 10px;
+  margin: 2px;
+  border-radius: 4px;
+  background-color: rgba(100, 255, 218, 0.1);
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.project-card .project-overlay .px-2:hover {
+  transform: translateY(-2px);
+  background-color: rgba(100, 255, 218, 0.2);
+}
+
+/* Project image enhancements */
+.project-card .aspect-video {
+  transition: transform 0.7s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.project-card:hover .aspect-video {
+  transform: scale(1.05);
+}
+
+/* Special effects for mobile */
+@media (max-width: 768px) {
+  .project-card::before, 
+  .project-card::after {
+    display: none; /* Disable complex effects on mobile for performance */
+  }
+  
+  .project-card:hover {
+    transform: translateY(-5px) scale(1.01); /* Simpler transform on mobile */
+  }
+  
+  .project-card .project-overlay {
+    opacity: 0.95;
+    transform: translateY(0);
+    background: linear-gradient(
+      to top,
+      rgba(10, 10, 15, 0.95) 0%,
+      rgba(10, 10, 15, 0.9) 80%,
+      rgba(10, 10, 15, 0.8) 100%
+    );
+  }
+}
