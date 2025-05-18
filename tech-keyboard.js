@@ -219,6 +219,16 @@ function initTechKeyboard() {
   // Clear any existing content
   container.innerHTML = '';
   
+  // Add keyboard edge glow
+  const keyboardEdge = document.createElement('div');
+  keyboardEdge.className = 'keyboard-edge';
+  container.appendChild(keyboardEdge);
+  
+  // Add keyboard base texture
+  const keyboardBase = document.createElement('div');
+  keyboardBase.className = 'keyboard-base';
+  container.appendChild(keyboardBase);
+  
   // Add lighting element for ambient effects
   const lighting = document.createElement('div');
   lighting.className = 'keyboard-lighting';
@@ -227,7 +237,7 @@ function initTechKeyboard() {
   // Add keyboard brand and status light for realism
   const keyboardBrand = document.createElement('div');
   keyboardBrand.className = 'keyboard-brand';
-  keyboardBrand.textContent = 'DEV KEEB';
+  keyboardBrand.textContent = 'TECH STACK';
   container.appendChild(keyboardBrand);
   
   const statusLight = document.createElement('div');
@@ -251,22 +261,38 @@ function initTechKeyboard() {
 }
 
 function createKeyElement(key) {
-  // Create key container with enhanced 3D structure
+  // Create key container with improved 3D button structure
   const keyElement = document.createElement('div');
   keyElement.className = `keyboard-key key-${key.category} ${key.size ? `key-${key.size}` : 'key-1u'}`;
   keyElement.dataset.tech = key.id;
   
-  // Add top illumination element
-  const keyIllumination = document.createElement('div');
-  keyIllumination.className = 'key-illumination';
-  keyElement.appendChild(keyIllumination);
+  // Add key shadow
+  const keyShadow = document.createElement('div');
+  keyShadow.className = 'key-shadow';
+  keyElement.appendChild(keyShadow);
   
-  // Add surface element for reflections and texture
-  const keySurface = document.createElement('div');
-  keySurface.className = 'key-surface';
-  keyElement.appendChild(keySurface);
+  // Create button structure with all sides for true 3D appearance
+  // 1. Top face (visible face with icon)
+  const keyTop = document.createElement('div');
+  keyTop.className = 'key-top';
   
-  // Create icon
+  // 2. Right edge - more visible, defines key depth
+  const keyRightEdge = document.createElement('div');
+  keyRightEdge.className = 'key-right-edge';
+  
+  // 3. Left edge - improved positioning
+  const keyLeftEdge = document.createElement('div');
+  keyLeftEdge.className = 'key-left-edge';
+  
+  // 4. Bottom edge - visible when hovering
+  const keyBottomEdge = document.createElement('div');
+  keyBottomEdge.className = 'key-bottom-edge';
+  
+  // 5. Back edge - for complete cube appearance
+  const keyBackEdge = document.createElement('div');
+  keyBackEdge.className = 'key-back-edge';
+  
+  // Create icon with enhanced appearance
   const keyIcon = document.createElement('img');
   keyIcon.src = key.icon;
   keyIcon.alt = key.name;
@@ -278,8 +304,15 @@ function createKeyElement(key) {
   tooltip.className = 'key-tooltip';
   tooltip.textContent = key.name;
   
-  // Add elements to key
-  keyElement.appendChild(keyIcon);
+  // Add icon to top face
+  keyTop.appendChild(keyIcon);
+  
+  // Add all elements to key - with improved structure
+  keyElement.appendChild(keyTop);
+  keyElement.appendChild(keyRightEdge);
+  keyElement.appendChild(keyLeftEdge);
+  keyElement.appendChild(keyBottomEdge);
+  keyElement.appendChild(keyBackEdge);
   keyElement.appendChild(tooltip);
   
   // Add event listeners with enhanced effects
@@ -296,10 +329,7 @@ function createKeyElement(key) {
   keyElement.addEventListener('click', () => {
     pressKey(keyElement);
     showTechDetails(key);
-    playKeyPressSound(true); // Play louder click
-    
-    // Add ripple effect on click
-    createRippleEffect(keyElement);
+    playKeyPressSound(true);
   });
   
   return keyElement;
@@ -351,15 +381,26 @@ function pressKey(keyElement) {
   keyElement.classList.add('key-pressed');
   
   // Enhanced 3D press effect
-  keyElement.style.transform = 'translateY(2px) translateZ(-2px)';
+  keyElement.style.transform = 'translateY(2px) translateZ(0)';
+  
+  // Adjust shadow on press for more realism
+  const shadow = keyElement.querySelector('.key-shadow');
+  if (shadow) {
+    shadow.style.opacity = '0.15';
+    shadow.style.transform = 'translateY(1px) scale(0.75, 0.5)';
+    shadow.style.filter = 'blur(3px)';
+  }
+  
+  // Reset after animation completes
   setTimeout(() => {
     keyElement.style.transform = '';
-  }, 150);
-  
-  // Remove class after animation completes
-  setTimeout(() => {
+    if (shadow) {
+      shadow.style.opacity = '';
+      shadow.style.transform = '';
+      shadow.style.filter = '';
+    }
     keyElement.classList.remove('key-pressed');
-  }, 150);
+  }, 200);
 }
 
 // Sound effects for keyboard
@@ -371,24 +412,38 @@ function playKeyPressSound(louder = false) {
       audioContext = new (window.AudioContext || window.webkitAudioContext)();
     }
     
-    // Create oscillator for key press sound
-    const oscillator = audioContext.createOscillator();
-    const gainNode = audioContext.createGain();
+    // Create more complex sound for mechanical keyboard effect
+    const clickOscillator = audioContext.createOscillator();
+    const clickGain = audioContext.createGain();
+    const thumpOscillator = audioContext.createOscillator();
+    const thumpGain = audioContext.createGain();
     
-    oscillator.connect(gainNode);
-    gainNode.connect(audioContext.destination);
+    // Connect nodes
+    clickOscillator.connect(clickGain);
+    thumpOscillator.connect(thumpGain);
+    clickGain.connect(audioContext.destination);
+    thumpGain.connect(audioContext.destination);
     
-    // Set sound properties (mechanical keyboard click)
-    oscillator.type = 'sine';
-    oscillator.frequency.value = louder ? 400 : 300 + Math.random() * 100;
-    gainNode.gain.value = louder ? 0.03 : 0.01;
+    // High-frequency click (plastic keycap sound)
+    clickOscillator.type = 'triangle';
+    clickOscillator.frequency.value = louder ? 2000 + Math.random() * 500 : 1500 + Math.random() * 500;
+    clickGain.gain.value = louder ? 0.03 : 0.02;
     
-    // Play brief sound
-    oscillator.start();
+    // Low-frequency thump (key bottoming out)
+    thumpOscillator.type = 'sine';
+    thumpOscillator.frequency.value = louder ? 120 + Math.random() * 30 : 100 + Math.random() * 20;
+    thumpGain.gain.value = louder ? 0.08 : 0.05;
     
-    // Release sound quickly
-    gainNode.gain.exponentialRampToValueAtTime(0.0001, audioContext.currentTime + 0.1);
-    oscillator.stop(audioContext.currentTime + 0.1);
+    // Play sounds
+    clickOscillator.start();
+    thumpOscillator.start();
+    
+    // Release sounds quickly
+    clickGain.gain.exponentialRampToValueAtTime(0.0001, audioContext.currentTime + 0.08);
+    thumpGain.gain.exponentialRampToValueAtTime(0.0001, audioContext.currentTime + 0.15);
+    
+    clickOscillator.stop(audioContext.currentTime + 0.1);
+    thumpOscillator.stop(audioContext.currentTime + 0.2);
   } catch (error) {
     // Silently fail if audio context isn't supported or fails
     console.log('Audio not supported');
@@ -509,7 +564,7 @@ window.addEventListener('resize', () => {
   }
 });
 
-// Add enhanced subtle keyboard tilt on mouse movement
+// Enhanced but simplified tilt effect 
 function addKeyboardTiltEffect() {
   const keyboard = document.getElementById('tech-keyboard');
   if (!keyboard) return;
@@ -521,31 +576,16 @@ function addKeyboardTiltEffect() {
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
     
-    // Calculate tilt (smaller range for a subtler effect)
-    const tiltX = -((y / rect.height - 0.5) * 5); 
-    const tiltY = (x / rect.width - 0.5) * 5;
+    // Calculate tilt - more subtle for better stability
+    const tiltX = -((y / rect.height - 0.5) * 6); 
+    const tiltY = (x / rect.width - 0.5) * 6;
     
-    // Apply subtle tilt with smooth transition
-    keyboard.style.transform = `rotateX(${12 + tiltX}deg) rotateY(${tiltY}deg)`;
-    
-    // Add dynamic lighting effect
-    const lighting = keyboard.querySelector('.keyboard-lighting');
-    if (lighting) {
-      // Calculate light position
-      const lightPositionX = (x / rect.width) * 100;
-      const lightPositionY = (y / rect.height) * 100;
-      lighting.style.background = `radial-gradient(circle at ${lightPositionX}% ${lightPositionY}%, rgba(255, 255, 255, 0.03) 0%, rgba(0, 0, 0, 0) 60%)`;
-    }
+    // Apply tilt with smooth transition - starting from 20 degrees
+    keyboard.style.transform = `rotateX(${20 + tiltX}deg) rotateY(${tiltY}deg) scale(0.9)`;
   });
   
   // Reset tilt when mouse leaves
   keyboard.addEventListener('mouseleave', () => {
-    keyboard.style.transform = 'rotateX(12deg) rotateY(0deg)';
-    
-    // Reset lighting
-    const lighting = keyboard.querySelector('.keyboard-lighting');
-    if (lighting) {
-      lighting.style.background = 'radial-gradient(circle at center, rgba(255, 255, 255, 0.03) 0%, rgba(0, 0, 0, 0) 60%)';
-    }
+    keyboard.style.transform = 'rotateX(20deg) rotateY(0deg) scale(0.9)';
   });
 }
