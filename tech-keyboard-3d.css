@@ -1,0 +1,215 @@
+/* Tech Keyboard 3D Visualization - Three.js version */
+
+/* Container for the 3D keyboard - improved aspect ratio */
+#tech-keyboard-container {
+  position: relative;
+  width: 100%;
+  height: 480px; /* Taller height to fit all keys properly */
+  max-width: 1100px;
+  margin: 0 auto 5rem;
+  border-radius: 2rem; /* More rounded corners */
+  overflow: hidden;
+  background: linear-gradient(145deg, #15171e, #0a0c12);
+  box-shadow: 
+    0 35px 80px -20px rgba(0, 0, 0, 0.8),
+    0 10px 30px rgba(100, 255, 218, 0.08); /* Enhanced glow */
+  /* Make sure container is visible */
+  display: block !important;
+  visibility: visible !important;
+  z-index: 10;
+  
+  /* Add subtle inner shadow to simulate keyboard recess */
+  border: 1px solid rgba(20, 25, 35, 0.8);
+}
+
+/* Canvas element created by Three.js */
+#tech-keyboard-container canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100% !important;
+  height: 100% !important;
+  border-radius: 2rem;
+  /* Improve inner shadow for more depth */
+  box-shadow: 
+    0 0 50px rgba(0, 0, 0, 0.5) inset,
+    0 0 3px rgba(0, 0, 0, 0.9) inset;
+  display: block !important;
+  visibility: visible !important;
+  z-index: 1;
+}
+
+/* Add subtle keyboard background effect */
+#tech-keyboard-container:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(
+      circle at 50% 40%,
+      rgba(100, 255, 218, 0.04),
+      transparent 70%
+    );
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Add second gradient for more depth */
+#tech-keyboard-container:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -20px;
+  height: 40px;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(100, 255, 218, 0.15),
+    transparent 70%
+  );
+  filter: blur(10px);
+  z-index: -1;
+}
+
+/* Add debug border to see if container is visible */
+.tech-keyboard-section {
+  border: 1px solid rgba(100, 255, 218, 0.3);
+  margin: 2rem 0;
+  padding: 1rem;
+  border-radius: 1.5rem;
+}
+
+/* Tech detail panel styling - enhanced with better typography */
+.tech-detail-panel {
+  max-width: 800px;
+  margin: 1.5rem auto 0;
+  background: linear-gradient(145deg, rgba(15, 23, 42, 0.9), rgba(23, 37, 63, 0.8));
+  border-radius: 1.5rem; /* More rounded corners to match keyboard */
+  border: 1px solid rgba(100, 255, 218, 0.2);
+  padding: 2rem;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  backdrop-filter: blur(12px);
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(100, 255, 218, 0.2);
+  min-height: 180px;
+  display: none; /* Start hidden, JavaScript will show it */
+}
+
+.tech-detail-panel.active {
+  opacity: 1;
+  transform: translateY(0);
+  display: block;
+}
+
+.tech-detail-inner {
+  text-align: center;
+}
+
+.tech-detail-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.tech-detail-icon {
+  width: 3rem;
+  height: 3rem;
+  margin-right: 1rem;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.4));
+}
+
+.tech-detail-name {
+  font-size: 1.75rem;
+  font-weight: bold;
+  color: #fff;
+  margin: 0;
+}
+
+.tech-detail-category {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 2rem;
+  font-size: 0.875rem;
+  margin-bottom: 1rem;
+}
+
+/* Make panel content more readable */
+.tech-detail-description {
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 1rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
+  font-size: 1.05rem;
+  letter-spacing: 0.01em;
+}
+
+.tech-detail-experience {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.875rem;
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 2rem;
+}
+
+/* Responsive adjustments - ensure keyboard is properly visible on all devices */
+@media (max-width: 768px) {
+  #tech-keyboard-container {
+    height: 420px; /* Taller on medium screens */
+    border-radius: 1.5rem;
+    margin-bottom: 3rem;
+  }
+  
+  #tech-keyboard-container canvas {
+    border-radius: 1.5rem;
+  }
+  
+  .tech-detail-panel {
+    padding: 1.5rem;
+    min-height: 150px;
+  }
+  
+  .tech-detail-name {
+    font-size: 1.5rem;
+  }
+  
+  .tech-detail-icon {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  #tech-keyboard-container {
+    height: 380px; /* Still maintain good height on small screens */
+    border-radius: 1.25rem;
+    margin-bottom: 2rem;
+  }
+  
+  #tech-keyboard-container canvas {
+    border-radius: 1.25rem;
+  }
+  
+  .tech-detail-panel {
+    padding: 1rem;
+    border-radius: 1rem;
+  }
+  
+  .tech-detail-name {
+    font-size: 1.25rem;
+  }
+  
+  .tech-detail-icon {
+    width: 2rem;
+    height: 2rem;
+  }
+}

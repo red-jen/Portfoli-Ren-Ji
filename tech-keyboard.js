@@ -1,13 +1,12 @@
 /**
  * Tech Keyboard Visualization
- * Enhanced with 3D rendering and realistic keyboard effects
+ * Enhanced with true 3D cube keys
  */
 
-// Tech data structure with keyboard layout information
+// Add more technologies to the keyboard layout
 const techKeyboard = [
-  // Layout data with rows and tech keys
+  // First row - Frontend basics
   {
-    // First row - typically numbers
     row: 0,
     keys: [
       { 
@@ -35,12 +34,51 @@ const techKeyboard = [
         description: "Versatile programming language that enables dynamic, interactive content and browser-based applications with support for modern ES6+ features."
       },
       { 
+        id: "typescript", 
+        name: "TypeScript",
+        category: "frontend",
+        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg",
+        experience: "Intermediate • 8+ months",
+        description: "Strongly typed programming language that builds on JavaScript, adding static type definitions for enhanced code quality and developer experience."
+      },
+      { 
+        id: "sass", 
+        name: "Sass",
+        category: "frontend",
+        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sass/sass-original.svg",
+        experience: "Intermediate • 1+ year",
+        description: "CSS preprocessor scripting language that extends CSS with variables, nested rules, mixins, and more for more maintainable stylesheets."
+      },
+      { 
+        id: "bootstrap", 
+        name: "Bootstrap",
+        category: "frontend",
+        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg",
+        experience: "Advanced • 2+ years",
+        description: "Front-end framework with pre-built components and responsive grid system for faster and easier web development."
+      }
+    ]
+  },
+  
+  // Second row - Frontend frameworks & libraries
+  {
+    row: 1,
+    keys: [
+      { 
         id: "react", 
         name: "React",
         category: "frontend",
         icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
         experience: "Intermediate • 1+ year",
         description: "JavaScript library for building component-based user interfaces with a virtual DOM for efficient rendering and state management."
+      },
+      { 
+        id: "vue", 
+        name: "Vue.js",
+        category: "frontend",
+        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg",
+        experience: "Basic • 6+ months",
+        description: "Progressive JavaScript framework for building user interfaces with a focus on declarative rendering and component composition."
       },
       { 
         id: "tailwind", 
@@ -57,13 +95,29 @@ const techKeyboard = [
         icon: "https://cdn.cdnlogo.com/logos/g/21/gsap-greensock.svg",
         experience: "Intermediate • 1+ year",
         description: "Professional-grade animation library for creating high-performance, complex animations with precise control."
+      },
+      { 
+        id: "threejs", 
+        name: "Three.js",
+        category: "frontend",
+        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/threejs/threejs-original.svg",
+        experience: "Basic • 4+ months",
+        description: "JavaScript 3D library that makes WebGL simpler, enabling the creation of 3D graphics in the browser."
+      },
+      { 
+        id: "nextjs", 
+        name: "Next.js",
+        category: "frontend",
+        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg",
+        experience: "Basic • 3+ months",
+        description: "React framework enabling server-side rendering, static site generation, and other performance optimizations with built-in routing."
       }
     ]
   },
   
-  // Second row - typically QWERTY
+  // Third row - Backend technologies
   {
-    row: 1,
+    row: 2,
     keys: [
       { 
         id: "php", 
@@ -98,19 +152,27 @@ const techKeyboard = [
         description: "Advanced open-source relational database with strong standards compliance and extensive features for complex data workloads."
       },
       { 
-        id: "rest", 
-        name: "REST API",
+        id: "nodejs", 
+        name: "Node.js",
         category: "backend",
-        icon: "https://cdn.iconscout.com/icon/free/png-256/free-api-3521432-2944880.png",
-        experience: "Intermediate • 1.5+ years",
-        description: "Architectural style for designing networked applications with stateless operations and standardized interfaces for web services."
+        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg",
+        experience: "Basic • 8+ months",
+        description: "JavaScript runtime built on Chrome's V8 engine for building scalable network applications on the server-side."
+      },
+      { 
+        id: "express", 
+        name: "Express.js",
+        category: "backend",
+        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg",
+        experience: "Basic • 6+ months",
+        description: "Fast, unopinionated, minimalist web framework for Node.js for building web applications and APIs."
       }
     ]
   },
   
-  // Third row - typically ASDF
+  // Fourth row - Developer tools
   {
-    row: 2,
+    row: 3,
     keys: [
       { 
         id: "git", 
@@ -151,13 +213,21 @@ const techKeyboard = [
         icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/npm/npm-original-wordmark.svg",
         experience: "Intermediate • 1.5+ years",
         description: "Default package manager for Node.js that facilitates installation and management of code packages and dependencies."
+      },
+      { 
+        id: "docker", 
+        name: "Docker",
+        category: "tools",
+        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg",
+        experience: "Basic • 6+ months",
+        description: "Platform for developing, shipping, and running applications in containers for consistent deployment across environments."
       }
     ]
   },
   
-  // Fourth row - typically ZXCV (space bar row)
+  // Fifth row - Professional skills
   {
-    row: 3,
+    row: 4,
     keys: [
       { 
         id: "responsive", 
@@ -193,7 +263,7 @@ const techKeyboard = [
         icon: "https://cdn-icons-png.flaticon.com/512/2166/2166823.png",
         experience: "Advanced • 2+ years",
         description: "Programming paradigm based on the concept of objects that contain data and code to manipulate that data, with principles like encapsulation and inheritance.",
-        size: "2u"
+        size: "1-5u"
       }
     ]
   }
@@ -212,6 +282,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }, 1800);
 });
 
+// Improved tech keyboard initialization to ensure all keys display properly
 function initTechKeyboard() {
   const container = document.getElementById('tech-keyboard');
   if (!container) return;
@@ -245,77 +316,104 @@ function initTechKeyboard() {
   statusLight.id = 'keyboard-status';
   container.appendChild(statusLight);
   
-  // Create keyboard rows
-  techKeyboard.forEach(rowData => {
+  // Create keyboard rows with optimized layout
+  techKeyboard.forEach((rowData, rowIndex) => {
     const keyboardRow = document.createElement('div');
     keyboardRow.className = 'keyboard-row';
     
+    // Special handling for different rows
+    if (rowIndex === 4) { // Concepts row
+      keyboardRow.style.justifyContent = 'space-evenly';
+    } else {
+      keyboardRow.style.justifyContent = 'center';
+    }
+    
     // Create keys in this row
     rowData.keys.forEach(key => {
-      const keyElement = createKeyElement(key);
+      const keyElement = createKeyElement(key, rowIndex);
       keyboardRow.appendChild(keyElement);
     });
     
     container.appendChild(keyboardRow);
   });
+  
+  // Initial check for layout issues after a brief delay to allow rendering
+  setTimeout(() => {
+    checkAndAdjustKeyboardLayout();
+  }, 50);
 }
 
-function createKeyElement(key) {
-  // Create key container with improved 3D button structure
+// Create individual keys with optimized dimensions
+function createKeyElement(key, rowIndex) {
+  // Create key container
   const keyElement = document.createElement('div');
   keyElement.className = `keyboard-key key-${key.category} ${key.size ? `key-${key.size}` : 'key-1u'}`;
   keyElement.dataset.tech = key.id;
+  
+  // Adjust size for fifth row (concepts row) to ensure equal distribution
+  if (rowIndex === 4) {
+    keyElement.classList.add('concept-key');
+  }
   
   // Add key shadow
   const keyShadow = document.createElement('div');
   keyShadow.className = 'key-shadow';
   keyElement.appendChild(keyShadow);
   
-  // Create button structure with all sides for true 3D appearance
-  // 1. Top face (visible face with icon)
+  // Create the actual cube container
+  const keyCube = document.createElement('div');
+  keyCube.className = 'key-cube';
+  
+  // Create all six cube faces
+  
+  // 1. Top face (main visible face with icon)
   const keyTop = document.createElement('div');
-  keyTop.className = 'key-top';
-  
-  // 2. Right edge - more visible, defines key depth
-  const keyRightEdge = document.createElement('div');
-  keyRightEdge.className = 'key-right-edge';
-  
-  // 3. Left edge - improved positioning
-  const keyLeftEdge = document.createElement('div');
-  keyLeftEdge.className = 'key-left-edge';
-  
-  // 4. Bottom edge - visible when hovering
-  const keyBottomEdge = document.createElement('div');
-  keyBottomEdge.className = 'key-bottom-edge';
-  
-  // 5. Back edge - for complete cube appearance
-  const keyBackEdge = document.createElement('div');
-  keyBackEdge.className = 'key-back-edge';
-  
-  // Create icon with enhanced appearance
+  keyTop.className = 'key-face key-top';
   const keyIcon = document.createElement('img');
   keyIcon.src = key.icon;
   keyIcon.alt = key.name;
   keyIcon.className = 'key-img';
-  keyIcon.loading = "lazy"; // Performance optimization
+  keyIcon.loading = "lazy";
+  keyTop.appendChild(keyIcon);
+  
+  // 2. Bottom face (opposite of top)
+  const keyBottom = document.createElement('div');
+  keyBottom.className = 'key-face key-bottom';
+  
+  // 3. Front face
+  const keyFront = document.createElement('div');
+  keyFront.className = 'key-face key-front';
+  
+  // 4. Back face
+  const keyBack = document.createElement('div');
+  keyBack.className = 'key-face key-back';
+  
+  // 5. Left face
+  const keyLeft = document.createElement('div');
+  keyLeft.className = 'key-face key-left';
+  
+  // 6. Right face
+  const keyRight = document.createElement('div');
+  keyRight.className = 'key-face key-right';
+  
+  // Add all faces to cube
+  keyCube.appendChild(keyTop);
+  keyCube.appendChild(keyBottom);
+  keyCube.appendChild(keyFront);
+  keyCube.appendChild(keyBack);
+  keyCube.appendChild(keyLeft);
+  keyCube.appendChild(keyRight);
+  
+  // Add cube to key
+  keyElement.appendChild(keyCube);
   
   // Create tooltip
   const tooltip = document.createElement('div');
   tooltip.className = 'key-tooltip';
   tooltip.textContent = key.name;
-  
-  // Add icon to top face
-  keyTop.appendChild(keyIcon);
-  
-  // Add all elements to key - with improved structure
-  keyElement.appendChild(keyTop);
-  keyElement.appendChild(keyRightEdge);
-  keyElement.appendChild(keyLeftEdge);
-  keyElement.appendChild(keyBottomEdge);
-  keyElement.appendChild(keyBackEdge);
   keyElement.appendChild(tooltip);
   
-  // Add event listeners with enhanced effects
+  // Add event listeners
   keyElement.addEventListener('mouseenter', () => {
     showTechDetails(key);
     playKeyPressSound();
@@ -333,6 +431,51 @@ function createKeyElement(key) {
   });
   
   return keyElement;
+}
+
+// More robust layout checking and adjustment
+function checkAndAdjustKeyboardLayout() {
+  const container = document.getElementById('tech-keyboard');
+  if (!container) return;
+  
+  const containerWidth = container.clientWidth;
+  const rows = container.querySelectorAll('.keyboard-row');
+  
+  // First pass - check if any row exceeds container width
+  let needsCompactMode = false;
+  rows.forEach(row => {
+    // Get total width of all keys in row
+    const keysWidth = Array.from(row.querySelectorAll('.keyboard-key'))
+      .reduce((total, key) => total + key.offsetWidth, 0);
+    
+    if (keysWidth > containerWidth * 0.98) {
+      needsCompactMode = true;
+    }
+  });
+  
+  // Apply compact mode if needed
+  if (needsCompactMode) {
+    container.classList.add('keyboard-compact');
+    
+    // Adjust each row's keys proportionally
+    rows.forEach((row, rowIndex) => {
+      const keys = row.querySelectorAll('.keyboard-key');
+      const totalKeys = keys.length;
+      
+      // Calculate new width for keys
+      let newKeyWidth;
+      if (rowIndex === 4) { // Concepts row
+        newKeyWidth = (containerWidth * 0.95) / totalKeys - 10; // 10px for margins
+      } else {
+        newKeyWidth = (containerWidth * 0.95) / Math.max(totalKeys, 8) - 8; // Ensure consistent width
+      }
+      
+      // Apply new width to each key
+      keys.forEach(key => {
+        key.style.width = `${newKeyWidth}px`;
+      });
+    });
+  }
 }
 
 function showTechDetails(tech) {
@@ -380,27 +523,10 @@ function getCategoryColor(category, opacity = '') {
 function pressKey(keyElement) {
   keyElement.classList.add('key-pressed');
   
-  // Enhanced 3D press effect
-  keyElement.style.transform = 'translateY(2px) translateZ(0)';
-  
-  // Adjust shadow on press for more realism
-  const shadow = keyElement.querySelector('.key-shadow');
-  if (shadow) {
-    shadow.style.opacity = '0.15';
-    shadow.style.transform = 'translateY(1px) scale(0.75, 0.5)';
-    shadow.style.filter = 'blur(3px)';
-  }
-  
   // Reset after animation completes
   setTimeout(() => {
-    keyElement.style.transform = '';
-    if (shadow) {
-      shadow.style.opacity = '';
-      shadow.style.transform = '';
-      shadow.style.filter = '';
-    }
     keyElement.classList.remove('key-pressed');
-  }, 200);
+  }, 250);
 }
 
 // Sound effects for keyboard
@@ -564,7 +690,7 @@ window.addEventListener('resize', () => {
   }
 });
 
-// Enhanced but simplified tilt effect 
+// Enhanced tilt effect with lower angle to keep all keys visible
 function addKeyboardTiltEffect() {
   const keyboard = document.getElementById('tech-keyboard');
   if (!keyboard) return;
@@ -576,16 +702,57 @@ function addKeyboardTiltEffect() {
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
     
-    // Calculate tilt - more subtle for better stability
-    const tiltX = -((y / rect.height - 0.5) * 6); 
-    const tiltY = (x / rect.width - 0.5) * 6;
+    // Calculate tilt with better constraints
+    const tiltX = -((y / rect.height - 0.5) * 2);
+    const tiltY = (x / rect.width - 0.5) * 3;
     
-    // Apply tilt with smooth transition - starting from 20 degrees
-    keyboard.style.transform = `rotateX(${20 + tiltX}deg) rotateY(${tiltY}deg) scale(0.9)`;
+    // Apply tilt with smooth transition - using lower starting angle
+    keyboard.style.transform = `rotateX(${8 + tiltX}deg) rotateY(${tiltY}deg) scale(0.9)`;
   });
   
-  // Reset tilt when mouse leaves
+  // Reset tilt when mouse leaves - to lower base angle
   keyboard.addEventListener('mouseleave', () => {
-    keyboard.style.transform = 'rotateX(20deg) rotateY(0deg) scale(0.9)';
+    keyboard.style.transform = 'rotateX(8deg) rotateY(0deg) scale(0.9)';
   });
+  
+  // Add touch support for mobile tilt
+  keyboard.addEventListener('touchmove', (e) => {
+    if (e.touches.length > 0) {
+      const touch = e.touches[0];
+      const rect = keyboard.getBoundingClientRect();
+      
+      // Calculate relative position
+      const x = touch.clientX - rect.left;
+      const y = touch.clientY - rect.top;
+      
+      // Calculate tilt (less than mouse for better mobile experience)
+      const tiltX = -((y / rect.height - 0.5) * 1.5);
+      const tiltY = (x / rect.width - 0.5) * 2.5;
+      
+      // Apply tilt
+      keyboard.style.transform = `rotateX(${8 + tiltX}deg) rotateY(${tiltY}deg) scale(0.8)`;
+      
+      // Prevent page scrolling while interacting with keyboard
+      e.preventDefault();
+    }
+  }, { passive: false });
 }
+
+// Add additional window resize handler to readjust layout as needed
+window.addEventListener('resize', () => {
+  // Reset any custom widths first
+  const keys = document.querySelectorAll('.keyboard-key');
+  keys.forEach(key => key.style.width = '');
+  
+  // Remove compact class to start fresh
+  const keyboard = document.getElementById('tech-keyboard');
+  if (keyboard) keyboard.classList.remove('keyboard-compact');
+  
+  // Re-check layout
+  setTimeout(checkAndAdjustKeyboardLayout, 50);
+});
+
+// Add window resize handler to adjust layout
+window.addEventListener('resize', () => {
+  checkKeyboardLayout();
+});

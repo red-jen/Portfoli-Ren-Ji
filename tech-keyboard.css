@@ -1,10 +1,10 @@
-/* Tech Keyboard Visualization - Simplified Button Keys */
+/* Tech Keyboard Visualization - True 3D Cube Keys with realistic dimensions */
 
 .tech-keyboard-container {
   position: relative;
   max-width: 1100px;
   margin: 0 auto 5rem;
-  padding: 4rem 2.5rem 3rem;
+  padding: 5rem 3rem 4rem; /* Adjusted padding for better key visibility */
   background: linear-gradient(145deg, #15171e, #0a0c12);
   border-radius: 1.5rem;
   border: 1px solid rgba(0, 0, 0, 0.9);
@@ -12,9 +12,10 @@
     0 35px 80px -15px rgba(0, 0, 0, 0.8),
     0 0 40px rgba(0, 0, 0, 0.7) inset;
   transition: all 0.3s ease;
-  perspective: 800px;
+  perspective: 1200px;
   transform-style: preserve-3d;
-  transform: rotateX(20deg) scale(0.9);
+  /* Lower camera angle for a better view of the keys */
+  transform: rotateX(8deg) scale(0.9); /* Lower angle for better overall view */
 }
 
 /* Keyboard base with enhanced depth effect */
@@ -30,6 +31,20 @@
   transform: translateZ(-30px);
   z-index: -1;
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9);
+}
+
+/* Add bottom glow to keyboard */
+.tech-keyboard-container::after {
+  content: "";
+  position: absolute;
+  width: 80%;
+  height: 30px;
+  left: 10%;
+  bottom: -30px;
+  border-radius: 50%;
+  background: rgba(100, 255, 218, 0.15);
+  filter: blur(20px);
+  pointer-events: none;
 }
 
 /* Keyboard edge glow effect */
@@ -51,190 +66,232 @@
 .keyboard-row {
   display: flex;
   justify-content: center;
-  margin-bottom: 1.5rem;
+  margin-bottom: 0.7rem; /* Tighter spacing between rows */
   position: relative;
   transform-style: preserve-3d;
+  flex-wrap: nowrap; /* Prevent wrapping for consistent layout */
+  width: 100%; /* Ensure full width */
 }
 
-/* Simplified button-like key styling - enhanced 3D appearance */
+/* Improved cube-style key styling with more accurate 3D dimensions */
 .keyboard-key {
   position: relative;
-  width: 4.5rem;
-  height: 4.5rem;
-  margin: 0 0.45rem;
+  width: 2.8rem; /* Smaller keys to ensure all fit */
+  height: 2.8rem;
+  margin: 0.2rem; /* Tighter margins */
   transform-style: preserve-3d;
-  transform: translateZ(5px);
-  transition: all 0.15s cubic-bezier(0.2, 0.8, 0.2, 1);
   cursor: pointer;
+  transition: all 0.3s ease;
 }
 
-/* Key face - main button surface - improved depth appearance */
-.key-top {
+/* Enhanced cube structure with perfect square dimensions */
+.key-cube {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.3s ease;
+}
+
+/* Common face styles for perfect cube geometry */
+.key-face {
   position: absolute;
   width: 100%;
   height: 100%;
-  border-radius: 0.75rem 0.75rem 0.25rem 0.25rem; /* Rounded only at top */
-  background-color: #2a3141;
-  border: 1px solid rgba(0, 0, 0, 0.8);
-  transform: translateZ(8px); /* Increased height */
+  backface-visibility: visible;
   display: flex;
-  justify-content: center;
   align-items: center;
-  box-shadow: 
-    0 0 5px rgba(0, 0, 0, 0.5) inset;
-  z-index: 3;
+  justify-content: center;
+  border: 1px solid rgba(0, 0, 0, 0.6);
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
-/* Key side edges - improved for more realistic appearance */
-.key-right-edge {
-  position: absolute;
-  width: 8px;
-  height: 100%;
-  right: 0;
-  top: 0;
-  background: #1a202c; /* Darker color for side */
-  transform: rotateY(90deg) translateZ(4.5rem);
-  transform-origin: right center;
-  border-radius: 0 0.75rem 0.75rem 0;
-  z-index: 2;
-  box-shadow: inset -2px 0 5px rgba(0, 0, 0, 0.3);
+/* Key faces with proper 3D transforms for a perfect cube and better rounded corners */
+.key-top {
+  transform: translateZ(0.8rem); /* Lower height for more realistic key cap */
+  border-radius: 0.8rem 0.8rem 0.3rem 0.3rem; /* More rounded top corners */
 }
 
-.key-left-edge {
-  position: absolute;
-  width: 8px;
-  height: 100%;
-  left: 0;
-  top: 0;
-  background: #1a202c;
-  transform: rotateY(-90deg) translateZ(0);
-  transform-origin: left center;
-  border-radius: 0.75rem 0 0 0.75rem;
-  z-index: 2;
-  box-shadow: inset 2px 0 5px rgba(0, 0, 0, 0.3);
+.key-bottom {
+  transform: translateZ(-0.8rem) rotateZ(180deg);
+  border-radius: 0.3rem 0.3rem 0.8rem 0.8rem;
 }
 
-.key-bottom-edge {
-  position: absolute;
+.key-front {
+  height: 1.6rem; /* Adjusted for consistent proportions */
   width: 100%;
-  height: 8px;
-  bottom: 0;
-  left: 0;
-  background: #111827; /* Darker color for bottom */
-  transform: rotateX(-90deg) translateZ(0);
-  transform-origin: bottom center;
-  border-radius: 0 0 0.75rem 0.75rem;
-  z-index: 2;
-  box-shadow: inset 0 -2px 5px rgba(0, 0, 0, 0.3);
+  transform: rotateX(90deg) translateZ(1.2rem);
+  transform-origin: bottom;
+  border-radius: 0 0 0.8rem 0.8rem;
 }
 
-/* Additional back edge - visible when key is hovering */
-.key-back-edge {
-  position: absolute;
+.key-back {
+  height: 1.6rem; /* Adjusted for consistent proportions */
   width: 100%;
-  height: 8px;
-  top: 0;
-  left: 0;
-  background: #111827;
-  transform: rotateX(90deg) translateZ(0);
-  transform-origin: top center;
-  border-radius: 0.75rem 0.75rem 0 0;
-  z-index: 1;
-  opacity: 0.7;
+  transform: rotateX(-90deg) translateZ(1.2rem);
+  transform-origin: top;
+  border-radius: 0.8rem 0.8rem 0 0;
 }
 
-/* Key shadow beneath */
-.key-shadow {
-  position: absolute;
-  width: 100%;
+.key-left {
+  width: 1.6rem; /* Adjusted for consistent proportions */
   height: 100%;
-  bottom: -5px;
-  background: #000;
-  filter: blur(4px);
-  opacity: 0.4;
-  z-index: -1;
-  border-radius: 50%;
-  transform: translateY(2px) scale(0.9, 0.7);
-  transition: all 0.2s ease;
+  transform: rotateY(-90deg) translateZ(1.75rem);
+  transform-origin: right;
+  border-radius: 0.8rem 0 0 0.8rem;
 }
 
-/* Category colors */
+.key-right {
+  width: 1.6rem; /* Adjusted for consistent proportions */
+  height: 100%;
+  transform: rotateY(90deg) translateZ(1.75rem);
+  transform-origin: left;
+  border-radius: 0 0.8rem 0.8rem 0;
+}
+
+/* Color schemes for keys by category */
+/* Frontend Keys - Blue theme with strong gradient */
 .key-frontend .key-top {
-  border-top: 3px solid #38BDF8;
-  background: linear-gradient(to bottom, #253247, #1e293b);
+  background: linear-gradient(135deg, #38BDF8, #0284c7);
 }
-.key-frontend .key-right-edge,
-.key-frontend .key-left-edge {
-  background: linear-gradient(to bottom, #1a2136, #151e2c);
+.key-frontend .key-bottom {
+  background: #0c4a6e;
 }
-.key-frontend .key-bottom-edge,
-.key-frontend .key-back-edge {
-  background: #151e2c;
+.key-frontend .key-front {
+  background: linear-gradient(to bottom, #0ea5e9, #075985);
+}
+.key-frontend .key-back {
+  background: linear-gradient(to top, #0ea5e9, #075985);
+}
+.key-frontend .key-left {
+  background: linear-gradient(to left, #0ea5e9, #075985);
+}
+.key-frontend .key-right {
+  background: linear-gradient(to right, #0ea5e9, #075985);
 }
 
+/* Backend Keys - Green theme with strong gradient */
 .key-backend .key-top {
-  border-top: 3px solid #4ADE80;
-  background: linear-gradient(to bottom, #253247, #1e293b);
+  background: linear-gradient(135deg, #4ADE80, #16a34a);
 }
-.key-backend .key-right-edge,
-.key-backend .key-left-edge {
-  background: linear-gradient(to bottom, #1a2136, #151e2c);
+.key-backend .key-bottom {
+  background: #14532d;
 }
-.key-backend .key-bottom-edge,
-.key-backend .key-back-edge {
-  background: #151e2c;
+.key-backend .key-front {
+  background: linear-gradient(to bottom, #22c55e, #15803d);
+}
+.key-backend .key-back {
+  background: linear-gradient(to top, #22c55e, #15803d);
+}
+.key-backend .key-left {
+  background: linear-gradient(to left, #22c55e, #15803d);
+}
+.key-backend .key-right {
+  background: linear-gradient(to right, #22c55e, #15803d);
 }
 
+/* Tools Keys - Purple theme with strong gradient */
 .key-tools .key-top {
-  border-top: 3px solid #C084FC;
-  background: linear-gradient(to bottom, #253247, #1e293b);
+  background: linear-gradient(135deg, #C084FC, #9333ea);
 }
-.key-tools .key-right-edge,
-.key-tools .key-left-edge {
-  background: linear-gradient(to bottom, #1a2136, #151e2c);
+.key-tools .key-bottom {
+  background: #581c87;
 }
-.key-tools .key-bottom-edge,
-.key-tools .key-back-edge {
-  background: #151e2c;
+.key-tools .key-front {
+  background: linear-gradient(to bottom, #a855f7, #7e22ce);
+}
+.key-tools .key-back {
+  background: linear-gradient(to top, #a855f7, #7e22ce);
+}
+.key-tools .key-left {
+  background: linear-gradient(to left, #a855f7, #7e22ce);
+}
+.key-tools .key-right {
+  background: linear-gradient(to right, #a855f7, #7e22ce);
 }
 
+/* Concepts Keys - Red theme with strong gradient */
 .key-concepts .key-top {
-  border-top: 3px solid #FB7185;
-  background: linear-gradient(to bottom, #253247, #1e293b);
+  background: linear-gradient(135deg, #FB7185, #e11d48);
 }
-.key-concepts .key-right-edge,
-.key-concepts .key-left-edge {
-  background: linear-gradient(to bottom, #1a2136, #151e2c);
+.key-concepts .key-bottom {
+  background: #881337;
 }
-.key-concepts .key-bottom-edge,
-.key-concepts .key-back-edge {
-  background: #151e2c;
+.key-concepts .key-front {
+  background: linear-gradient(to bottom, #f43f5e, #be123c);
+}
+.key-concepts .key-back {
+  background: linear-gradient(to top, #f43f5e, #be123c);
+}
+.key-concepts .key-left {
+  background: linear-gradient(to left, #f43f5e, #be123c);
+}
+.key-concepts .key-right {
+  background: linear-gradient(to right, #f43f5e, #be123c);
 }
 
-/* Tech icon styling */
-.key-img {
-  width: 65%;
-  height: 65%;
-  object-fit: contain;
-  filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.5));
-  transition: transform 0.2s ease;
-  z-index: 5;
+/* Enhanced hover animation for true cube rotation - less extreme */
+.keyboard-key:hover .key-cube {
+  transform: translateY(-4px) rotateX(8deg) rotateY(8deg);
+}
+
+/* Additional lighting effect for more realistic 3D appearance */
+.key-face::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 50%, rgba(0, 0, 0, 0.1) 100%);
   pointer-events: none;
 }
 
-.keyboard-key:hover .key-img {
-  transform: scale(1.15);
-}
-
-/* Enhanced hover effect with better 3D appearance */
-.keyboard-key:hover {
-  transform: translateY(-12px) translateZ(10px);
+/* Enhanced shadow effect for more visual depth */
+.key-shadow {
+  position: absolute;
+  width: 95%;
+  height: 95%;
+  border-radius: 50%;
+  background: #000;
+  filter: blur(15px);
+  opacity: 0.4;
+  transform: translateY(4px) scale(0.8, 0.2); /* More realistic shadow position */
+  transition: all 0.3s ease;
+  z-index: -1;
 }
 
 .keyboard-key:hover .key-shadow {
-  opacity: 0.6;
-  transform: translateY(8px) scale(0.95, 0.7);
-  filter: blur(8px);
+  opacity: 0.7;
+  filter: blur(20px);
+  transform: translateY(25px) scale(1, 0.4);
+}
+
+/* Enhanced press effect for realistic travel distance */
+.keyboard-key:active .key-cube, 
+.keyboard-key.pressed .key-cube {
+  transform: translateY(1px) rotateX(0deg) rotateY(0deg); /* Typical mechanical key travel is about 2-4mm */
+  transition: all 0.08s ease;
+}
+
+.keyboard-key:active .key-shadow, 
+.keyboard-key.pressed .key-shadow {
+  opacity: 0.2;
+  transform: translateY(3px) rotateX(90deg) scale(0.7, 0.3);
+}
+
+/* Tech icon styling with enhanced visibility */
+.key-img {
+  width: 55%;
+  height: 55%;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.4));
+  transition: transform 0.3s ease;
+}
+
+.keyboard-key:hover .key-img {
+  transform: scale(1.2);
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.5));
 }
 
 /* Enhanced key press effect with improved physics */
@@ -258,7 +315,7 @@
 }
 
 .key-1-5u {
-  width: 6.75rem;
+  width: 4rem; /* Standardized width for concept keys */
 }
 
 .key-1-75u {
@@ -314,11 +371,12 @@
   transform: translateX(-50%) translateY(0) translateZ(30px);
 }
 
-/* Row staggering for realistic keyboard look */
+/* Row staggering for realistic keyboard look - improved spacing */
 .keyboard-row:nth-child(1) { padding-left: 0; }
-.keyboard-row:nth-child(2) { padding-left: 1.3rem; }
-.keyboard-row:nth-child(3) { padding-left: 1.8rem; }
-.keyboard-row:nth-child(4) { padding-left: 0.9rem; }
+.keyboard-row:nth-child(2) { padding-left: 0.5rem; }
+.keyboard-row:nth-child(3) { padding-left: 0.8rem; }
+.keyboard-row:nth-child(4) { padding-left: 0.4rem; }
+.keyboard-row:nth-child(5) { padding-left: 0.5rem; } /* Added for 5th row */
 
 /* Status light and branding */
 .keyboard-status-light {
@@ -444,26 +502,19 @@
   .keyboard-row {
     flex-wrap: wrap;
     justify-content: center;
-    margin-bottom: 1.2rem;
+    margin-bottom: 0.7rem; /* Closer rows on mobile */
+    padding-left: 0 !important; /* Remove row offsets on mobile */
   }
   
   .keyboard-key {
-    width: 3.5rem;
-    height: 3.5rem;
-    margin: 0.25rem;
-  }
-  
-  .key-1-25u, .key-1-5u, .key-1-75u, .key-2u, .key-2-25u {
-    width: 3.5rem;
-  }
-  
-  .key-6-25u {
-    width: 80%;
+    width: 2.5rem;
+    height: 2.5rem;
+    margin: 0.15rem;
   }
   
   .tech-keyboard-container {
-    transform: rotateX(15deg) scale(0.85);
-    padding: 2.5rem 1.5rem 2rem;
+    transform: rotateX(8deg) scale(0.8); /* Even lower angle on mobile */
+    padding: 3rem 2rem 2.5rem; /* Adjusted padding */
   }
   
   .keyboard-row {
@@ -473,13 +524,22 @@
   .tech-detail-panel {
     padding: 1.5rem;
   }
+  
+  /* Ensure concepts row keys are properly sized on mobile */
+  .keyboard-row:nth-child(5) .keyboard-key {
+    width: 3.5rem;
+  }
+  
+  .key-1-5u {
+    width: 3.5rem;
+  }
 }
 
 @media (max-width: 480px) {
   .keyboard-key {
-    width: 2.8rem;
-    height: 2.8rem;
-    margin: 0.2rem;
+    width: 2.2rem;
+    height: 2.2rem;
+    margin: 0.1rem;
   }
   
   .tech-keyboard-container {
@@ -499,4 +559,63 @@
     width: 2.5rem;
     height: 2.5rem;
   }
+  
+  .keyboard-row:nth-child(5) .keyboard-key {
+    width: 2.8rem;
+  }
+  
+  .key-1-5u {
+    width: 2.8rem;
+  }
+}
+
+/* Landscape orientation fixes for mobile */
+@media (max-width: 768px) and (orientation: landscape) {
+  .tech-keyboard-container {
+    padding: 3rem 2rem; /* Less vertical padding */
+  }
+  
+  .keyboard-key {
+    width: 2.5rem;
+    height: 2.5rem;
+    margin: 0.15rem;
+  }
+  
+  .keyboard-row:nth-child(5) .keyboard-key {
+    width: 3.5rem;
+  }
+}
+
+/* Animation for key press */
+@keyframes keyPress {
+  0% { transform: translateY(0) rotateX(0deg) rotateY(0deg); }
+  50% { transform: translateY(1.2px) rotateX(0deg) rotateY(0deg); } /* More realistic travel distance */
+  100% { transform: translateY(0) rotateX(0deg) rotateY(0deg); }
+}
+
+.key-pressed .key-cube {
+  animation: keyPress 0.25s ease-in-out;
+}
+
+/* Add support for WebGL/Three.js fallback class */
+.tech-keyboard-container.webgl-enabled {
+  /* Remove CSS 3D transforms when using WebGL */
+  transform: none;
+  perspective: none;
+}
+
+.tech-keyboard-container.webgl-enabled .keyboard-key {
+  transform: none;
+  transform-style: flat;
+}
+
+/* Canvas for Three.js rendering */
+#tech-keyboard-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 1.5rem;
+  z-index: 1;
 }

@@ -61,6 +61,11 @@
             }
         });
     </script>
+    <!-- Add the following script tags to your HTML head section -->
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/controls/OrbitControls.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <link rel="stylesheet" href="tech-keyboard-3d.css">
 </head>
 <body class="overflow-x-hidden">
     <!-- Loading Screen -->
@@ -641,16 +646,12 @@
         <p class="text-center text-gray-400 mb-12 max-w-3xl mx-auto">My toolkit for crafting digital experiences - hover over keys to explore.</p>
         
         <!-- Tech Keyboard Visualization -->
-        <div id="tech-keyboard" class="tech-keyboard-container">
-            <!-- Keyboard will be generated here -->
-        </div>
-        
-        <!-- Tech Detail Panel -->
+        <div id="tech-keyboard-container"></div>
         <div id="tech-detail-panel" class="tech-detail-panel">
             <div class="tech-detail-inner">
                 <div class="tech-detail-header">
                     <img src="" alt="" class="tech-detail-icon">
-                    <h3 class="tech-detail-name"></h3>
+                    <h4 class="tech-detail-name"></h4>
                 </div>
                 <div class="tech-detail-category"></div>
                 <p class="tech-detail-description"></p>
@@ -877,15 +878,50 @@
 </footer>
 
 <!-- Include JavaScript files -->
-<link rel="stylesheet" href="./tech-keyboard.css">
-<script src="./tech-keyboard.js" defer></script>
+<!-- <link rel="stylesheet" href="./tech-keyboard.css">
+<script src="./tech-keyboard.js" defer></script> -->
 <script src="./responsive-fix.js" defer></script>
 <script src="./gsapanim.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollToPlugin.min.js" defer></script>
 <script src="./tabswitch.js" defer></script>
 <script src="./modern-tech-grid.js" defer></script>
 <script src="./performance-optimization.js" defer></script>
-<!-- Remove this script which was causing the reload issue -->
-<!-- <script src="./tech-neural-network-debug.js"></script> -->
+<!-- Add these script imports before your existing tech-keyboard.js script -->
+
+<!-- Three.js library for advanced 3D rendering -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+
+<!-- GSAP for animations -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/gsap.min.js"></script>
+
+<!-- Enhanced tech keyboard with 3D support -->
+<!-- <script src="tech-keyboard-3d.js" defer></script> -->
+<!-- Add the script at the end of the body -->
+<script src="tech-keyboard-3js.js"></script>
+
+<!-- Required scripts for 3D keyboard -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r132/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/controls/OrbitControls.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+
+<!-- Add these elements to where you want the keyboard to appear -->
+<div class="tech-keyboard-section">
+  <div id="tech-keyboard-container"></div>
+  <div id="tech-detail-panel" class="tech-detail-panel">
+    <div class="tech-detail-inner">
+      <div class="tech-detail-header">
+        <img src="" alt="" class="tech-detail-icon">
+        <h4 class="tech-detail-name"></h4>
+      </div>
+      <div class="tech-detail-category"></div>
+      <p class="tech-detail-description"></p>
+      <div class="tech-detail-experience"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Keyboard script - make sure this comes after the HTML elements above -->
+<script src="tech-keyboard-3js.js"></script>
+
 </body>
 </html>
