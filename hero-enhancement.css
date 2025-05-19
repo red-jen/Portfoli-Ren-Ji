@@ -1,0 +1,348 @@
+/* Enhanced Hero Section Styling with Animation Support */
+
+/* Base container improvements */
+.luxury-hero {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* Improved background with subtle gradient */
+.luxury-hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(
+    circle at 70% 30%,
+    rgba(25, 30, 40, 0.8),
+    rgba(15, 20, 30, 0.95) 70%
+  );
+  z-index: 0;
+}
+
+/* Enhanced title with text shadow */
+.luxury-title {
+  font-size: clamp(3rem, 8vw, 5rem);
+  letter-spacing: -1px;
+  text-shadow: 0px 2px 8px rgba(0, 0, 0, 0.5);
+  transform-origin: left;
+  position: relative;
+  white-space: normal !important; /* Ensure text wraps on mobile */
+}
+
+/* Show the first part of the title with a different color */
+.luxury-title .highlight {
+  position: relative;
+  display: inline-block;
+  color: var(--accent, #64ffda);
+  z-index: 1;
+}
+
+.luxury-title .highlight::after {
+  content: '';
+  position: absolute;
+  width: 110%;
+  height: 10%;
+  bottom: 5%;
+  left: -5%;
+  background-color: var(--accent, #64ffda);
+  opacity: 0.2;
+  z-index: -1;
+  transform: skewX(-15deg);
+}
+
+/* Enhanced profile container with animated border */
+.luxury-profile-container {
+  position: relative;
+  border-radius: 0.75rem;
+  background: rgba(15, 20, 30, 0.3);
+  backdrop-filter: blur(4px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  overflow: visible !important;
+}
+
+/* Animated border effect */
+.luxury-profile-container::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 0.85rem;
+  padding: 2px;
+  background: linear-gradient(
+    135deg,
+    var(--accent, #64ffda) 0%,
+    rgba(100, 255, 218, 0.3) 50%,
+    transparent 100%
+  );
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: rotateGradient 8s linear infinite;
+}
+
+@keyframes rotateGradient {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 200% 200%;
+  }
+}
+
+/* Enhanced profile image with better fit */
+.luxury-image {
+  border-radius: 0.65rem;
+  transition: transform 0.5s ease;
+}
+
+.luxury-profile-container:hover .luxury-image {
+  transform: scale(1.03);
+}
+
+/* Improved tags layout */
+.luxury-tagline {
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* Enhance description paragraph */
+.luxury-description {
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
+  letter-spacing: 0.3px;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.7);
+  max-width: 600px;
+}
+
+/* Enhanced typing text */
+.luxury-typing {
+  font-family: 'Courier New', monospace;
+  color: var(--accent, #64ffda);
+  font-weight: 400;
+  font-size: 1.1rem;
+  margin: 1.25rem 0;
+  line-height: 1.2;
+}
+
+.luxury-typing-cursor {
+  display: inline-block;
+  width: 0.5rem;
+  height: 1.25rem;
+  background-color: var(--accent, #64ffda);
+  margin-left: 0.25rem;
+  animation: blink 1s step-end infinite;
+  vertical-align: text-bottom;
+}
+
+@keyframes blink {
+  from, to {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* Enhanced statistics display */
+.luxury-stats {
+  display: flex;
+  gap: 2rem;
+}
+
+.luxury-stat {
+  transition: transform 0.3s ease;
+}
+
+.luxury-stat:hover {
+  transform: translateY(-5px);
+}
+
+.luxury-stat-number {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--accent, #64ffda);
+  line-height: 1;
+}
+
+.luxury-stat-label {
+  font-size: 0.85rem;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.7);
+  margin-top: 0.25rem;
+}
+
+/* Enhanced buttons */
+.luxury-btn-primary,
+.luxury-btn-secondary {
+  position: relative;
+  border: 2px solid var(--accent, #64ffda);
+  padding: 0.75rem 1.75rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  letter-spacing: 0.5px;
+  z-index: 1;
+}
+
+.luxury-btn-primary {
+  background-color: rgba(100, 255, 218, 0.15);
+  color: var(--accent, #64ffda);
+}
+
+.luxury-btn-secondary {
+  background-color: transparent;
+  color: var(--accent, #64ffda);
+}
+
+.luxury-btn-primary:hover,
+.luxury-btn-secondary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 7px 15px rgba(100, 255, 218, 0.2);
+}
+
+/* Improved button hover animation */
+.luxury-btn-primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: left 0.7s;
+  z-index: -1;
+}
+
+.luxury-btn-primary:hover::before {
+  left: 100%;
+}
+
+/* Enhanced social links with animation */
+.luxury-social {
+  display: flex;
+  gap: 1.5rem;
+  position: absolute;
+  bottom: 2rem;
+  left: 2rem;
+  z-index: 10;
+}
+
+.luxury-social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.7);
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.luxury-social-link:hover {
+  background-color: rgba(100, 255, 218, 0.15);
+  color: var(--accent, #64ffda);
+  border-color: var(--accent, #64ffda);
+  transform: translateY(-4px);
+}
+
+/* Enhanced scroll indicator with animation */
+.luxury-scroll-indicator {
+  position: absolute;
+  bottom: 2rem;
+  right: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  color: rgba(255, 255, 255, 0.6);
+  z-index: 10;
+}
+
+.luxury-scroll-text {
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.luxury-scroll-line {
+  width: 1px;
+  height: 70px;
+  background: linear-gradient(
+    to bottom,
+    rgba(100, 255, 218, 1),
+    rgba(100, 255, 218, 0)
+  );
+  animation: scrollLine 2s ease-out infinite;
+}
+
+@keyframes scrollLine {
+  0% {
+    transform: scaleY(0);
+    transform-origin: top;
+  }
+  50% {
+    transform: scaleY(1);
+    transform-origin: top;
+  }
+  50.1% {
+    transform-origin: bottom;
+  }
+  100% {
+    transform: scaleY(0);
+    transform-origin: bottom;
+  }
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+  .luxury-hero {
+    padding-top: 1rem;
+    padding-bottom: 2rem;
+  }
+  
+  .luxury-content {
+    padding: 1rem;
+  }
+  
+  .luxury-title {
+    font-size: clamp(2.5rem, 12vw, 3.5rem);
+  }
+  
+  .luxury-social {
+    position: relative;
+    bottom: auto;
+    left: auto;
+    justify-content: center;
+    margin-top: 2rem;
+  }
+  
+  .luxury-scroll-indicator {
+    display: none;
+  }
+  
+  /* Make profile image smaller on mobile */
+  .luxury-profile-container {
+    width: min(240px, 60vw);
+    height: min(240px, 60vw);
+    margin: 0 auto 1.5rem;
+  }
+}
