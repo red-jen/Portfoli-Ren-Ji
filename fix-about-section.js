@@ -1,6 +1,6 @@
 /**
- * Fix About Section Layout - CV Style with Smaller Content Width and Stable Layout
- * Maintains layout stability during tab switches with optimized content width
+ * Fix About Section Layout - Mobile Responsive CV Style
+ * Maintains layout stability with proper mobile responsiveness
  */
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function fixAboutSectionLayout() {
-  console.log('Applying CV-style layout to About section');
+  console.log('Applying responsive CV-style layout to About section');
   
   const aboutSection = document.getElementById('about');
   if (!aboutSection) return;
@@ -16,14 +16,14 @@ function fixAboutSectionLayout() {
   // Reset any existing modifications
   resetAboutSection(aboutSection);
   
-  // Apply CV-style layout with smaller content width
-  applyCVLayout(aboutSection);
+  // Apply responsive CV-style layout
+  applyResponsiveCVLayout(aboutSection);
   
-  // Setup enhanced tab switching with smooth transitions
-  setupSmoothTabSwitching(aboutSection);
+  // Setup enhanced tab switching
+  setupResponsiveTabSwitching(aboutSection);
   
-  // Stabilize tab content heights
-  stabilizeTabContentHeights(aboutSection);
+  // Stabilize content heights
+  stabilizeResponsiveContent(aboutSection);
 }
 
 function resetAboutSection(aboutSection) {
@@ -66,59 +66,255 @@ function resetAboutSection(aboutSection) {
   if (scrollIndicators) scrollIndicators.remove();
 }
 
-function applyCVLayout(aboutSection) {
+function applyResponsiveCVLayout(aboutSection) {
   const gridContainer = aboutSection.querySelector('.grid.grid-cols-1.lg\\:grid-cols-12');
   if (!gridContainer) return;
   
-  // Apply proper CV-style grid layout with smaller content width
-  gridContainer.style.cssText = `
-    display: grid !important;
-    grid-template-columns: 380px 1fr !important;
-    gap: 3rem !important;
-    align-items: start !important;
-    max-width: 1100px !important;
-    margin: 0 auto !important;
-    width: 100% !important;
-  `;
+  const isMobile = window.innerWidth <= 768;
+  const isTablet = window.innerWidth > 768 && window.innerWidth <= 1024;
   
-  // Profile column styling (left side)
-  const profileColumn = aboutSection.querySelector('.lg\\:col-span-5');
-  if (profileColumn) {
-    profileColumn.style.cssText = `
-      position: sticky !important;
-      top: 2rem !important;
-      align-self: flex-start !important;
-      height: fit-content !important;
-      width: 100% !important;
-      flex-shrink: 0 !important;
-    `;
-  }
-  
-  // Content column styling (right side) - smaller width
-  const contentColumn = aboutSection.querySelector('.lg\\:col-span-7');
-  if (contentColumn) {
-    contentColumn.style.cssText = `
-      display: flex !important;
-      flex-direction: column !important;
+  if (isMobile) {
+    // Mobile layout: single column, profile first
+    gridContainer.style.cssText = `
+      display: grid !important;
+      grid-template-columns: 1fr !important;
       gap: 2rem !important;
+      max-width: 100% !important;
+      margin: 0 auto !important;
       width: 100% !important;
-      max-width: 600px !important;
-      min-height: 500px !important;
     `;
     
-    // Create stable container for tab content
-    createStableTabContainer(contentColumn);
+    // Profile column for mobile
+    const profileColumn = aboutSection.querySelector('.lg\\:col-span-5');
+    if (profileColumn) {
+      profileColumn.style.cssText = `
+        position: static !important;
+        order: 1 !important;
+        margin-bottom: 2rem !important;
+        width: 100% !important;
+        max-width: 400px !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+      `;
+    }
+    
+    // Content column for mobile
+    const contentColumn = aboutSection.querySelector('.lg\\:col-span-7');
+    if (contentColumn) {
+      contentColumn.style.cssText = `
+        order: 2 !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 2rem !important;
+        min-height: auto !important;
+      `;
+    }
+    
+    // Mobile-specific content adjustments
+    createMobileTabContainer(aboutSection);
+    
+  } else if (isTablet) {
+    // Tablet layout: two columns with adjusted proportions
+    gridContainer.style.cssText = `
+      display: grid !important;
+      grid-template-columns: 1fr 2fr !important;
+      gap: 3rem !important;
+      align-items: start !important;
+      max-width: 100% !important;
+      margin: 0 auto !important;
+      width: 100% !important;
+    `;
+    
+    // Profile column for tablet
+    const profileColumn = aboutSection.querySelector('.lg\\:col-span-5');
+    if (profileColumn) {
+      profileColumn.style.cssText = `
+        position: sticky !important;
+        top: 2rem !important;
+        align-self: flex-start !important;
+        height: fit-content !important;
+        width: 100% !important;
+      `;
+    }
+    
+    // Content column for tablet
+    const contentColumn = aboutSection.querySelector('.lg\\:col-span-7');
+    if (contentColumn) {
+      contentColumn.style.cssText = `
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 2rem !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        min-height: 500px !important;
+      `;
+    }
+    
+    createTabletTabContainer(aboutSection);
+    
+  } else {
+    // Desktop layout: CV style with smaller content width
+    gridContainer.style.cssText = `
+      display: grid !important;
+      grid-template-columns: 380px 1fr !important;
+      gap: 3rem !important;
+      align-items: start !important;
+      max-width: 1100px !important;
+      margin: 0 auto !important;
+      width: 100% !important;
+    `;
+    
+    // Profile column for desktop
+    const profileColumn = aboutSection.querySelector('.lg\\:col-span-5');
+    if (profileColumn) {
+      profileColumn.style.cssText = `
+        position: sticky !important;
+        top: 2rem !important;
+        align-self: flex-start !important;
+        height: fit-content !important;
+        width: 100% !important;
+        flex-shrink: 0 !important;
+      `;
+    }
+    
+    // Content column for desktop
+    const contentColumn = aboutSection.querySelector('.lg\\:col-span-7');
+    if (contentColumn) {
+      contentColumn.style.cssText = `
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 2rem !important;
+        width: 100% !important;
+        max-width: 600px !important;
+        min-height: 500px !important;
+      `;
+    }
+    
+    createDesktopTabContainer(aboutSection);
   }
-  
-  // Apply responsive design
-  applyResponsiveDesign(gridContainer);
 }
 
-function createStableTabContainer(contentColumn) {
-  const spaceContainer = contentColumn.querySelector('.space-y-6');
+function createMobileTabContainer(aboutSection) {
+  const spaceContainer = aboutSection.querySelector('.lg\\:col-span-7 .space-y-6');
   if (!spaceContainer) return;
   
-  // Reset the space container with fixed height
+  spaceContainer.style.cssText = `
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 2rem !important;
+    width: 100% !important;
+    min-height: auto !important;
+  `;
+  
+  const tabSection = spaceContainer.querySelector('.mb-10');
+  if (tabSection) {
+    tabSection.style.cssText = `
+      display: flex !important;
+      flex-direction: column !important;
+      width: 100% !important;
+      margin-bottom: 0 !important;
+    `;
+    
+    // Mobile tab navigation
+    const tabNavigation = tabSection.querySelector('.flex.overflow-x-auto');
+    if (tabNavigation) {
+      tabNavigation.style.cssText = `
+        display: flex !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+        margin-bottom: 1.5rem !important;
+        overflow-x: auto !important;
+        width: 100% !important;
+        scrollbar-width: none !important;
+        -ms-overflow-style: none !important;
+      `;
+      
+      // Hide scrollbar
+      tabNavigation.style.setProperty('-webkit-scrollbar', 'none');
+    }
+    
+    // Mobile tab content
+    const tabContents = tabSection.querySelectorAll('.tab-content');
+    tabContents.forEach(content => {
+      content.style.cssText = `
+        position: relative !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: none !important;
+        width: 100% !important;
+        height: auto !important;
+        min-height: auto !important;
+        padding: 0 !important;
+        margin: 0 !important;
+      `;
+      
+      if (content.classList.contains('hidden')) {
+        content.style.display = 'none';
+      }
+    });
+  }
+  
+  // Mobile skills section
+  const skillsSection = spaceContainer.querySelector('div:last-child');
+  if (skillsSection && !skillsSection.classList.contains('mb-10')) {
+    skillsSection.style.cssText = `
+      width: 100% !important;
+      padding-top: 2rem !important;
+      border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+      margin-top: 0 !important;
+    `;
+  }
+}
+
+function createTabletTabContainer(aboutSection) {
+  const spaceContainer = aboutSection.querySelector('.lg\\:col-span-7 .space-y-6');
+  if (!spaceContainer) return;
+  
+  spaceContainer.style.cssText = `
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 2rem !important;
+    width: 100% !important;
+    min-height: 400px !important;
+  `;
+  
+  const tabSection = spaceContainer.querySelector('.mb-10');
+  if (tabSection) {
+    tabSection.style.cssText = `
+      display: flex !important;
+      flex-direction: column !important;
+      width: 100% !important;
+      margin-bottom: 0 !important;
+      flex: 1 !important;
+    `;
+    
+    // Create stable wrapper for tablet
+    let tabContentsWrapper = tabSection.querySelector('.tab-contents-wrapper');
+    if (!tabContentsWrapper) {
+      tabContentsWrapper = document.createElement('div');
+      tabContentsWrapper.className = 'tab-contents-wrapper';
+      tabContentsWrapper.style.cssText = `
+        position: relative !important;
+        min-height: 300px !important;
+        width: 100% !important;
+        flex: 1 !important;
+      `;
+      
+      const tabContents = tabSection.querySelectorAll('.tab-content');
+      tabContents.forEach(content => {
+        tabContentsWrapper.appendChild(content);
+      });
+      
+      tabSection.appendChild(tabContentsWrapper);
+    }
+  }
+}
+
+function createDesktopTabContainer(aboutSection) {
+  const spaceContainer = aboutSection.querySelector('.lg\\:col-span-7 .space-y-6');
+  if (!spaceContainer) return;
+  
   spaceContainer.style.cssText = `
     display: flex !important;
     flex-direction: column !important;
@@ -223,33 +419,50 @@ function createStableTabContainer(contentColumn) {
   }
 }
 
-function stabilizeTabContentHeights(aboutSection) {
-  const tabContents = aboutSection.querySelectorAll('.tab-content');
-  if (!tabContents.length) return;
+function stabilizeResponsiveContent(aboutSection) {
+  const isMobile = window.innerWidth <= 768;
+  const isTablet = window.innerWidth > 768 && window.innerWidth <= 1024;
   
-  // Set consistent height for all tab contents
-  const fixedHeight = 280; // Fixed height in pixels
-  
-  // Apply consistent height to wrapper
-  const tabWrapper = aboutSection.querySelector('.tab-contents-wrapper');
-  if (tabWrapper) {
-    tabWrapper.style.minHeight = fixedHeight + 'px';
-    tabWrapper.style.height = fixedHeight + 'px';
-  }
-  
-  // Ensure all tab contents have the same dimensions
-  tabContents.forEach(content => {
-    if (!content.classList.contains('active')) {
-      content.style.height = fixedHeight + 'px';
+  if (isMobile) {
+    // Mobile: no fixed heights, natural content flow
+    const tabContents = aboutSection.querySelectorAll('.tab-content');
+    tabContents.forEach(content => {
+      content.style.height = 'auto';
+      content.style.minHeight = 'auto';
+    });
+    
+  } else {
+    // Tablet/Desktop: maintain stable heights
+    const fixedHeight = isTablet ? 350 : 280;
+    const tabWrapper = aboutSection.querySelector('.tab-contents-wrapper');
+    if (tabWrapper) {
+      tabWrapper.style.minHeight = fixedHeight + 'px';
+      tabWrapper.style.height = fixedHeight + 'px';
     }
-  });
+  }
 }
 
-function setupSmoothTabSwitching(aboutSection) {
+function setupResponsiveTabSwitching(aboutSection) {
   const tabLinks = aboutSection.querySelectorAll('.tab-link');
+  const isMobile = window.innerWidth <= 768;
   
-  // Remove existing event listeners and add optimized ones
+  // Optimize tab links for mobile
   tabLinks.forEach(link => {
+    if (isMobile) {
+      link.style.cssText = `
+        padding: 0.75rem 1rem !important;
+        font-size: 0.9rem !important;
+        white-space: nowrap !important;
+        min-width: 120px !important;
+        text-align: center !important;
+        min-height: 44px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+      `;
+    }
+    
+    // Remove existing listeners and add responsive ones
     const newLink = link.cloneNode(true);
     link.parentNode.replaceChild(newLink, link);
     
@@ -258,18 +471,19 @@ function setupSmoothTabSwitching(aboutSection) {
       e.stopPropagation();
       
       const targetTab = this.getAttribute('data-tab');
-      smoothSwitchToTab(targetTab, aboutSection);
+      responsiveSwitchToTab(targetTab, aboutSection);
     });
   });
 }
 
-function smoothSwitchToTab(targetTab, aboutSection) {
-  // Use requestAnimationFrame for smooth transitions
+function responsiveSwitchToTab(targetTab, aboutSection) {
+  const isMobile = window.innerWidth <= 768;
+  
   requestAnimationFrame(() => {
     const tabLinks = aboutSection.querySelectorAll('.tab-link');
     const tabContents = aboutSection.querySelectorAll('.tab-content');
     
-    // Update tab link states immediately
+    // Update tab link states
     tabLinks.forEach(link => {
       const linkTab = link.getAttribute('data-tab');
       if (linkTab === targetTab) {
@@ -283,183 +497,65 @@ function smoothSwitchToTab(targetTab, aboutSection) {
       }
     });
     
-    // Handle tab content transitions with consistent sizing
-    tabContents.forEach((content, index) => {
+    // Update tab content with responsive behavior
+    tabContents.forEach(content => {
       const contentTab = content.id.replace('-tab', '');
       
       if (contentTab === targetTab) {
-        // Show target content with smooth transition
-        setTimeout(() => {
-          content.classList.remove('hidden');
-          content.classList.add('active');
-          
-          // Apply smooth fade-in with consistent dimensions
-          requestAnimationFrame(() => {
+        content.classList.remove('hidden');
+        content.classList.add('active');
+        
+        if (isMobile) {
+          // Mobile: simple show/hide
+          content.style.cssText = `
+            position: relative !important;
+            display: block !important;
+            opacity: 1 !important;
+            visibility: visible !important;
+            transform: none !important;
+            width: 100% !important;
+            height: auto !important;
+            min-height: auto !important;
+          `;
+        } else {
+          // Tablet/Desktop: smooth transitions
+          setTimeout(() => {
             content.style.cssText = `
               position: relative !important;
               opacity: 1 !important;
               visibility: visible !important;
               transform: translateY(0) !important;
-              transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+              transition: all 0.3s ease !important;
               width: 100% !important;
-              max-width: 600px !important;
               height: auto !important;
               min-height: 280px !important;
-              padding: 0 !important;
-              margin: 0 !important;
-              overflow-y: auto !important;
-              box-sizing: border-box !important;
             `;
-          });
-        }, 50);
+          }, 50);
+        }
       } else {
-        // Hide other content with consistent dimensions
         content.classList.add('hidden');
         content.classList.remove('active');
         
-        content.style.cssText = `
-          position: absolute !important;
-          top: 0 !important;
-          left: 0 !important;
-          width: 100% !important;
-          max-width: 600px !important;
-          height: 280px !important;
-          opacity: 0 !important;
-          visibility: hidden !important;
-          transform: translateY(20px) !important;
-          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
-          padding: 0 !important;
-          margin: 0 !important;
-          overflow-y: auto !important;
-          box-sizing: border-box !important;
-        `;
+        if (isMobile) {
+          content.style.display = 'none';
+        } else {
+          content.style.cssText = `
+            position: absolute !important;
+            top: 0 !important;
+            left: 0 !important;
+            width: 100% !important;
+            opacity: 0 !important;
+            visibility: hidden !important;
+            transform: translateY(20px) !important;
+            transition: all 0.3s ease !important;
+          `;
+        }
       }
     });
   });
 }
 
-function applyResponsiveDesign(gridContainer) {
-  const mediaQuery = window.matchMedia('(max-width: 1024px)');
-  
-  function handleResponsive(e) {
-    if (e.matches) {
-      // Mobile/tablet layout
-      gridContainer.style.cssText = `
-        display: grid !important;
-        grid-template-columns: 1fr !important;
-        gap: 2rem !important;
-        max-width: 100% !important;
-        margin: 0 auto !important;
-        width: 100% !important;
-      `;
-      
-      const profileColumn = document.querySelector('#about .lg\\:col-span-5');
-      if (profileColumn) {
-        profileColumn.style.cssText = `
-          position: static !important;
-          order: 1 !important;
-          margin-bottom: 2rem !important;
-          width: 100% !important;
-          max-width: 400px !important;
-          margin-left: auto !important;
-          margin-right: auto !important;
-        `;
-      }
-      
-      const contentColumn = document.querySelector('#about .lg\\:col-span-7');
-      if (contentColumn) {
-        contentColumn.style.cssText = `
-          order: 2 !important;
-          width: 100% !important;
-          max-width: 100% !important;
-          display: flex !important;
-          flex-direction: column !important;
-          gap: 2rem !important;
-          min-height: auto !important;
-        `;
-      }
-      
-      // Fix tab contents for mobile
-      const tabContents = document.querySelectorAll('#about .tab-content');
-      tabContents.forEach(content => {
-        if (content.classList.contains('hidden')) {
-          content.style.display = 'none';
-        } else {
-          content.style.cssText = `
-            position: relative !important;
-            opacity: 1 !important;
-            visibility: visible !important;
-            transform: none !important;
-            width: 100% !important;
-            max-width: 100% !important;
-            height: auto !important;
-            min-height: auto !important;
-            padding: 0 !important;
-            margin: 0 !important;
-          `;
-        }
-      });
-      
-      // Adjust wrapper for mobile
-      const tabWrapper = document.querySelector('#about .tab-contents-wrapper');
-      if (tabWrapper) {
-        tabWrapper.style.cssText = `
-          position: relative !important;
-          min-height: auto !important;
-          height: auto !important;
-          width: 100% !important;
-          overflow: visible !important;
-        `;
-      }
-    } else {
-      // Desktop layout
-      setTimeout(() => {
-        applyCVLayout(document.getElementById('about'));
-        stabilizeTabContentHeights(document.getElementById('about'));
-      }, 100);
-    }
-  }
-  
-  mediaQuery.addListener(handleResponsive);
-  handleResponsive(mediaQuery);
-}
-
-// Handle tab switching with proper content display
-document.addEventListener('click', function(e) {
-  if (e.target.classList.contains('tab-link')) {
-    e.preventDefault();
-    
-    const tabId = e.target.getAttribute('data-tab');
-    const aboutSection = document.getElementById('about');
-    
-    // Remove active from all tabs
-    aboutSection.querySelectorAll('.tab-link').forEach(tab => {
-      tab.classList.remove('active-tab');
-      tab.style.borderColor = 'transparent';
-      tab.style.color = '#9ca3af';
-    });
-    
-    // Add active to clicked tab
-    e.target.classList.add('active-tab');
-    e.target.style.borderColor = 'var(--accent)';
-    e.target.style.color = 'var(--accent)';
-    
-    // Hide all tab content
-    aboutSection.querySelectorAll('.tab-content').forEach(content => {
-      content.classList.add('hidden');
-      content.classList.remove('active');
-    });
-    
-    // Show target tab content
-    const targetContent = document.getElementById(`${tabId}-tab`);
-    if (targetContent) {
-      targetContent.classList.remove('hidden');
-      targetContent.classList.add('active');
-    }
-  }
-});
-
-// Handle window resize with debouncing
+// Handle responsive resize
 let resizeTimeout;
 window.addEventListener('resize', () => {
   clearTimeout(resizeTimeout);
@@ -471,12 +567,12 @@ window.addEventListener('resize', () => {
   }, 250);
 });
 
-// Prevent layout shift on initial load
-window.addEventListener('load', () => {
+// Handle orientation change
+window.addEventListener('orientationchange', () => {
   setTimeout(() => {
     const aboutSection = document.getElementById('about');
     if (aboutSection) {
-      stabilizeTabContentHeights(aboutSection);
+      fixAboutSectionLayout();
     }
-  }, 500);
+  }, 300);
 });
